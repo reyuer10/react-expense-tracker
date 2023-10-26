@@ -26,7 +26,7 @@ export default function DashBoard() {
           />
         </div>
       </div>
-      <div className="flex flex-grow flex-wrap basis-30">
+      <div className="flex flex-grow flex-wrap gap-x-10">
         <div>
           <Balance />
         </div>
