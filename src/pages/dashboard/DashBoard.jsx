@@ -42,8 +42,8 @@ export default function DashBoard() {
       </div>
       {modalTransactions && (
         <>
-          <Modal handleOpenModalTransaction={handleOpenModalTransaction}>
-            <ExpensesEntry />
+          <Modal >
+            <ExpensesEntry handleOpenModalTransaction={handleOpenModalTransaction} />
           </Modal>
         </>
       )}

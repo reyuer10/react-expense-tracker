@@ -1,30 +1,21 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-export default function Modal({ children, handleOpenModalTransaction }) {
+export default function Modal({ children }) {
   return (
-    <div
-      onClick={handleOpenModalTransaction}
-      className="bg-[#FFFFFF81] inset-0 fixed z-0 flex justify-center items-center"
-    >
+    <div className="bg-[#FFFFFF81] inset-0 fixed z-0 flex justify-center items-center font-outfit text-[#303030]">
       <div className="z-10" />
       <div
         onClick={(e) => e.stopPropagation()}
-        className="text-white bg-white h-[200px] rounded-lg "
+        className=" bg-white h-[200px] w-[600px] rounded-lg "
       >
-        <div>
-          <button onClick={handleOpenModalTransaction}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="Outline"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-            >
-              <path d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z" />
-            </svg>
-          </button>
-        </div>
-        <div className="container">{children}</div>
+        <motion.div
+          initial={{ y: "-4vh", opacity: 0 }}
+          animate={{ y: "0", opacity: 1 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <div className="container">{children}</div>
+        </motion.div>
       </div>
     </div>
   );
