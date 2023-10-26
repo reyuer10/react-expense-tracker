@@ -8,7 +8,7 @@ export default function SideNavBar() {
   const [isIncomeHover, setIsIncomeHover] = useState(false);
 
   return (
-    <div className="flex flex-col m-7 space-y-10 items-center">
+    <div className="flex flex-col m-7 space-y-8 items-center0 h-[80vh] p-3 py-5 rounded-2xl border-none shadow-md ring-1 ring-gray-200">
       <Link to="/" className="relative flex items-center">
         <div
           onMouseEnter={() => setIsDashBoardHover(true)}

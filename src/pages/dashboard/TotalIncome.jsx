@@ -7,7 +7,7 @@ export default function TotalIncome() {
             <p className='text-2xl'>Total Income</p>
         </div>
         <div>
-
+    
         </div>
     </div>
   )
