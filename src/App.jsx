@@ -1,7 +1,30 @@
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+// components
+import Header from "./components/Header";
+
+// root
+import RootLayout from "./root/RootLayout";
+
+// pages
+import DashBoard from "./pages/dashboard/DashBoard";
+import Transactions from "./pages/Transactions";
+import Expenses from "./pages/Expenses";
+import Income from "./pages/Income";
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <>
+      <Header />
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<DashBoard />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/income" element={<Income />} />
+        </Route>
+      </Routes>
+    </>
+  );
 }
