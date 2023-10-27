@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function TotalIncome() {
+
   return (
     <div className=' h-[300px] w-[550px]'>
         <div>

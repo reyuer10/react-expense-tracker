@@ -16,15 +16,17 @@ import Modal from "../../modal/Modal";
 import ChooseTransactions from "../ChooseTransactions";
 import { useDispatch, useSelector } from "react-redux";
 import { close_modal, open_modal } from "../../features/transactionSlice";
-
+import ExpensesEntry from "../entry/ExpensesEntry";
+import IncomeEntry from "../entry/IncomeEntry";
 
 export default function DashBoard() {
   const dispatch = useDispatch();
+  const [isUserChooseExpense, setIsUserChooseExpense] = useState(false);
+  const [isUserChooseIncome, setIsUserChooseIncome] = useState(false);
 
   const modalTransactions = useSelector(
     (state) => state.transaction.modalTransactions
   );
-
 
   const handleOpenModal = () => {
     dispatch(open_modal());
@@ -34,6 +36,28 @@ export default function DashBoard() {
     dispatch(close_modal());
   };
 
+  const handleOpenExpense = () => {
+    setIsUserChooseExpense(true);
+  };
+
+  const handleCloseExpense = () => {
+    setIsUserChooseExpense(false);
+  };
+
+  const handleOpenIncome = () => {
+    setIsUserChooseIncome(true);
+  };
+
+  const handleCloseIncome = () => {
+    setIsUserChooseIncome(false);
+  };
+
+  const dashBoardComponent = [
+    { id: 1, component: <Balance /> },
+    { id: 2, component: <TotalIncome /> },
+    { id: 3, component: <RecentTransaction /> },
+    { id: 4, component: <TotalExpenses /> },
+  ];
 
   return (
     <div className="text-[#303030] font-outfit">
@@ -46,23 +70,39 @@ export default function DashBoard() {
         </div>
       </div>
       <div className="flex flex-grow flex-wrap gap-x-10">
-        <div>
-          <Balance />
-        </div>
-        <div>
-          <TotalIncome />
-        </div>
-        <div>
-          <RecentTransaction />
-        </div>
-        <div>
-          <TotalExpenses />
-        </div>
+        {dashBoardComponent.map((component) => (
+          <div key={component.id}>
+            <div>{component.component}</div>
+          </div>
+        ))}
       </div>
       {modalTransactions && (
         <>
-          <Modal isOpen={handleOpenModal} isClose={handleCloseModal}>
-            <ChooseTransactions onClose={handleCloseModal} />
+          <Modal
+            isOpen={handleOpenModal}
+            isClose={handleCloseModal}
+            closeExpense={handleCloseExpense}
+            closeIncome={handleCloseIncome}
+          >
+            {!isUserChooseExpense ? (
+              <>
+                {!isUserChooseIncome ? (
+                  <>
+                    <ChooseTransactions
+                      openExpense={handleOpenExpense}
+                      openIncome={handleOpenIncome}
+                      onClose={handleCloseModal}
+                    />
+                  </>
+                ) : (
+                  <IncomeEntry onClose={handleCloseModal} />
+                )}
+              </>
+            ) : (
+              <>
+                <ExpensesEntry />
+              </>
+            )}
           </Modal>
         </>
       )}

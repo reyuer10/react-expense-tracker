@@ -1,10 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function Modal({ isOpen, children, isClose }) {
+export default function Modal({
+  isOpen,
+  children,
+  isClose,
+  closeExpense,
+  closeIncome,
+}) {
   if (!isOpen) {
     return null;
   }
+
+  const handleCloseModal = () => {
+    isClose();
+    closeExpense();
+    closeIncome();
+  };
   return (
     <div className="bg-[#FFFFFF81] inset-0 fixed z-0 flex justify-center items-center font-outfit text-[#303030]">
       <motion.div
@@ -16,9 +28,10 @@ export default function Modal({ isOpen, children, isClose }) {
           onClick={(e) => e.stopPropagation()}
           className="container bg-white ring-1 ring-slate-200 rounded-lg"
         >
-          <div className="text-right p-3">
-            <button onClick={isClose} className="">
+          <div className="text-right fill-current">
+            <button onClick={handleCloseModal} className="p-3">
               <svg
+         
                 xmlns="http://www.w3.org/2000/svg"
                 id="Outline"
                 viewBox="0 0 24 24"
