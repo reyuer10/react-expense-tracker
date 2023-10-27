@@ -28,7 +28,7 @@ export default function RecentTransaction() {
   ]);
 
   return (
-    <div className="my-10 h-[300px] w-[550px] shadow-md p-7 rounded-xl">
+    <div className="my-10 h-[300px] w-[550px] shadow-md p-7 rounded-xl text-[#303030]">
       <div>
         <p className="text-2xl py-3 text-[#303030]">Recent Transaction</p>
       </div>
