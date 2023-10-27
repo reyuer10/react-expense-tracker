@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function TransactionButton({handleOpenModalTransaction}) {
+export default function TransactionButton({handleOpenModal}) {
   return (
     <>
       <button
-        onClick={handleOpenModalTransaction}
+        onClick={handleOpenModal}
         className="flex px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 "
       >
         <svg

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function Modal({ isOpen, children, isClose }) {
+export default function ExpenseEntryModal() {
   if (!isOpen) {
     return null;
   }

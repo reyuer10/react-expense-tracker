@@ -1,18 +1,39 @@
 import React, { useState } from "react";
+
+// Dashboard component
 import Balance from "./Balance";
 import RecentTransaction from "./RecentTransaction";
 import TotalExpenses from "./TotalExpenses";
 import TotalIncome from "./TotalIncome";
-import ExpensesEntry from "../ExpensesEntry";
-import Modal from "../../modal/Modal";
+
+// button for new transactions
 import TransactionButton from "../button/TransactionButton";
 
-export default function DashBoard() {
-  const [modalTransactions, setModalTransactions] = useState(false);
+// modal
+import Modal from "../../modal/Modal";
 
-  const handleOpenModalTransaction = () => {
-    setModalTransactions(!modalTransactions);
+// choose transactions
+import ChooseTransactions from "../ChooseTransactions";
+import { useDispatch, useSelector } from "react-redux";
+import { close_modal, open_modal } from "../../features/transactionSlice";
+
+
+export default function DashBoard() {
+  const dispatch = useDispatch();
+
+  const modalTransactions = useSelector(
+    (state) => state.transaction.modalTransactions
+  );
+
+
+  const handleOpenModal = () => {
+    dispatch(open_modal());
   };
+
+  const handleCloseModal = () => {
+    dispatch(close_modal());
+  };
+
 
   return (
     <div className="text-[#303030] font-outfit">
@@ -21,9 +42,7 @@ export default function DashBoard() {
           <p className="text-2xl font-semibold">DashBoard</p>
         </div>
         <div>
-          <TransactionButton
-            handleOpenModalTransaction={handleOpenModalTransaction}
-          />
+          <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
       <div className="flex flex-grow flex-wrap gap-x-10">
@@ -42,8 +61,8 @@ export default function DashBoard() {
       </div>
       {modalTransactions && (
         <>
-          <Modal >
-            <ExpensesEntry handleOpenModalTransaction={handleOpenModalTransaction} />
+          <Modal isOpen={handleOpenModal} isClose={handleCloseModal}>
+            <ChooseTransactions onClose={handleCloseModal} />
           </Modal>
         </>
       )}
