@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { expCategory } from "./category-expense/expCategory";
 import { useDispatch } from "react-redux";
 import { close_modal, new_transaction } from "../../features/transactionSlice";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function IncomeEntry() {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
 
   const handleAddExpenseEntry = () => {
     dispatch(
@@ -19,12 +20,14 @@ export default function IncomeEntry() {
         newCategory: category,
         newTitle: title,
         newAmount: amount,
+        newDescription: description,
         newDate: date,
       })
     );
 
     dispatch(close_modal());
   };
+
   return (
     <div className="py-7 px-8 space-y-5 w-[470px]">
       <div>
@@ -40,10 +43,7 @@ export default function IncomeEntry() {
         >
           {expCategory.map((expenses) => (
             <option key={expenses.id} value={`${expenses.value}`}>
-              <div>{expenses.svg}</div>
-              <div>
-                <p>{expenses.name}</p>
-              </div>
+              {expenses.name}
             </option>
           ))}
         </select>
@@ -61,34 +61,26 @@ export default function IncomeEntry() {
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-1">
           <label htmlFor="date">Date:</label>
-
-          <input
-            className="rounded-lg px-4 py-2 ring-1 ring-slate-200 shadow-md w-full"
-            type="date"
+          <DatePicker
             id="date"
+            selected={date}
+            onChange={(date) => setDate(date)}
+            className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
           />
         </div>
-        <div className="flex items-center space-x-1">
-          <label htmlFor="date">Time:</label>
-
+        <div className="space-x-1 flex items-center">
+          <label htmlFor="amount">Amount: </label>
           <input
-            className="rounded-lg px-4 py-2 ring-1 ring-slate-200 shadow-md w-full"
-            type="time"
-            id="time"
+            value={amount}
+            placeholder="$$"
+            className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
+            type="text"
+            id="amount"
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
       </div>
-      <div className="space-x-3 flex items-center">
-        <label htmlFor="title">Amount: </label>
-        <input
-          value={amount}
-          placeholder="$$"
-          className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
-          type="text"
-          id="title"
-          onChange={(e) => setAmount(e.target.value)}
-        />
-      </div>
+
       <div>
         <textarea
           value={description}

@@ -14,6 +14,7 @@ import Expenses from "./pages/Expenses";
 import Income from "./pages/Income";
 import ExpensesEntry from "./pages/entry/ExpensesEntry";
 
+
 export default function App() {
   return (
     <>

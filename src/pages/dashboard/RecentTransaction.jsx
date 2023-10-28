@@ -14,17 +14,17 @@ export default function RecentTransaction() {
       <div>
         {transaction.map((transac) => (
           <div
-            key={transac.id}
+            key={transac.incomeId}
             className="flex items-center justify-between space-y-2"
           >
             <div className={`flex space-x-3`}>
-              <div>{categoryIcons[transac.category]}</div>
+              <div>{categoryIcons[transac.incomeCategory]}</div>
               <div>
-                <p>{transac.category}</p>
+                <p>{transac.incomeCategory}</p>
               </div>
             </div>
             <div>
-              <p>{transac.amount}$</p>
+              <p>{transac.incomeAmount}$</p>
             </div>
           </div>
         ))}

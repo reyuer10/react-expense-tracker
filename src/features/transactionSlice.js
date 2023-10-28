@@ -3,25 +3,28 @@ import { createSlice } from "@reduxjs/toolkit";
 const initalValue = {
   transactionList: [
     {
-      id: 1,
-      category: "Grocery Shopping",
-      title: "Purchased groceries for the month",
-      amount: 150,
-      date: "2023-10-15",
+      incomeId: 1,
+      incomeCategory: "Grocery Shopping",
+      incomeTitle: "Purchased groceries for the month",
+      incomeAmount: 150,
+      incomeDate: "2023-10-15",
+      incomeDescription: "This is a sample description",
     },
     {
-      id: 2,
-      category: "Monthly Salary",
-      title: "Received monthly salary from XYZ Company",
-      amount: 3000,
-      date: "2023-10-01",
+      incomeId: 2,
+      incomeCategory: "Monthly Salary",
+      incomeTitle: "Received monthly salary from XYZ Company",
+      incomeAmount: 3000,
+      incomeDate: "2023-10-01",
+      incomeDescription: "This is a sample description",
     },
     {
-      id: 3,
-      category: "Bills & Utilities",
-      title: "Paid electricity and water bills",
-      amount: 80,
-      date: "2023-10-10",
+      incomeId: 3,
+      incomeCategory: "Bills & Utilities",
+      incomeTitle: "Paid electricity and water bills",
+      incomeAmount: 80,
+      incomeDate: "2023-10-10",
+      incomeDescription: "This is a sample description",
     },
   ],
   modalTransactions: false,
@@ -32,16 +35,24 @@ export const transactionSlice = createSlice({
   initialState: initalValue,
   reducers: {
     new_transaction: (state, action) => {
-      const { newCategory, newTitle, newAmount, newDate } = action.payload;
+      const {
+        newCategory,
+        newTitle,
+        newAmount,
+        newDate,
+        newDescription,
+      } = action.payload;
       const transactionItem = {
-        id:
+        incomeId:
           state.transactionList.length === 0
             ? 1
-            : state.transactionList[state.transactionList.length - 1].id + 1,
-        category: newCategory,
-        title: newTitle,
-        amount: newAmount,
-        date: newDate,
+            : state.transactionList[state.transactionList.length - 1].incomeId +
+              1,
+        incomeCategory: newCategory,
+        incometitle: newTitle,
+        incomeAmount: newAmount,
+        incomeDate: newDate,
+        incomeDescription: newDescription,
       };
       return {
         ...state,
