@@ -14,7 +14,7 @@ export default function SideNavBar() {
   };
 
   return (
-    <div className="flex flex-col m-7 h-[80vh] space-y-8 items-center p-3 py-5 rounded-2xl border-none shadow-md ring-2 ring-slate-200">
+    <div className="flex flex-col m-7 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl border-none shadow-md ring-2 ring-slate-200">
       {sideNav.map((nav) => (
         <Link
           to={`${nav.link}`}

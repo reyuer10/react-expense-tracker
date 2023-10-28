@@ -13,6 +13,7 @@ import Transactions from "./pages/Transactions";
 import Expenses from "./pages/Expenses";
 import Income from "./pages/Income";
 import ExpensesEntry from "./pages/entry/ExpensesEntry";
+import ViewDetails from "./pages/view-details/ViewDetails";
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
           <Route path="/expenses-entry" element={<ExpensesEntry />} />
+          <Route path="/transaction-details/:id" element={<ViewDetails />} />
         </Route>
       </Routes>
     </>

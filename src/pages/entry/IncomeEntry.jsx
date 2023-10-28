@@ -106,7 +106,7 @@ export default function IncomeEntry({ isClose }) {
           onClick={handleAddExpenseEntry}
           className="px-4 py-2 rounded-lg bg-[#303030] text-white font-medium w-full shadow-md hover:bg-slate-600 transition-colors"
         >
-          Submit
+          Add transaction
         </button>
       </div>
     </div>
