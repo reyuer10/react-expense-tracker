@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { expCategory } from "./category-expense/expCategory";
 import { useDispatch } from "react-redux";
-import { close_modal, new_transaction } from "../../features/transactionSlice";
+import {
+  close_modal,
+  income_transaction,
+} from "../../features/transactionSlice";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { incCategory } from "./category-expense/incCategory";
 
-export default function IncomeEntry() {
+export default function IncomeEntry({ isClose }) {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -15,17 +18,23 @@ export default function IncomeEntry() {
   const [date, setDate] = useState(new Date());
 
   const handleAddExpenseEntry = () => {
+    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+
     dispatch(
-      new_transaction({
+      income_transaction({
         newCategory: category,
         newTitle: title,
         newAmount: amount,
         newDescription: description,
-        newDate: date,
+        newDate: formattedDate,
       })
     );
 
     dispatch(close_modal());
+    isClose();
   };
 
   return (
@@ -41,7 +50,7 @@ export default function IncomeEntry() {
           className="p-3 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
           onChange={(e) => setCategory(e.target.value)}
         >
-          {expCategory.map((expenses) => (
+          {incCategory.map((expenses) => (
             <option key={expenses.id} value={`${expenses.value}`}>
               {expenses.name}
             </option>

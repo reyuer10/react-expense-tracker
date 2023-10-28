@@ -95,7 +95,7 @@ export default function DashBoard() {
                     />
                   </>
                 ) : (
-                  <IncomeEntry onClose={handleCloseModal} />
+                  <IncomeEntry isClose={handleCloseModal} onClose={handleCloseModal} />
                 )}
               </>
             ) : (

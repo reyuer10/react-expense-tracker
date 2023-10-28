@@ -1,40 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initalValue = {
   transactionList: [
     {
-      incomeId: 1,
-      incomeCategory: "Grocery Shopping",
-      incomeTitle: "Purchased groceries for the month",
-      incomeAmount: 150,
-      incomeDate: "2023-10-15",
-      incomeDescription: "This is a sample description",
+      transacId: 1,
+      transacCategory: "Grocery Shopping",
+      transacTitle: "Purchased groceries for the month",
+      transacAmount: 150,
+      transacDate: "2023-10-15",
+      transacDescription: "This is a sample description",
     },
     {
-      incomeId: 2,
-      incomeCategory: "Monthly Salary",
-      incomeTitle: "Received monthly salary from XYZ Company",
-      incomeAmount: 3000,
-      incomeDate: "2023-10-01",
-      incomeDescription: "This is a sample description",
+      transacId: 2,
+      transacCategory: "Monthly Salary",
+      transacTitle: "Received monthly salary from XYZ Company",
+      transacAmount: 3000,
+      transacDate: "2023-10-01",
+      transacDescription: "This is a sample description",
     },
     {
-      incomeId: 3,
-      incomeCategory: "Bills & Utilities",
-      incomeTitle: "Paid electricity and water bills",
-      incomeAmount: 80,
-      incomeDate: "2023-10-10",
-      incomeDescription: "This is a sample description",
+      transacId: 3,
+      transacCategory: "Bills & Utilities",
+      transacTitle: "Paid electricity and water bills",
+      transacAmount: 80,
+      transacDate: "2023-10-10",
+      transacDescription: "This is a sample description",
     },
   ],
   modalTransactions: false,
+  balance: 1000,
+
 };
 
 export const transactionSlice = createSlice({
+  
   name: "transactions",
   initialState: initalValue,
   reducers: {
-    new_transaction: (state, action) => {
+    income_transaction: (state, action) => {
       const {
         newCategory,
         newTitle,
@@ -43,20 +45,23 @@ export const transactionSlice = createSlice({
         newDescription,
       } = action.payload;
       const transactionItem = {
-        incomeId:
+
+        transacId:
           state.transactionList.length === 0
             ? 1
-            : state.transactionList[state.transactionList.length - 1].incomeId +
+            : state.transactionList[state.transactionList.length - 1].transacId +
               1,
-        incomeCategory: newCategory,
-        incometitle: newTitle,
-        incomeAmount: newAmount,
-        incomeDate: newDate,
-        incomeDescription: newDescription,
+        transacCategory: newCategory,
+        transacTitle: newTitle,
+        transacAmount: parseInt(newAmount),
+        transacDate: newDate,
+        transacDescription: newDescription,
+        
       };
       return {
         ...state,
-        transactions: [...state.transactionList, transactionItem],
+        transactionList: [...state.transactionList, transactionItem],
+        balance: (transactionItem.transacAmount + state.balance)
       };
     },
     open_modal: (state) => {
@@ -71,9 +76,10 @@ export const transactionSlice = createSlice({
         modalTransactions: false,
       };
     },
+
   },
 });
 
-export const { new_transaction, open_modal, close_modal } =
+export const { income_transaction, open_modal, close_modal } =
   transactionSlice.actions;
 export default transactionSlice.reducer;

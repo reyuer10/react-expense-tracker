@@ -1,8 +1,13 @@
-export const expCategory = [
+export const incCategory = [
+  {
+    id: 0,
+    name: "",
+    value: "",
+  },
   {
     id: 1,
     name: "Salary/Wages",
-    value: "salary",
+    value: "Salary/Wages",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +24,7 @@ export const expCategory = [
   {
     id: 2,
     name: "Free/consulting",
-    value: "consulting",
+    value: "Free/consulting",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +41,7 @@ export const expCategory = [
   {
     id: 3,
     name: "Business income",
-    value: "business",
+    value: "Business income",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +57,7 @@ export const expCategory = [
   {
     id: 4,
     name: "Investments",
-    value: "invesments",
+    value: "Investments",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +75,7 @@ export const expCategory = [
   {
     id: 5,
     name: "Rental income",
-    value: "rental",
+    value: "Rental income",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +92,7 @@ export const expCategory = [
   {
     id: 6,
     name: "Gifts",
-    value: "gifts",
+    value: "Gifts",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +109,7 @@ export const expCategory = [
   {
     id: 7,
     name: "Savings interest",
-    value: "rental",
+    value: "Savings interest",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +126,7 @@ export const expCategory = [
   {
     id: 8,
     name: "Bonuses/Commissions",
-    value: "bonuses",
+    value: "Bonuses/Commissions",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +143,7 @@ export const expCategory = [
   {
     id: 9,
     name: "Pension/Retirement",
-    value: "pension",
+    value: "Pension/Retirement",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +160,7 @@ export const expCategory = [
   {
     id: 10,
     name: "Other",
-    value: "other",
+    value: "Other",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
