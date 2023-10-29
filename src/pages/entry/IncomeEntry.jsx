@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { incCategory } from "./category-expense/incCategory";
 
-export default function IncomeEntry({ isClose }) {
+export default function IncomeEntry({ isClose, closeIncome}) {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -35,6 +35,7 @@ export default function IncomeEntry({ isClose }) {
 
     dispatch(close_modal());
     isClose();
+    closeIncome();
   };
 
   return (

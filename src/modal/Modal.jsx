@@ -31,7 +31,6 @@ export default function Modal({
           <div className="text-right fill-current">
             <button onClick={handleCloseModal} className="p-3">
               <svg
-         
                 xmlns="http://www.w3.org/2000/svg"
                 id="Outline"
                 viewBox="0 0 24 24"

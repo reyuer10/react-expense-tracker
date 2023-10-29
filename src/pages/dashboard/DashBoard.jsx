@@ -19,6 +19,7 @@ import { close_modal, open_modal } from "../../features/transactionSlice";
 import ExpensesEntry from "../entry/ExpensesEntry";
 import IncomeEntry from "../entry/IncomeEntry";
 import DraftButton from "../button/DraftButton";
+import BudgetManagement from "./BudgetManagement";
 
 export default function DashBoard() {
   const dispatch = useDispatch();
@@ -29,35 +30,19 @@ export default function DashBoard() {
     (state) => state.transaction.modalTransactions
   );
 
-  const handleOpenModal = () => {
-    dispatch(open_modal());
-  };
-
-  const handleCloseModal = () => {
-    dispatch(close_modal());
-  };
-
-  const handleOpenExpense = () => {
-    setIsUserChooseExpense(true);
-  };
-
-  const handleCloseExpense = () => {
-    setIsUserChooseExpense(false);
-  };
-
-  const handleOpenIncome = () => {
-    setIsUserChooseIncome(true);
-  };
-
-  const handleCloseIncome = () => {
-    setIsUserChooseIncome(false);
-  };
+  const handleOpenModal = () => dispatch(open_modal());
+  const handleCloseModal = () => dispatch(close_modal());
+  const handleOpenExpense = () => setIsUserChooseExpense(true);
+  const handleCloseExpense = () => setIsUserChooseExpense(false);
+  const handleOpenIncome = () => setIsUserChooseIncome(true);
+  const handleCloseIncome = () => setIsUserChooseIncome(false);
 
   const dashBoardComponent = [
     { id: 1, component: <Balance /> },
     { id: 2, component: <TotalIncome /> },
-    { id: 3, component: <RecentTransaction /> },
-    { id: 4, component: <TotalExpenses /> },
+    { id: 3, component: <BudgetManagement /> },
+    { id: 4, component: <RecentTransaction /> },
+    { id: 5, component: <TotalExpenses /> },
   ];
 
   return (
@@ -71,9 +56,16 @@ export default function DashBoard() {
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
-      <div className="flex flex-grow flex-wrap gap-10">
+
+      {/* flex flex-grow flex-wrap gap-10 */}
+      <div className="grid grid-cols-3 gap-10">
         {dashBoardComponent.map((component) => (
-          <div key={component.id}>
+          <div
+            key={component.id}
+            className={`row-span-${component.id === 3 ? "2" : "1"} row-span-${
+              component.id === 3 ? "2" : "1"
+            }`}
+          >
             <div>{component.component}</div>
           </div>
         ))}
@@ -100,6 +92,7 @@ export default function DashBoard() {
                   <IncomeEntry
                     isClose={handleCloseModal}
                     onClose={handleCloseModal}
+                    closeIncome={handleCloseIncome}
                   />
                 )}
               </>

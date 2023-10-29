@@ -8,7 +8,7 @@ export default function RootLayout() {
       <div>
         <SideNavBar />
       </div>
-      <div className="m-10">
+      <div className="m-10 w-full">
         <Outlet />
       </div>
     </div>
