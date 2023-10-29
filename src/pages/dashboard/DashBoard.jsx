@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { close_modal, open_modal } from "../../features/transactionSlice";
 import ExpensesEntry from "../entry/ExpensesEntry";
 import IncomeEntry from "../entry/IncomeEntry";
+import DraftButton from "../button/DraftButton";
 
 export default function DashBoard() {
   const dispatch = useDispatch();
@@ -61,15 +62,16 @@ export default function DashBoard() {
 
   return (
     <div className="text-[#303030] font-outfit">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between my-4">
         <div>
           <p className="text-2xl font-semibold">DashBoard</p>
         </div>
-        <div>
+        <div className="flex space-x-3">
+          <DraftButton />
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
-      <div className="flex flex-grow flex-wrap gap-x-10">
+      <div className="flex flex-grow flex-wrap gap-10">
         {dashBoardComponent.map((component) => (
           <div key={component.id}>
             <div>{component.component}</div>
@@ -95,7 +97,10 @@ export default function DashBoard() {
                     />
                   </>
                 ) : (
-                  <IncomeEntry isClose={handleCloseModal} onClose={handleCloseModal} />
+                  <IncomeEntry
+                    isClose={handleCloseModal}
+                    onClose={handleCloseModal}
+                  />
                 )}
               </>
             ) : (

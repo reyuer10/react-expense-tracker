@@ -7,7 +7,7 @@ export default function RecentTransaction() {
   const transaction = useSelector((state) => state.transaction.transactionList);
 console.log(transaction)
   return (
-    <div className="my-10 h-[300px] w-[550px] shadow-md p-7 rounded-xl text-[#303030]">
+    <div className=" h-[300px] w-[550px] shadow-md p-7 rounded-[40px] ring-1 ring-slate-200 text-[#303030]">
       <div>
         <p className="text-2xl py-3 text-[#303030]">Recent Transaction</p>
       </div>

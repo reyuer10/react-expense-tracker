@@ -101,12 +101,15 @@ export default function IncomeEntry({ isClose }) {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
       </div>
-      <div>
+      <div className="flex space-x-3">
         <button
           onClick={handleAddExpenseEntry}
           className="px-4 py-2 rounded-lg bg-[#303030] text-white font-medium w-full shadow-md hover:bg-slate-600 transition-colors"
         >
           Add transaction
+        </button>
+        <button className="border shadow-md rounded-lg font-medium w-full hover:bg-slate-50">
+          Save as Draft
         </button>
       </div>
     </div>
