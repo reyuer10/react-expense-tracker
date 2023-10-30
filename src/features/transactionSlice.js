@@ -32,7 +32,7 @@ const initalValue = {
   modalTransactions: false,
   balance: 1000,
   totalIncome: 0,
-
+  totalExpenses: 0,
 };
 
 export const transactionSlice = createSlice({
@@ -62,6 +62,30 @@ export const transactionSlice = createSlice({
         totalIncome: transactionItem.transacAmount + state.totalIncome,
       };
     },
+    expense_transaction: (state, action) => {
+      const { eCategory, eTitle, eAmount, eDescription, eDate } =
+        action.payload;
+      const newExpense = {
+        transacId:
+          state.transactionList.length === 0
+            ? 1
+            : state.transactionList[state.transactionList.length - 1]
+                .transacId + 1,
+        transactionType: "Expenses",
+        transacCategory: eCategory,
+        transacTitle: eTitle,
+        transacAmount: parseInt(eAmount),
+        transacDate: eDate,
+        transacDescription: eDescription,
+      };
+      return {
+        ...state,
+        transactionList: [...state.transactionList, newExpense],
+        balance: state.balance - newExpense.transacAmount,
+        totalExpenses: newExpense.transacAmount + state.totalExpenses
+
+      };
+    },
     open_modal: (state) => {
       return {
         ...state,
@@ -77,6 +101,10 @@ export const transactionSlice = createSlice({
   },
 });
 
-export const { income_transaction, open_modal, close_modal } =
-  transactionSlice.actions;
+export const {
+  income_transaction,
+  open_modal,
+  close_modal,
+  expense_transaction,
+} = transactionSlice.actions;
 export default transactionSlice.reducer;

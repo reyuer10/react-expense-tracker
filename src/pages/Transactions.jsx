@@ -8,6 +8,8 @@ import { categoryIcons } from "../svg_category/svgCategory";
 export default function Transactions() {
   const transaction = useSelector((state) => state.transaction.transactionList);
 
+
+
   return (
     <motion.div
       initial={{ y: "-4vh", opacity: 0 }}
@@ -22,9 +24,9 @@ export default function Transactions() {
         </div>
         <div>
           {transaction.map((transac) => (
-            <Link to={`/transaction-details/${transac.transacId}`}>
+            <Link to={`/transaction-details/${transac.transacId}`} key={transac.transacId}>
               <div
-                key={transac.transacId}
+                
                 className="flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5 hover:bg-slate-50 transition-colors duration-100"
               >
                 <div>

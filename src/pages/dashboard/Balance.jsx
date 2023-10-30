@@ -6,7 +6,7 @@ export default function Balance() {
   return (
     <div className="shadow-md p-3 rounded-[40px] h-[300px] w-[550px] ring-2 ring-slate-200">
       <div>
-        <p className="text-4xl font-semibold p-8">Balance: </p>
+        <p className="text-4xl font-semibold p-8">Balance:</p>
         <p className="text-[55px] font-semibold text-[#3e9c35] text-center">
           {balance}$
         </p>

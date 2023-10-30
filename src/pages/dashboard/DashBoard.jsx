@@ -96,7 +96,10 @@ export default function DashBoard() {
               </>
             ) : (
               <>
-                <ExpensesEntry />
+                <ExpensesEntry
+                  isClose={handleCloseModal}
+                  closeExpense={handleCloseExpense}
+                />
               </>
             )}
           </Modal>
