@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { categoryIcons } from "../../svg_category/svgCategory";
 import { useSelector } from "react-redux";
+import { buttonOption } from "./ButtonOption";
 
 export default function ViewDetails() {
+  const [isOptionButtonClick, setIsOptionButtonClick] = useState(false);
+
   const transaction = useSelector((state) => state.transaction.transactionList);
   const { id } = useParams();
   const selectedItem = transaction.find(
@@ -12,10 +15,45 @@ export default function ViewDetails() {
   if (!selectedItem) {
     return <div>Item not found</div>;
   }
+
+ 
+
+  const handleOptionButtonClick = () =>
+    setIsOptionButtonClick(!isOptionButtonClick);
   return (
     <div className="relative flex flex-col justify-center items-center font-outfit shadow-md rounded-xl p-9 my-3 space-y-12 text-[#303030]">
-      <div className="items-start">
-        <p className="text-3xl font-medium">Transaction Details</p>
+      <div className="flex items-center">
+        <div>
+          <p className="text-3xl font-medium">Transaction Details</p>
+        </div>
+        <div>
+          <button
+            onClick={handleOptionButtonClick}
+            className="absolute right-0 mx-10 text-[#303030] hover:text-slate-50"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="Outline"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+            >
+              <circle cx="2" cy="12" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="22" cy="12" r="2" />
+            </svg>
+          </button>
+          {isOptionButtonClick && (
+            <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-lg flex flex-col p-3 z-10 bg-white items-baseline">
+              {buttonOption.map((button) => (
+                <button className="flex items-center space-x-2">
+                  {button.svg}
+                  <p>{button.name}</p>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <div className="text-xl w-[700px]">
         <div>

@@ -40,9 +40,8 @@ export default function DashBoard() {
   const dashBoardComponent = [
     { id: 1, component: <Balance /> },
     { id: 2, component: <TotalIncome /> },
-    { id: 3, component: <BudgetManagement /> },
-    { id: 4, component: <RecentTransaction /> },
-    { id: 5, component: <TotalExpenses /> },
+    { id: 3, component: <RecentTransaction /> },
+    { id: 4, component: <TotalExpenses /> },
   ];
 
   return (
@@ -57,18 +56,17 @@ export default function DashBoard() {
         </div>
       </div>
 
-      {/* flex flex-grow flex-wrap gap-10 */}
-      <div className="grid grid-cols-3 gap-10">
-        {dashBoardComponent.map((component) => (
-          <div
-            key={component.id}
-            className={`row-span-${component.id === 3 ? "2" : "1"} row-span-${
-              component.id === 3 ? "2" : "1"
-            }`}
-          >
-            <div>{component.component}</div>
-          </div>
-        ))}
+      <div className="flex">
+        <div className="flex flex-grow flex-wrap gap-8 mx-5 ">
+          {dashBoardComponent.map((component) => (
+            <div key={component.id}>
+              <div>{component.component}</div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <BudgetManagement />
+        </div>
       </div>
       {modalTransactions && (
         <>
