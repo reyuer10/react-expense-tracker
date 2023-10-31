@@ -56,7 +56,7 @@ export default function DashBoard() {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex ">
         <div className="flex flex-grow flex-wrap gap-8 mx-5 ">
           {dashBoardComponent.map((component) => (
             <div key={component.id}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   close_modal,
@@ -8,27 +8,72 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { incCategory } from "./category-expense/incCategory";
 
-export default function IncomeEntry({ isClose, closeIncome}) {
+export default function IncomeEntry({ isClose, closeIncome }) {
   const dispatch = useDispatch();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [category, setCategory] = useState("");
   const [date, setDate] = useState(new Date());
 
-  const handleAddIncomeEntry = () => {
-    const formattedDate = new Date(date).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
+  const [incomeValue, setIncomeValue] = useState({
+    title: "",
+    description: "",
+    amount: "",
+    category: "",
+  });
+
+  const handleOnchange = (event) => {
+    const { name, value } = event.target;
+    setIncomeValue({ ...incomeValue, [name]: value });
+  };
+
+  const [error, setError] = useState({
+    title: null,
+    description: null,
+    amount: null,
+    category: null,
+  });
+
+  const { title, amount, category } = incomeValue;
+
+  const handleAddIncomeEntry = async () => {
+    const formattedDate = new Date(incomeValue.date).toLocaleDateString(
+      "en-US",
+      {
+        month: "long",
+        day: "numeric",
+      }
+    );
+
+    if (title.trim() === "") {
+      setError({
+        ...error,
+        title: "Title cannot be empty.",
+      });
+      return;
+    } else {
+      setError((prevstate) => ({
+        ...prevstate,
+        title: null,
+      }));
+    }
+
+    if (amount.trim() === "") {
+      setError({ ...error, amount: "Amount cannot be empty." });
+      return;
+    }
+    // else if (isNaN(amount)) {
+    //   setError({
+    //     ...error,
+    //     amount: "Numbers only allowed in the amount field.",
+    //   });
+    // } else {
+    //   setError({ ...error, amount: null });
+    // }
 
     dispatch(
       income_transaction({
-        newCategory: category,
-        newTitle: title,
-        newAmount: amount,
-        newDescription: description,
+        newCategory: incomeValue.category,
+        newTitle: incomeValue.title,
+        newAmount: incomeValue.amount,
+        newDescription: incomeValue.description,
         newDate: formattedDate,
       })
     );
@@ -47,9 +92,10 @@ export default function IncomeEntry({ isClose, closeIncome}) {
         <label htmlFor="category">Category:</label>
         <select
           value={category}
+          name="category"
           id="category"
           className="p-3 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleOnchange}
         >
           {incCategory.map((expenses) => (
             <option key={expenses.id} value={`${expenses.value}`}>
@@ -57,16 +103,19 @@ export default function IncomeEntry({ isClose, closeIncome}) {
             </option>
           ))}
         </select>
+        {error.category && <div>{error.category}</div>}
       </div>
       <div className="space-x-3 flex items-center">
         <label htmlFor="title">Title: </label>
         <input
-          value={title}
+          value={incomeValue.title}
           className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
           type="text"
           id="title"
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          onChange={handleOnchange}
         />
+        {error.title && <div>{error.title}</div>}
       </div>
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-1">
@@ -81,25 +130,28 @@ export default function IncomeEntry({ isClose, closeIncome}) {
         <div className="space-x-1 flex items-center">
           <label htmlFor="amount">Amount: </label>
           <input
-            value={amount}
+            value={incomeValue.amount}
             placeholder="$$"
             className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
             type="text"
+            name="amount"
             id="amount"
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={handleOnchange}
           />
+          {error.amount && <div>{error.amount}</div>}
         </div>
       </div>
 
       <div>
         <textarea
-          value={description}
+          value={incomeValue.description}
           placeholder="Enter description..."
           id="description"
           cols="30"
           rows="3"
+          name="description"
           className="rounded-lg ring-1 ring-slate-200 shadow-md p-3 w-full"
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={handleOnchange}
         ></textarea>
       </div>
       <div className="flex space-x-3">
