@@ -18,7 +18,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { close_modal, open_modal } from "../../features/transactionSlice";
 import ExpensesEntry from "../entry/ExpensesEntry";
 import IncomeEntry from "../entry/IncomeEntry";
+
+import { Route, Routes } from "react-router-dom";
+
+import BudgetButton from "../button/BudgetButton";
 import DraftButton from "../button/DraftButton";
+
+import Draft from "./Draft";
 import BudgetManagement from "./BudgetManagement";
 
 export default function DashBoard() {
@@ -51,6 +57,7 @@ export default function DashBoard() {
           <p className="text-2xl font-semibold">DashBoard</p>
         </div>
         <div className="flex space-x-3">
+          <BudgetButton />
           <DraftButton />
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
@@ -65,7 +72,10 @@ export default function DashBoard() {
           ))}
         </div>
         <div>
-          <BudgetManagement />
+          <Routes>
+            <Route path="/" element={<BudgetManagement />} />
+            <Route path="/draft" element={<Draft />} />
+          </Routes>
         </div>
       </div>
       {modalTransactions && (

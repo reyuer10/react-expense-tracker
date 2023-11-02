@@ -22,7 +22,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route element={<RootLayout />}>
-        <Route path="/" element={<DashBoard />} />
+          <Route path="*" element={<DashBoard />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
