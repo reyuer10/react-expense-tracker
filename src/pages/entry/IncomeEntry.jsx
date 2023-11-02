@@ -7,16 +7,24 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { incCategory } from "./category-expense/incCategory";
+import { useForm } from "react-hook-form";
 
 export default function IncomeEntry({ isClose, closeIncome }) {
+  const {
+    getValues,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
 
   const [incomeValue, setIncomeValue] = useState({
-    title: "",
+    // title: "",
     description: "",
-    amount: "",
-    category: "",
+    // amount: "",
+    // category: "",
   });
 
   const handleOnchange = (event) => {
@@ -24,55 +32,23 @@ export default function IncomeEntry({ isClose, closeIncome }) {
     setIncomeValue({ ...incomeValue, [name]: value });
   };
 
-  const [error, setError] = useState({
-    title: null,
-    description: null,
-    amount: null,
-    category: null,
-  });
+  const { title, amount, category, description } = incomeValue;
 
-  const { title, amount, category } = incomeValue;
+  const handleAddIncomeEntry = () => {
+    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
 
-  const handleAddIncomeEntry = async () => {
-    const formattedDate = new Date(incomeValue.date).toLocaleDateString(
-      "en-US",
-      {
-        month: "long",
-        day: "numeric",
-      }
-    );
-
-    if (title.trim() === "") {
-      setError({
-        ...error,
-        title: "Title cannot be empty.",
-      });
-      return;
-    } else {
-      setError((prevstate) => ({
-        ...prevstate,
-        title: null,
-      }));
-    }
-
-    if (amount.trim() === "") {
-      setError({ ...error, amount: "Amount cannot be empty." });
-      return;
-    }
-    // else if (isNaN(amount)) {
-    //   setError({
-    //     ...error,
-    //     amount: "Numbers only allowed in the amount field.",
-    //   });
-    // } else {
-    //   setError({ ...error, amount: null });
-    // }
+    const incomeTitle = getValues("incomeTitle");
+    const incomeAmount = getValues("incomeAmount");
+    const incomeCategory = getValues("incomeCategory");
 
     dispatch(
       income_transaction({
-        newCategory: incomeValue.category,
-        newTitle: incomeValue.title,
-        newAmount: incomeValue.amount,
+        newCategory: incomeCategory,
+        newTitle: incomeTitle,
+        newAmount: incomeAmount,
         newDescription: incomeValue.description,
         newDate: formattedDate,
       })
@@ -83,39 +59,76 @@ export default function IncomeEntry({ isClose, closeIncome }) {
     closeIncome();
   };
 
+  const isPositive = (value) => {
+    return parseFloat(value) >= 0;
+  };
+
   return (
-    <div className="py-7 px-8 space-y-5 w-[470px]">
+    <form
+      onSubmit={handleSubmit(handleAddIncomeEntry)}
+      className="py-7 px-8 space-y-5 w-[470px]"
+    >
       <div>
         <p className="text-xl text-center">Income</p>
       </div>
-      <div className="space-x-3 flex items-center">
-        <label htmlFor="category">Category:</label>
-        <select
-          value={category}
-          name="category"
-          id="category"
-          className="p-3 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
-          onChange={handleOnchange}
-        >
-          {incCategory.map((expenses) => (
-            <option key={expenses.id} value={`${expenses.value}`}>
-              {expenses.name}
-            </option>
-          ))}
-        </select>
-        {error.category && <div>{error.category}</div>}
+      <div className="space-x-3 flex flex-col">
+        <div className="flex items-center">
+          <label htmlFor="category">Category:</label>
+          <select
+            // value={category}
+            name="category"
+            id="category"
+            className={`${
+              errors.incomeCategory
+                ? "border-red-400 border focus-within:outline-red-400"
+                : ""
+            } p-3 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+            // onChange={handleOnchange}
+            {...register("incomeCategory", {
+              required: "Category is required",
+            })}
+          >
+            {incCategory.map((expenses) => (
+              <option key={expenses.id} value={`${expenses.value}`}>
+                {expenses.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          {errors.incomeCategory && (
+            <div className="text-red-400 text-center">
+              {errors.incomeCategory.message}
+            </div>
+          )}
+        </div>
       </div>
-      <div className="space-x-3 flex items-center">
-        <label htmlFor="title">Title: </label>
-        <input
-          value={incomeValue.title}
-          className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
-          type="text"
-          id="title"
-          name="title"
-          onChange={handleOnchange}
-        />
-        {error.title && <div>{error.title}</div>}
+      <div className="space-x-3 flex flex-col">
+        <div className="flex items-center">
+          <label htmlFor="title">Title: </label>
+          <input
+            // value={title}
+            className={`${
+              errors.incomeTitle
+                ? "border-red-400 border focus-within:outline-red-400"
+                : ""
+            } p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+            type="text"
+            id="title"
+            name="title"
+            // onChange={handleOnchange}
+            {...register("incomeTitle", {
+              required: "Title is required",
+            })}
+          />
+        </div>
+        <div>
+          {errors.incomeTitle && (
+            <div className="text-red-400 text-center">
+              {errors.incomeTitle.message}
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-1">
@@ -127,24 +140,41 @@ export default function IncomeEntry({ isClose, closeIncome }) {
             className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
           />
         </div>
-        <div className="space-x-1 flex items-center">
-          <label htmlFor="amount">Amount: </label>
-          <input
-            value={incomeValue.amount}
-            placeholder="$$"
-            className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
-            type="text"
-            name="amount"
-            id="amount"
-            onChange={handleOnchange}
-          />
-          {error.amount && <div>{error.amount}</div>}
+        <div className="space-x-1 flex flex-col">
+          <div className="flex items-center">
+            <label htmlFor="amount">Amount: </label>
+            <input
+              // value={amount}
+              placeholder="$$"
+              className={`${
+                errors.incomeAmount
+                  ? "border-red-400 border focus-within:outline-red-400"
+                  : ""
+              } p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+              type="number"
+              name="amount"
+              id="amount"
+              // onChange={handleOnchange}
+              {...register("incomeAmount", {
+                required: "Amount is required",
+                validate: (value) =>
+                  isPositive(value) || "Non-negative values required",
+              })}
+            />
+          </div>
+          <div>
+            {errors.incomeAmount && (
+              <div className="text-center text-red-400 w-full">
+                {errors.incomeAmount.message}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
       <div>
         <textarea
-          value={incomeValue.description}
+          value={description}
           placeholder="Enter description..."
           id="description"
           cols="30"
@@ -156,7 +186,7 @@ export default function IncomeEntry({ isClose, closeIncome }) {
       </div>
       <div className="flex space-x-3">
         <button
-          onClick={handleAddIncomeEntry}
+          type="submit"
           className="px-4 py-2 rounded-lg bg-[#303030] text-white font-medium w-full shadow-md hover:bg-slate-600 transition-colors"
         >
           Add transaction
@@ -165,6 +195,6 @@ export default function IncomeEntry({ isClose, closeIncome }) {
           Save as Draft
         </button>
       </div>
-    </div>
+    </form>
   );
 }
