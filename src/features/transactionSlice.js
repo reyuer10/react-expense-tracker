@@ -33,6 +33,7 @@ const initalValue = {
   balance: 1000,
   totalIncome: 0,
   totalExpenses: 0,
+  draftList: [],
 };
 
 export const transactionSlice = createSlice({
@@ -82,8 +83,7 @@ export const transactionSlice = createSlice({
         ...state,
         transactionList: [...state.transactionList, newExpense],
         balance: state.balance - newExpense.transacAmount,
-        totalExpenses: newExpense.transacAmount + state.totalExpenses
-
+        totalExpenses: newExpense.transacAmount + state.totalExpenses,
       };
     },
     open_modal: (state) => {
@@ -98,6 +98,32 @@ export const transactionSlice = createSlice({
         modalTransactions: false,
       };
     },
+    add_to_draft: (state, action) => {
+      const {
+        draftCategory,
+        draftTitle,
+        draftAmount,
+        draftDate,
+        draftDescription,
+      } = action.payload;
+      const newDraftList = {
+        toDraftId:
+          state.draftList.length === 0
+            ? 1
+            : state.draftList[state.draftList.length - 1].toDraftId + 1,
+        transactionType: "Draft",
+        toDraftCategory: draftCategory,
+        toDraftTitle: draftTitle,
+        toDraftAmount: parseInt(draftAmount),
+        toDraftDate: draftDate,
+        toDraftDescription: draftDescription,
+      };
+
+      return {
+        ...state,
+        draftList: [...state.draftList, newDraftList],
+      };
+    },
   },
 });
 
@@ -106,5 +132,6 @@ export const {
   open_modal,
   close_modal,
   expense_transaction,
+  add_to_draft,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

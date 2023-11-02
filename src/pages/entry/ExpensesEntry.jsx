@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
+  add_to_draft,
   close_modal,
   expense_transaction,
 } from "../../features/transactionSlice";
@@ -25,15 +26,15 @@ export default function ExpensesEntry({ isClose, closeExpense }) {
   // const [expenseCategory, setExpenseCategory] = useState("");
   const [expenseDate, setExpenseDate] = useState(new Date());
 
+  const expensesCategory = getValues("expensesCategory");
+  const expensesTitle = getValues("expensesTitle");
+  const expensesAmount = getValues("expensesAmount");
+
   const handleAddExpenseEntry = () => {
     const formattedDate = new Date(expenseDate).toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
     });
-
-    const expensesCategory = getValues("expensesCategory");
-    const expensesTitle = getValues("expensesTitle");
-    const expensesAmount = getValues("expensesAmount");
 
     dispatch(
       expense_transaction({
@@ -52,6 +53,28 @@ export default function ExpensesEntry({ isClose, closeExpense }) {
 
   const isPositive = (value) => {
     return parseFloat(value) >= 0;
+  };
+
+  const handleAddtoDraft = () => {
+    console.log("Hi");
+
+    const formattedDate = new Date(expenseDate).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+
+    dispatch(
+      add_to_draft({
+        draftCategory: expensesCategory,
+        draftTitle: expensesTitle,
+        draftAmount: expensesAmount,
+        draftDate: expenseDescription,
+        draftDescription: formattedDate,
+      })
+    );
+    dispatch(close_modal());
+    isClose();
+    closeExpense();
   };
 
   return (
@@ -178,7 +201,11 @@ export default function ExpensesEntry({ isClose, closeExpense }) {
         >
           Add transaction
         </button>
-        <button className="border shadow-md rounded-lg font-medium w-full hover:bg-slate-50">
+        <button
+          type="button"
+          onClick={handleAddtoDraft}
+          className="border shadow-md rounded-lg font-medium w-full hover:bg-slate-50"
+        >
           Save as Draft
         </button>
       </div>

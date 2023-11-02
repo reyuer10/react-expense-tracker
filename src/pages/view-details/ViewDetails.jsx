@@ -16,8 +16,6 @@ export default function ViewDetails() {
     return <div>Item not found</div>;
   }
 
- 
-
   const handleOptionButtonClick = () =>
     setIsOptionButtonClick(!isOptionButtonClick);
   return (
@@ -44,14 +42,18 @@ export default function ViewDetails() {
             </svg>
           </button>
           {isOptionButtonClick && (
-            <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-lg flex flex-col p-3 z-10 bg-white items-baseline">
-              {buttonOption.map((button) => (
-                <button className="flex items-center space-x-2">
-                  {button.svg}
-                  <p>{button.name}</p>
-                </button>
-              ))}
-            </div>
+            <>
+              <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-lg flex flex-col p-3 z-10 bg-white items-baseline">
+                {buttonOption.map((button) => (
+                  <div key={button.id}>
+                    <button className="flex items-center space-x-2">
+                      {button.svg}
+                      <p>{button.name}</p>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
