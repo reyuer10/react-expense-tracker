@@ -176,8 +176,30 @@ export const transactionSlice = createSlice({
       };
     },
     move_to_bin: (state, action) => {
+      const { detailsExistingId } = action.payload;
+      const removeTransaction = state.transactionList.find(
+        (transac) => transac.transacId === detailsExistingId
+      );
+
+      if (!removeTransaction) {
+        return state;
+      }
+
       return {
-        
+        ...state,
+        transactionList: state.transactionList.filter(
+          (transac) => transac.transacId !== detailsExistingId
+        ),
+        bin: [...state.bin, removeTransaction],
+      };
+    },
+    delete_bin: (state, action) => {
+      const { existingBinId } = action.payload;
+      return {
+        ...state,
+        bin: state.bin.filter(
+          (transac) => transac.transacId !== existingBinId
+        ),
       };
     },
   },
@@ -191,5 +213,6 @@ export const {
   add_to_draft_expenses,
   add_to_draft_income,
   move_to_bin,
+  delete_bin,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

@@ -1,20 +1,38 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { categoryIcons } from "../../svg_category/svgCategory";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { buttonOption } from "./ButtonOption";
+import { move_to_bin } from "../../features/transactionSlice";
 
 export default function ViewDetails() {
   const [isOptionButtonClick, setIsOptionButtonClick] = useState(false);
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   const transaction = useSelector((state) => state.transaction.transactionList);
-  const { id } = useParams();
   const selectedItem = transaction.find(
     (transac) => transac.transacId === parseInt(id)
   );
+
   if (!selectedItem) {
-    return <div>Item not found</div>;
+    return (
+      <div className="text-[#303030] my-10 text-xl font-outfit font-normal shadow-md p-8 rounded-xl w-[600px] h-[300px]">
+        Item not found
+      </div>
+    );
   }
+
+  const handleButtonClick = (buttonId) => {
+    if (buttonId === 2) {
+      dispatch(
+        move_to_bin({
+          detailsExistingId: selectedItem.transacId,
+        })
+      );
+    }
+    console.log(selectedItem.transacId);
+  };
 
   const handleOptionButtonClick = () =>
     setIsOptionButtonClick(!isOptionButtonClick);
@@ -46,7 +64,10 @@ export default function ViewDetails() {
               <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-lg flex flex-col p-3 z-10 bg-white items-baseline">
                 {buttonOption.map((button) => (
                   <div key={button.id}>
-                    <button className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleButtonClick(button.id)}
+                      className="flex items-center space-x-2"
+                    >
                       {button.svg}
                       <p>{button.name}</p>
                     </button>
