@@ -63,7 +63,7 @@ export default function DashBoard() {
         </div>
       </div>
 
-      <div className="flex ">
+      <div className="flex">
         <div className="flex flex-grow flex-wrap gap-8 mx-5 ">
           {dashBoardComponent.map((component) => (
             <div key={component.id}>
@@ -80,12 +80,7 @@ export default function DashBoard() {
       </div>
       {modalTransactions && (
         <>
-          <Modal
-            isOpen={handleOpenModal}
-            isClose={handleCloseModal}
-            closeExpense={handleCloseExpense}
-            closeIncome={handleCloseIncome}
-          >
+          <Modal isOpen={handleOpenModal} isClose={handleCloseModal}>
             {!isUserChooseExpense ? (
               <>
                 {!isUserChooseIncome ? (
@@ -109,6 +104,7 @@ export default function DashBoard() {
                 <ExpensesEntry
                   isClose={handleCloseModal}
                   closeExpense={handleCloseExpense}
+                  closeIncome={handleCloseIncome}
                 />
               </>
             )}

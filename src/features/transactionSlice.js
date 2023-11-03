@@ -114,7 +114,7 @@ export const transactionSlice = createSlice({
         transactionType: "Draft",
         toDraftCategory: draftCategory,
         toDraftTitle: draftTitle,
-        toDraftAmount: parseInt(draftAmount),
+        toDraftAmount: parseFloat(draftAmount),
         toDraftDate: draftDate,
         toDraftDescription: draftDescription,
       };
