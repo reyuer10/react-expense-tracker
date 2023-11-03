@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-  add_to_draft,
+  add_to_draft_expenses,
   close_modal,
   expense_transaction,
 } from "../../features/transactionSlice";
@@ -17,7 +17,7 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
     handleSubmit,
     getValues,
     formState: { errors },
-    watch
+    watch,
   } = useForm();
   const dispatch = useDispatch();
 
@@ -34,13 +34,12 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
   const [draftHover, setDraftHover] = useState(false);
   const [isdraftDisable, setIsDraftDisable] = useState(false);
 
-  const inputTitle = watch("expensesTitle");
+  // const inputTitle = watch("expensesTitle");
   const inputCategory = watch("expensesCategory");
   const inputAmount = watch("expensesAmount");
 
-  
   useEffect(() => {
-    console.log("Input field amount:", inputAmount)
+    console.log("Input field amount:", inputAmount);
 
     if (inputAmount === "" && inputCategory === "") {
       setIsDraftDisable(true);
@@ -87,12 +86,12 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
     });
 
     dispatch(
-      add_to_draft({
+      add_to_draft_expenses({
         draftCategory: expensesCategory,
         draftTitle: expensesTitle,
         draftAmount: expensesAmount,
-        draftDate: expenseDescription,
-        draftDescription: formattedDate,
+        draftDate: formattedDate,
+        draftDescription: expenseDescription,
       })
     );
 
@@ -105,7 +104,6 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
     isClose();
     closeExpense();
     closeIncome();
-   
   };
 
   const handleDraftHover = (isHover) => {
@@ -129,7 +127,7 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
             className={`${isdraftDisable ? "text-slate-500" : ""}`}
           >
             <svg
-            className="fill-current"
+              className="fill-current"
               id="Layer_1"
               height="20"
               viewBox="0 0 24 24"
@@ -143,7 +141,7 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
           <div>
             {draftHover && (
               <p className="fixed w-[140px] rounded-lg top-0 ml-5 border border-slate-300 flex items-start bg-white px-4 py-2">
-                Move to draft
+                Save as draft
               </p>
             )}
           </div>
@@ -162,8 +160,8 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
           </button>
         </div>
       </div>
-      <div className="">
-        <p className="text-xl grid place-items-center w-full ">Expenses</p>
+      <div>
+        <p className="text-xl grid place-items-center w-full">Expenses</p>
       </div>
       <div className="space-x-3 flex flex-col">
         <div className="flex items-center">

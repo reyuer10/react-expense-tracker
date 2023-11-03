@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function Modal({ isOpen, children }) {
+export default function DraftModal({ isOpen, children }) {
   if (!isOpen) {
     return null;
   }

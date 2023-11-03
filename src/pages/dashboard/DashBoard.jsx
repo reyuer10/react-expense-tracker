@@ -86,6 +86,9 @@ export default function DashBoard() {
                 {!isUserChooseIncome ? (
                   <>
                     <ChooseTransactions
+                      isClose={handleCloseModal}
+                      closeExpense={handleCloseExpense}
+                      closeIncome={handleCloseIncome}
                       openExpense={handleOpenExpense}
                       openIncome={handleOpenIncome}
                       onClose={handleCloseModal}
@@ -96,6 +99,7 @@ export default function DashBoard() {
                     isClose={handleCloseModal}
                     onClose={handleCloseModal}
                     closeIncome={handleCloseIncome}
+                    closeExpense={handleCloseExpense}
                   />
                 )}
               </>

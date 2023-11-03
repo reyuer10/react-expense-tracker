@@ -34,6 +34,7 @@ const initalValue = {
   totalIncome: 0,
   totalExpenses: 0,
   draftList: [],
+  bin: [],
 };
 
 export const transactionSlice = createSlice({
@@ -98,7 +99,7 @@ export const transactionSlice = createSlice({
         modalTransactions: false,
       };
     },
-    add_to_draft: (state, action) => {
+    add_to_draft_expenses: (state, action) => {
       const {
         draftCategory,
         draftTitle,
@@ -111,7 +112,7 @@ export const transactionSlice = createSlice({
           state.draftList.length === 0
             ? 1
             : state.draftList[state.draftList.length - 1].toDraftId + 1,
-        transactionType: "Draft",
+        transactionType: "Expenses",
         toDraftCategory: draftCategory,
         toDraftTitle: draftTitle,
         toDraftAmount: parseFloat(draftAmount),
@@ -124,6 +125,61 @@ export const transactionSlice = createSlice({
         draftList: [...state.draftList, newDraftList],
       };
     },
+    add_to_draft_income: (state, action) => {
+      const {
+        draftIncomeCategory,
+        draftIncomeTitle,
+        draftIncomeAmount,
+        draftIncomeDate,
+        draftIncomeDescription,
+      } = action.payload;
+      const newIncomeDraftList = {
+        toDraftId:
+          state.draftList.length === 0
+            ? 1
+            : state.draftList[state.draftList.length - 1].toDraftId + 1,
+        transactionType: "Income",
+        toDraftCategory: draftIncomeCategory,
+        toDraftTitle: draftIncomeTitle,
+        toDraftAmount: parseFloat(draftIncomeAmount),
+        toDraftDate: draftIncomeDate,
+        toDraftDescription: draftIncomeDescription,
+      };
+      return {
+        ...state,
+        draftList: [...state.draftList, newIncomeDraftList],
+      };
+    },
+    edit_draft_income: (state, action) => {
+      const {
+        updateIncomeCategory,
+        updateIncomeTitle,
+        updateIncomeAmount,
+        updateIncomeDate,
+        updateIncomeDescription,
+        existingIncomeId,
+      } = action.payload;
+      return {
+        ...state,
+        draftList: state.draftList.map((draft) =>
+          draft.id === existingIncomeId
+            ? {
+                ...draft,
+                toDraftCategory: updateIncomeCategory,
+                toDraftTitle: updateIncomeTitle,
+                toDraftAmount: parseFloat(updateIncomeAmount),
+                toDraftDate: updateIncomeDate,
+                toDraftDescription: updateIncomeDescription,
+              }
+            : draft
+        ),
+      };
+    },
+    move_to_bin: (state, action) => {
+      return {
+        
+      };
+    },
   },
 });
 
@@ -132,6 +188,8 @@ export const {
   open_modal,
   close_modal,
   expense_transaction,
-  add_to_draft,
+  add_to_draft_expenses,
+  add_to_draft_income,
+  move_to_bin,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;
