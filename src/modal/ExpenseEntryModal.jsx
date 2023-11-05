@@ -17,7 +17,7 @@ export default function ExpenseEntryModal() {
           className="container bg-white ring-1 ring-slate-200 rounded-lg"
         >
           <div className="text-right p-3">
-            <button onClick={isClose} className="">
+            <button onClick={isClose}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Outline"

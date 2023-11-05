@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { categoryIcons } from "../../svg_category/svgCategory";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { buttonOption } from "./ButtonOption";
-import { move_to_bin } from "../../features/transactionSlice";
+import BinExpensesModal from "../../modal/BinExpensesModal";
+import BinModal from "./binModal";
 
 export default function ViewDetails() {
   const [isOptionButtonClick, setIsOptionButtonClick] = useState(false);
   const { id } = useParams();
-  const dispatch = useDispatch();
 
+  const [binOpenModal, setBinOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOptionButtonClick((prevState) => !prevState);
+    setBinOpenModal(true);
+  };
+  const handleCloseModal = () =>  setBinOpenModal(false);
+  
   const transaction = useSelector((state) => state.transaction.transactionList);
   const selectedItem = transaction.find(
     (transac) => transac.transacId === parseInt(id)
@@ -25,17 +33,13 @@ export default function ViewDetails() {
 
   const handleButtonClick = (buttonId) => {
     if (buttonId === 2) {
-      dispatch(
-        move_to_bin({
-          detailsExistingId: selectedItem.transacId,
-        })
-      );
+      handleOpenModal();
     }
     console.log(selectedItem.transacId);
   };
 
   const handleOptionButtonClick = () =>
-    setIsOptionButtonClick(!isOptionButtonClick);
+    setIsOptionButtonClick((prevState) => !prevState);
   return (
     <div className="relative flex flex-col justify-center items-center font-outfit shadow-md rounded-xl p-9 my-3 space-y-12 text-[#303030]">
       <div className="flex items-center">
@@ -129,6 +133,12 @@ export default function ViewDetails() {
           </div>
         </div>
       </div>
+      <BinExpensesModal isOpen={binOpenModal}>
+        <BinModal
+          transacId={selectedItem.transacId}
+          closeModal={handleCloseModal}
+        />
+      </BinExpensesModal>
     </div>
   );
 }

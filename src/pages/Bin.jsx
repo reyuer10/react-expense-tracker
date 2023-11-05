@@ -4,6 +4,9 @@ import { categoryIcons } from "../svg_category/svgCategory";
 import { delete_bin } from "../features/transactionSlice";
 
 export default function Bin() {
+  // const uniqueId = uuidv4();
+  // console.log(uuidv4()) 
+ 
   const dispatch = useDispatch();
   const bin = useSelector((state) => state.transaction.bin);
   const [selectOption, setSelectOption] = useState(false);
@@ -14,9 +17,8 @@ export default function Bin() {
     console.log(binExistingId)
     if (binExistingId) {
       setExistingId(itemId);
-      setSelectOption(!selectOption);
+      setSelectOption(prevState => !prevState);
     }
-    
   };
 
   const handleDeleteItem = (binId) => {
@@ -25,6 +27,7 @@ export default function Bin() {
         existingBinId: binId,
       })
     );
+    setSelectOption(prevState => !prevState);
   };
   return (
     <div className="text-[#303030] font-outfit my-8">
@@ -34,7 +37,7 @@ export default function Bin() {
       <div>
         {bin.map((b) => (
           <div
-            key={b.transacId}
+            key={b.transacI}
             className="border p-3 rounded-2xl shadow-md flex flex-col w-[700px] my-3"
           >
             <div className="relative">

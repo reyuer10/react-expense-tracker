@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initalValue = {
   transactionList: [
     {
@@ -184,6 +185,7 @@ export const transactionSlice = createSlice({
       if (!removeTransaction) {
         return state;
       }
+  
 
       return {
         ...state,

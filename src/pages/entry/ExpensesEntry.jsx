@@ -39,15 +39,11 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
   const inputAmount = watch("expensesAmount");
 
   useEffect(() => {
-    console.log("Input field amount:", inputAmount);
-
     if (inputAmount === "" && inputCategory === "") {
       setIsDraftDisable(true);
     } else {
       setIsDraftDisable(false);
     }
-
-    console.log("draft disabled: ", isdraftDisable);
   }, [inputAmount]);
 
   const handleAddExpenseEntry = () => {
