@@ -88,6 +88,37 @@ export const transactionSlice = createSlice({
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
       };
     },
+    draft_transaction: (state, action) => {
+      const {
+        addDraftCategory,
+        addDraftTitle,
+        addDraftAmount,
+        addDraftDate,
+        addDraftDescription,
+        addTransactionType,
+        draftExistingId,
+      } = action.payload;
+
+      const draftValue = {
+        transacId:
+          state.transactionList.length === 0
+            ? 1
+            : state.transactionList[state.transactionList.length - 1]
+                .transacId + 1,
+        transactionType: addTransactionType,
+        transacCategory: addDraftCategory,
+        transacTitle: addDraftTitle,
+        transacAmount: parseInt(addDraftAmount),
+        transacDate: addDraftDate,
+        transacDescription: addDraftDescription,
+      };
+
+      return {
+        ...state,
+        transactionList: [...state.transactionList, draftValue],
+        draftList: state.draftList.filter((draft) => draft.toDraftId !== draftExistingId)
+      };
+    },
     open_modal: (state) => {
       return {
         ...state,
@@ -151,26 +182,27 @@ export const transactionSlice = createSlice({
         draftList: [...state.draftList, newIncomeDraftList],
       };
     },
-    edit_draft_income: (state, action) => {
+    edit_draft: (state, action) => {
       const {
-        updateIncomeCategory,
-        updateIncomeTitle,
-        updateIncomeAmount,
-        updateIncomeDate,
-        updateIncomeDescription,
-        existingIncomeId,
+        updateDraftCategory,
+        updateDraftTitle,
+        updateDraftAmount,
+        updateDraftDate,
+        updateDraftDescription,
+        existingDraftId,
       } = action.payload;
+
       return {
         ...state,
         draftList: state.draftList.map((draft) =>
-          draft.id === existingIncomeId
+          draft.toDraftId === existingDraftId
             ? {
                 ...draft,
-                toDraftCategory: updateIncomeCategory,
-                toDraftTitle: updateIncomeTitle,
-                toDraftAmount: parseFloat(updateIncomeAmount),
-                toDraftDate: updateIncomeDate,
-                toDraftDescription: updateIncomeDescription,
+                toDraftCategory: updateDraftCategory,
+                toDraftTitle: updateDraftTitle,
+                toDraftAmount: parseFloat(updateDraftAmount),
+                toDraftDate: updateDraftDate,
+                toDraftDescription: updateDraftDescription,
               }
             : draft
         ),
@@ -185,23 +217,34 @@ export const transactionSlice = createSlice({
       if (!removeTransaction) {
         return state;
       }
-  
+
+      const binId =
+        state.bin.length === 0
+          ? 1
+          : state.bin[state.bin.length - 1].transacId + 1;
 
       return {
         ...state,
         transactionList: state.transactionList.filter(
           (transac) => transac.transacId !== detailsExistingId
         ),
-        bin: [...state.bin, removeTransaction],
+        bin: [...state.bin, { ...removeTransaction, transacId: binId }],
       };
     },
     delete_bin: (state, action) => {
       const { existingBinId } = action.payload;
       return {
         ...state,
-        bin: state.bin.filter(
-          (transac) => transac.transacId !== existingBinId
-        ),
+        bin: state.bin.filter((transac) => transac.transacId !== existingBinId),
+      };
+    },
+    restore_bin: (state, action) => {
+      const { restoreBinId } = action.payload;
+      const binExistingId = state.bin.find((b) => b.transacId === restoreBinId);
+      return {
+        ...state,
+        bin: state.bin.filter((transac) => transac.transacId !== restoreBinId),
+        transactionList: [...state.transactionList, binExistingId],
       };
     },
   },
@@ -216,5 +259,8 @@ export const {
   add_to_draft_income,
   move_to_bin,
   delete_bin,
+  restore_bin,
+  edit_draft,
+  draft_transaction
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

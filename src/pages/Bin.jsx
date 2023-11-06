@@ -1,34 +1,35 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryIcons } from "../svg_category/svgCategory";
-import { delete_bin } from "../features/transactionSlice";
+import { delete_bin, restore_bin } from "../features/transactionSlice";
+import DeleteModal from "../modal/DeleteModal";
+import DeleteConfirmation from "../modal/DeleteConfirmation";
 
 export default function Bin() {
-  // const uniqueId = uuidv4();
-  // console.log(uuidv4()) 
- 
   const dispatch = useDispatch();
   const bin = useSelector((state) => state.transaction.bin);
   const [selectOption, setSelectOption] = useState(false);
   const [exisitngId, setExistingId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenConfirmation = () => setIsModalOpen(true);
+  const handleCloseConfirmation = () => setIsModalOpen(false);
 
   const handleOpenOption = (itemId) => {
     const binExistingId = bin.find((b) => b.transacId === itemId);
-    console.log(binExistingId)
+    console.log(binExistingId);
     if (binExistingId) {
       setExistingId(itemId);
-      setSelectOption(prevState => !prevState);
+      setSelectOption((prevState) => !prevState);
     }
   };
 
-  const handleDeleteItem = (binId) => {
-    dispatch(
-      delete_bin({
-        existingBinId: binId,
-      })
-    );
-    setSelectOption(prevState => !prevState);
-  };
+  const handleRestore = (restoreId) => {
+    dispatch(restore_bin({
+      restoreBinId: restoreId
+    }))
+  }
+
   return (
     <div className="text-[#303030] font-outfit my-8">
       <div className="">
@@ -37,11 +38,14 @@ export default function Bin() {
       <div>
         {bin.map((b) => (
           <div
-            key={b.transacI}
+            key={b.transacId}
             className="border p-3 rounded-2xl shadow-md flex flex-col w-[700px] my-3"
           >
             <div className="relative">
-              <button onClick={() => handleOpenOption(b.transacId)} className="float-right px-2">
+              <button
+                onClick={() => handleOpenOption(b.transacId)}
+                className="float-right px-2"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="Outline"
@@ -56,8 +60,8 @@ export default function Bin() {
               </button>
               {selectOption && exisitngId === b.transacId && (
                 <div className="absolute bg-white right-0 my-6 px-4 py-2 flex flex-col rounded-xl border shadow-md items-start">
-                  <button>Restore</button>
-                  <button onClick={() => handleDeleteItem(b.transacId)}>
+                  <button onClick={() => handleRestore(b.transacId)}>Restore</button>
+                  <button onClick={handleOpenConfirmation}>
                     Delete permanently
                   </button>
                 </div>
@@ -100,6 +104,12 @@ export default function Bin() {
               <label className="font-semibold">Description: </label>
               <span>{b.transacDescription}</span>
             </div>
+            <DeleteModal isOpen={isModalOpen}>
+              <DeleteConfirmation
+                binId={b.transacId}
+                closeModal={handleCloseConfirmation}
+              />
+            </DeleteModal>
           </div>
         ))}
       </div>

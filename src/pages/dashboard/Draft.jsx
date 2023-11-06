@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import DraftModal from "../../modal/DraftModal";
+import DraftUpdate from "../../modal/DraftUpdate";
 
 export default function Draft() {
   const draftList = useSelector((state) => state.transaction.draftList);
@@ -8,18 +9,20 @@ export default function Draft() {
   const [openDraftModal, setOpenDraftModal] = useState(false);
   const [existingIncomeId, setExistingIncomeId] = useState(null);
 
-  
+  const handleOpenModalDraft = () => setOpenDraftModal(true);
+  const handleCloseModalDraft = () => setOpenDraftModal(false);
 
   return (
-    <div className="shadow-md text-[#303030] font-outfit px-7 rounded-[30px] w-[580px] h-[calc(100vh-290px)] ring-2 ring-slate-200">
+    <div className=" shadow-md text-[#303030] font-outfit px-7 rounded-[30px] w-[580px] h-[calc(100vh-290px)] ring-2 ring-slate-200">
       <div>
-        <p className="text-3xl font-semibold py-8">Draft</p>
+        <p className="text-3xl font-semibold pt-5">Draft</p>
       </div>
-      <div>
+      <div className=" h-[540px] overflow-y-auto">
         {draftList.map((draft) => (
           <div
+            onClick={handleOpenModalDraft}
             key={draft.toDraftId}
-            className="border-b-2 border-b-[#303030] my-5 p-3 hover:bg-slate-50 cursor-pointer transition-colors duration-100"
+            className="my-5 p-3 hover:bg-slate-100 rounded-3xl cursor-pointer transition-colors duration-100"
           >
             <div className="flex justify-between">
               <p>
@@ -59,10 +62,12 @@ export default function Draft() {
                 </span>
               </p>
             </div>
+              <DraftModal isOpen={openDraftModal}>
+                <DraftUpdate draft={draft} isClose={handleCloseModalDraft} />
+              </DraftModal>
           </div>
         ))}
       </div>
-      {openDraftModal && <DraftModal></DraftModal>}
     </div>
   );
 }

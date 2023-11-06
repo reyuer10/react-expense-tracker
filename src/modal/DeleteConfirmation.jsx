@@ -1,15 +1,18 @@
 import React from "react";
-import { move_to_bin } from "../../features/transactionSlice";
 import { useDispatch } from "react-redux";
+import { delete_bin } from "../features/transactionSlice";
 
-export default function BinModal({ closeModal, transacId }) {
+export default function DeleteConfirmation({ closeModal, binId }) {
   const dispatch = useDispatch();
-  const handleMovetoBin = () => {
+
+
+  const handleDeletePermanently = () => {
     dispatch(
-      move_to_bin({
-        detailsExistingId: transacId,
+      delete_bin({
+        existingBinId: binId,
       })
     );
+
   };
   return (
     <div className="flex flex-col font-outfit">
@@ -30,12 +33,12 @@ export default function BinModal({ closeModal, transacId }) {
 
       <div>
         <p className="px-6 py-7">
-          Are you sure you want to move this transaction to the bin?
+          Are you sure you delete this transaction permanently?
         </p>
       </div>
       <div className="space-x-3 text-center">
         <button
-          onClick={handleMovetoBin}
+          onClick={handleDeletePermanently}
           className="font-bold px-6 py-2 rounded-xl bg-black text-white hover:bg-slate-700 transition-colors duration-100"
         >
           Yes

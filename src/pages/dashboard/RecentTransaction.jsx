@@ -11,7 +11,7 @@ console.log(transaction)
       <div>
         <p className="text-2xl py-3 text-[#303030]">Recent Transaction</p>
       </div>
-      <div>
+      <div className="h-48 overflow-y-auto">
         {transaction.map((transac) => (
           
           <div

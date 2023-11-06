@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function BinModal({ isOpen, children }) {
+export default function DeleteModal({ isOpen, children }) {
   if (!isOpen) {
     return null;
   }

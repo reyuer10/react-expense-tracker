@@ -16,8 +16,8 @@ export default function ViewDetails() {
     setIsOptionButtonClick((prevState) => !prevState);
     setBinOpenModal(true);
   };
-  const handleCloseModal = () =>  setBinOpenModal(false);
-  
+  const handleCloseModal = () => setBinOpenModal(false);
+
   const transaction = useSelector((state) => state.transaction.transactionList);
   const selectedItem = transaction.find(
     (transac) => transac.transacId === parseInt(id)
@@ -40,6 +40,7 @@ export default function ViewDetails() {
 
   const handleOptionButtonClick = () =>
     setIsOptionButtonClick((prevState) => !prevState);
+
   return (
     <div className="relative flex flex-col justify-center items-center font-outfit shadow-md rounded-xl p-9 my-3 space-y-12 text-[#303030]">
       <div className="flex items-center">
@@ -65,9 +66,12 @@ export default function ViewDetails() {
           </button>
           {isOptionButtonClick && (
             <>
-              <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-lg flex flex-col p-3 z-10 bg-white items-baseline">
+              <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-2xl flex flex-col p-5 ring-1 ring-slate-200 w-[250px] z-10 bg-white items-baseline">
                 {buttonOption.map((button) => (
-                  <div key={button.id}>
+                  <div
+                    key={button.id}
+                    className="hover:bg-slate-100 w-full rounded-lg p-1 px-4"
+                  >
                     <button
                       onClick={() => handleButtonClick(button.id)}
                       className="flex items-center space-x-2"
