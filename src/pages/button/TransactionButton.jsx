@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TransactionButton({handleOpenModal}) {
+export default function TransactionButton({ handleOpenModal }) {
   return (
     <>
       <button

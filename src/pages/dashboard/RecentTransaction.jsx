@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function RecentTransaction() {
   const transaction = useSelector((state) => state.transaction.transactionList);
-console.log(transaction)
+  console.log(transaction);
   return (
     <div className=" h-[300px] w-[550px] shadow-md p-7 rounded-[40px] ring-1 ring-slate-200 text-[#303030]">
       <div>
@@ -13,20 +13,26 @@ console.log(transaction)
       </div>
       <div className="h-48 overflow-y-auto">
         {transaction.map((transac) => (
-          
           <div
             key={transac.transacId}
             className="flex items-center justify-between space-y-2"
           >
             <div className={`flex space-x-3`}>
-             
               <div>{categoryIcons[transac.transacCategory]}</div>
               <div>
                 <p>{transac.transacCategory}</p>
               </div>
             </div>
             <div>
-              <p>{transac.transacAmount}$</p>
+              <p
+                className={`${
+                  transac.transactionType === "Expenses"
+                    ? "text-red-400"
+                    : "text-green-400"
+                } font-semibold`}
+              >
+                {transac.transacAmount}$
+              </p>
             </div>
           </div>
         ))}

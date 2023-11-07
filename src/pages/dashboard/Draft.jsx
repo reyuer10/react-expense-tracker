@@ -62,9 +62,9 @@ export default function Draft() {
                 </span>
               </p>
             </div>
-              <DraftModal isOpen={openDraftModal}>
-                <DraftUpdate draft={draft} isClose={handleCloseModalDraft} />
-              </DraftModal>
+            <DraftModal isOpen={openDraftModal}>
+              <DraftUpdate draft={draft} isClose={handleCloseModalDraft} />
+            </DraftModal>
           </div>
         ))}
       </div>

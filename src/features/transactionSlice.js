@@ -36,6 +36,12 @@ const initalValue = {
   totalExpenses: 0,
   draftList: [],
   bin: [],
+  budgetList: [],
+  expenseLimit: 0,
+  expensesOne: 0,
+  expensesTwo: 0,
+  expensesThree: 0,
+  expensesFour: 0,
 };
 
 export const transactionSlice = createSlice({
@@ -116,7 +122,9 @@ export const transactionSlice = createSlice({
       return {
         ...state,
         transactionList: [...state.transactionList, draftValue],
-        draftList: state.draftList.filter((draft) => draft.toDraftId !== draftExistingId)
+        draftList: state.draftList.filter(
+          (draft) => draft.toDraftId !== draftExistingId
+        ),
       };
     },
     open_modal: (state) => {
@@ -247,6 +255,39 @@ export const transactionSlice = createSlice({
         transactionList: [...state.transactionList, binExistingId],
       };
     },
+    add_budget_item: (state, action) => {
+      const {
+        bOneGetAmount,
+        bTwoGetAmount,
+        bThreeGetAmount,
+        bFourGetAmount,
+        bOneGetCategory,
+        bTwoGetCategory,
+        bThreeGetCategory,
+        bFourGetCategory,
+      } = action.payload;
+      const budget = {
+        budgetId:
+          state.budgetList.length === 0
+            ? 1
+            : state.budgetList[state.budgetList.length - 1].budgetId + 1,
+        bOneAmount: parseFloat(bOneGetAmount),
+        bTwoAmount: parseFloat(bTwoGetAmount),
+        bThreeAmount: parseFloat(bThreeGetAmount),
+        bFourCategory: bFourGetCategory,
+        bOneCategory: bOneGetCategory,
+        bTwoCategory: bTwoGetCategory,
+        bThreeCategory: bThreeGetCategory,
+      };
+      return {
+        ...state,
+        budgetList: [...state.budgetList, budget],
+        expenseLimit:
+          budget.bOneAmount +
+          budget.bTwoAmount +
+          budget.bThreeAmount
+      };
+    },
   },
 });
 
@@ -261,6 +302,7 @@ export const {
   delete_bin,
   restore_bin,
   edit_draft,
-  draft_transaction
+  draft_transaction,
+  add_budget_item,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

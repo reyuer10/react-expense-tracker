@@ -37,7 +37,11 @@ export default function Transactions() {
                   <p>{transac.transacDate}</p>
                 </div>
                 <div>
-                  <p>{transac.transacAmount}$</p>
+                  <p className={`${
+                  transac.transactionType === "Expenses"
+                    ? "text-red-400"
+                    : "text-green-400"
+                } font-semibold`}>{transac.transacAmount}$</p>
                 </div>
               </div>
             </Link>
