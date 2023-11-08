@@ -14,64 +14,36 @@ export default function AddCategory({
     handleSubmit,
     getValues,
     formState: { errors },
-    watch,
   } = useForm();
 
-  const budgetList = useSelector((state) => state.transaction.budgetList);
   const dispatch = useDispatch();
 
-  const budgetOneAmount = getValues("budgetOneAmount");
-  const budgetTwoAmount = getValues("budgetTwoAmount");
-  const budgetThreeAmount = getValues("budgetThreeAmount");
-  const budgetOneCategory = getValues("budgetOneCategory");
-  const budgetTwoCategory = getValues("budgetTwoCategory");
-  const budgetThreeCategory = getValues("budgetThreeCategory");
-
-  // const [budgetValue, setBudgetValue] = useState({
-  //   budgetOneAmount: 0,
-  //   budgetTwoAmount: 0,
-  //   budgetThreeAmount: 0,
-  //   budgetFourAmount: 0,
-  //   budgetOneCategory: "",
-  //   budgetTwoCategory: "",
-  //   budgetThreeCategory: "",
-  //   budgetFourCategory: "",
-  // });
-
-  // const handleOnchange = (e) => {
-  //   const { name, value } = e.target;
-  //   setBudgetValue({ ...budgetValue, [name]: value });
-  // };
-
-  // const {
-  //   budgetOneAmount,
-  //   budgetTwoAmount,
-  //   budgetThreeAmount,
-  //   budgetFourAmount,
-  //   budgetOneCategory,
-  //   budgetTwoCategory,
-  //   budgetThreeCategory,
-  //   budgetFourCategory,
-  // } = budgetValue;
-
   const handleBudgetComplete = () => {
+
+  const bAOne = getValues("budgetOneAmount");
+  const bATwo = getValues("budgetTwoAmount");
+  const bAThree = getValues("budgetThreeAmount");
+  const bCOne = getValues("budgetOneCategory");
+  const bCtwo = getValues("budgetTwoCategory");
+  const bCThree = getValues("budgetThreeCategory");
+
+    const formValues = getValues();
     dispatch(
       add_budget_item({
-        bOneGetAmount: budgetOneAmount,
-        bTwoGetAmount: budgetTwoAmount,
-        bThreeGetAmount: budgetThreeAmount,
-        bOneGetCategory: budgetOneCategory,
-        bTwoGetCategory: budgetTwoCategory,
-        bThreeGetCategory: budgetThreeCategory,
+        bOneGetAmount: bAOne,
+        bTwoGetAmount: bATwo,
+        bThreeGetAmount: bAThree,
+        bOneGetCategory: bCOne,
+        bTwoGetCategory: bCtwo,
+        bThreeGetCategory: bCThree,
       })
     );
     setIsButtonBudgetClick(false);
     setIsBudgetComplete(true);
+    console.log(formValues);
+
   };
 
-  useEffect(() => {
-    console.log(budgetList);
-  }, [budgetList]);
 
   return (
     <form
@@ -83,7 +55,7 @@ export default function AddCategory({
           type="submit"
           className="flex shadow-sm rounded-lg px-4 py-2 ring-1 ring-slate-400 bg-[#303030] text-white font-semibold hover:bg-slate-700"
         >
-          Set budgetF
+          Set budget
         </button>
         <button
           type="button"
@@ -94,13 +66,12 @@ export default function AddCategory({
         </button>
       </div>
       <div className="flex space-x-10 items-center justify-center">
-        <div className="">
+        <div>
           <label htmlFor="AmountOne">Amount: </label>
           <input
+            id="AmountOne"
             className="ring-1 ring-slate-200 rounded-lg p-1 w-[120px]"
             type="number"
-            id="AmountOne"
-            name="budgetOneAmount"
             {...register("budgetOneAmount", {
               required: "Amount is required.",
             })}
@@ -115,7 +86,6 @@ export default function AddCategory({
           <label htmlFor="categoryOne">Category: </label>
           <select
             id="categoryOne"
-            name="budgetOneCategory"
             className="px-4 py-2 rounded-lg ring-1 ring-slate-200"
             {...register("budgetOneCategory", {
               required: "Amount is required.",
@@ -141,7 +111,6 @@ export default function AddCategory({
             id="amountTwo"
             className="ring-1 ring-slate-200 rounded-lg p-1 w-[120px]"
             type="number"
-            name="budgetTwoAmount"
             {...register("budgetTwoAmount", {
               required: "Amount is required.",
             })}
@@ -156,7 +125,6 @@ export default function AddCategory({
           <label htmlFor="categoryTwo">Category: </label>
           <select
             id="categoryTwo"
-            name="budgetTwoCategory"
             className="px-4 py-2 rounded-lg ring-1 ring-slate-200"
             {...register("budgetTwoCategory", {
               required: "Category is required.",
@@ -182,7 +150,6 @@ export default function AddCategory({
             id="amountThree"
             className="ring-1 ring-slate-200 rounded-lg p-1 w-[120px]"
             type="number"
-            name="budgetThreeAmount"
             {...register("budgetThreeAmount", {
               required: "Amount is required.",
             })}
@@ -197,10 +164,9 @@ export default function AddCategory({
           <label htmlFor="categoryThree">Category: </label>
           <select
             id="categoryThree"
-            name="budgetThreeCategory"
             className="px-4 py-2 rounded-lg ring-1 ring-slate-200"
             {...register("budgetThreeCategory", {
-              required: "Amount is required.",
+              required: "Category is required.",
             })}
           >
             {expCategory.map((expenses) => (

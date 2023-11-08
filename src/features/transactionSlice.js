@@ -38,10 +38,9 @@ const initalValue = {
   bin: [],
   budgetList: [],
   expenseLimit: 0,
-  expensesOne: 0,
-  expensesTwo: 0,
-  expensesThree: 0,
-  expensesFour: 0,
+  expenseOneLimit: 0,
+  expenseTwoLimit: 0,
+  expenseThreeLimit: 0,
 };
 
 export const transactionSlice = createSlice({
@@ -260,32 +259,52 @@ export const transactionSlice = createSlice({
         bOneGetAmount,
         bTwoGetAmount,
         bThreeGetAmount,
-        bFourGetAmount,
         bOneGetCategory,
         bTwoGetCategory,
         bThreeGetCategory,
-        bFourGetCategory,
       } = action.payload;
       const budget = {
         budgetId:
           state.budgetList.length === 0
             ? 1
             : state.budgetList[state.budgetList.length - 1].budgetId + 1,
-        bOneAmount: parseFloat(bOneGetAmount),
-        bTwoAmount: parseFloat(bTwoGetAmount),
-        bThreeAmount: parseFloat(bThreeGetAmount),
-        bFourCategory: bFourGetCategory,
+        bOneAmount: parseInt(bOneGetAmount),
+        bTwoAmount: parseInt(bTwoGetAmount),
+        bThreeAmount: parseInt(bThreeGetAmount),
         bOneCategory: bOneGetCategory,
         bTwoCategory: bTwoGetCategory,
         bThreeCategory: bThreeGetCategory,
+        expensesOne: 0,
+        expensesTwo: 0,
+        expensesThree: 0,
       };
       return {
         ...state,
         budgetList: [...state.budgetList, budget],
+        expenseOneLimit: budget.bOneAmount,
+        expenseTwoLimit: budget.bTwoAmount,
+        expenseThreeLimit: budget.bThreeAmount,
         expenseLimit:
-          budget.bOneAmount +
-          budget.bTwoAmount +
-          budget.bThreeAmount
+          budget.bOneAmount + budget.bTwoAmount + budget.bThreeAmount,
+      };
+    },
+    add_expenses_budgetM: (state, action) => {
+      const { bId, newEOneVal, newTwoVal, newThreeVal } = action.payload;
+
+      return {
+        ...state,
+        budgetList: state.budgetList.map((budget) =>
+          budget.budgetId === bId
+            ? {
+                ...budget,
+                expensesOne:
+                  parseInt(budget.expensesOne) + parseInt(newEOneVal),
+                expensesTwo: parseInt(budget.expensesTwo) + parseInt(newTwoVal),
+                expensesThree:
+                  parseInt(budget.expensesThree) + parseInt(newThreeVal),
+              }
+            : budget
+        ),
       };
     },
   },
@@ -304,5 +323,6 @@ export const {
   edit_draft,
   draft_transaction,
   add_budget_item,
+  add_expenses_budgetM,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;
