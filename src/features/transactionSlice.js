@@ -37,10 +37,7 @@ const initalValue = {
   draftList: [],
   bin: [],
   budgetList: [],
-  expenseLimit: 0,
-  expenseOneLimit: 0,
-  expenseTwoLimit: 0,
-  expenseThreeLimit: 0,
+  notificationList: [],
 };
 
 export const transactionSlice = createSlice({
@@ -255,56 +252,56 @@ export const transactionSlice = createSlice({
       };
     },
     add_budget_item: (state, action) => {
-      const {
-        bOneGetAmount,
-        bTwoGetAmount,
-        bThreeGetAmount,
-        bOneGetCategory,
-        bTwoGetCategory,
-        bThreeGetCategory,
-      } = action.payload;
+      const { GetAmount, GetCategory } = action.payload;
       const budget = {
         budgetId:
           state.budgetList.length === 0
             ? 1
             : state.budgetList[state.budgetList.length - 1].budgetId + 1,
-        bOneAmount: parseInt(bOneGetAmount),
-        bTwoAmount: parseInt(bTwoGetAmount),
-        bThreeAmount: parseInt(bThreeGetAmount),
-        bOneCategory: bOneGetCategory,
-        bTwoCategory: bTwoGetCategory,
-        bThreeCategory: bThreeGetCategory,
-        expensesOne: 0,
-        expensesTwo: 0,
-        expensesThree: 0,
+        budgetAmount: parseInt(GetAmount),
+        budgetCategory: GetCategory,
+        budgetExpenses: 0,
+        budgetPercentage: 100,
       };
+
       return {
         ...state,
         budgetList: [...state.budgetList, budget],
-        expenseOneLimit: budget.bOneAmount,
-        expenseTwoLimit: budget.bTwoAmount,
-        expenseThreeLimit: budget.bThreeAmount,
-        expenseLimit:
-          budget.bOneAmount + budget.bTwoAmount + budget.bThreeAmount,
+
+        // balance:
+        //   state.balance -
+        //   (budget.bOneAmount + budget.bTwoAmount + budget.bThreeAmount),
       };
     },
-    add_expenses_budgetM: (state, action) => {
-      const { bId, newEOneVal, newTwoVal, newThreeVal } = action.payload;
 
+    add_expenses_budgetM: (state, action) => {
+      const { bId, newEOneVal } = action.payload;
       return {
         ...state,
         budgetList: state.budgetList.map((budget) =>
           budget.budgetId === bId
             ? {
                 ...budget,
-                expensesOne:
-                  parseInt(budget.expensesOne) + parseInt(newEOneVal),
-                expensesTwo: parseInt(budget.expensesTwo) + parseInt(newTwoVal),
-                expensesThree:
-                  parseInt(budget.expensesThree) + parseInt(newThreeVal),
+                budgetExpenses:
+                  parseInt(budget.budgetExpenses) + parseInt(newEOneVal),
               }
             : budget
         ),
+      };
+    },
+    notification_budget: (state, action) => {
+      const { nValue } = action.payload;
+      const newNotification = {
+        notificationId:
+          state.notificationList.length === 0
+            ? 1
+            : state.notificationList[state.notificationList.length - 1]
+                .notificationId + 1,
+        notificationValue: nValue,
+      };
+      return {
+        ...state,
+        notificationList: [...state.notificationList, newNotification],
       };
     },
   },
@@ -324,5 +321,7 @@ export const {
   draft_transaction,
   add_budget_item,
   add_expenses_budgetM,
+  exit_budget_management,
+  notification_budget
 } = transactionSlice.actions;
 export default transactionSlice.reducer;
