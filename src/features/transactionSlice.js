@@ -90,6 +90,26 @@ export const transactionSlice = createSlice({
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
       };
     },
+    edit_transaction: (state, action) => {
+      const { tId, nCategory, nDate, nAmount, nTitle, nDescription, nType } =
+        action.payload;
+      return {
+        ...state,
+        transactionList: state.transactionList.map((transac) =>
+          transac.transacId === tId
+            ? {
+                ...transac,
+                transactionType: nType,
+                transacCategory: nCategory,
+                transacTitle: nTitle,
+                transacAmount: parseInt(nAmount),
+                transacDate: nDate,
+                transacDescription: nDescription,
+              }
+            : transac
+        ),
+      };
+    },
     draft_transaction: (state, action) => {
       const {
         addDraftCategory,
@@ -267,10 +287,6 @@ export const transactionSlice = createSlice({
       return {
         ...state,
         budgetList: [...state.budgetList, budget],
-
-        // balance:
-        //   state.balance -
-        //   (budget.bOneAmount + budget.bTwoAmount + budget.bThreeAmount),
       };
     },
 
@@ -322,6 +338,7 @@ export const {
   add_budget_item,
   add_expenses_budgetM,
   exit_budget_management,
-  notification_budget
+  notification_budget,
+  edit_transaction,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

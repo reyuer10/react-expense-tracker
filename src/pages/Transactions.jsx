@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import ViewDetails from "./view-details/ViewDetails";
 import { Link } from "react-router-dom";
 import { categoryIcons } from "../svg_category/svgCategory";
 
 export default function Transactions() {
   const transaction = useSelector((state) => state.transaction.transactionList);
+  const [searchFilter, setSearchFilter] = useState("");
 
+  const handleSearchInputChange = (e) => {
+    setSearchFilter(e.target.value);
+  };
 
+  const filterSearch = transaction.filter((transac) =>
+    transac.transacCategory.toLowerCase().includes(searchFilter.toLowerCase())
+  );
 
   return (
     <motion.div
@@ -22,13 +28,22 @@ export default function Transactions() {
             Transactions
           </p>
         </div>
+        <div className="mx-5">
+          <input
+            type="text"
+            placeholder="Search category..."
+            value={searchFilter}
+            onChange={handleSearchInputChange}
+            className="flex justify-center items-center w-full rounded-lg ring-1 ring-slate-300 shadow-md px-3 py-2"
+          />
+        </div>
         <div>
-          {transaction.map((transac) => (
-            <Link to={`/transaction-details/${transac.transacId}`} key={transac.transacId}>
-              <div
-                
-                className="flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5 hover:bg-slate-50 transition-colors duration-100"
-              >
+          {filterSearch.map((transac) => (
+            <Link
+              to={`/transaction-details/${transac.transacId}`}
+              key={transac.transacId}
+            >
+              <div className="flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5 hover:bg-slate-50 transition-colors duration-100">
                 <div>
                   <div className="flex space-x-2">
                     {categoryIcons[transac.transacCategory]}
@@ -37,11 +52,15 @@ export default function Transactions() {
                   <p>{transac.transacDate}</p>
                 </div>
                 <div>
-                  <p className={`${
-                  transac.transactionType === "Expenses"
-                    ? "text-red-400"
-                    : "text-green-400"
-                } font-semibold`}>{transac.transacAmount}$</p>
+                  <p
+                    className={`${
+                      transac.transactionType === "Expenses"
+                        ? "text-red-400"
+                        : "text-green-400"
+                    } font-semibold`}
+                  >
+                    {transac.transacAmount}$
+                  </p>
                 </div>
               </div>
             </Link>

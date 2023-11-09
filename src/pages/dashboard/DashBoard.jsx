@@ -52,7 +52,7 @@ export default function DashBoard() {
 
   return (
     <div className="text-[#303030] font-outfit">
-      <div className="flex items-center justify-between my-4">
+      <div className="flex items-center justify-between my-4 mx-5">
         <div>
           <p className="text-2xl font-semibold">DashBoard</p>
         </div>

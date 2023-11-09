@@ -8,7 +8,7 @@ import DeleteConfirmation from "../modal/DeleteConfirmation";
 export default function Bin() {
   const dispatch = useDispatch();
   const bin = useSelector((state) => state.transaction.bin);
-  const [selectOption, setSelectOption] = useState(false);
+  const [selectOption, setSelectOption] = useState(null);
   const [exisitngId, setExistingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,14 +25,16 @@ export default function Bin() {
   };
 
   const handleRestore = (restoreId) => {
-    dispatch(restore_bin({
-      restoreBinId: restoreId
-    }))
-  }
+    dispatch(
+      restore_bin({
+        restoreBinId: restoreId,
+      })
+    );
+  };
 
   return (
     <div className="text-[#303030] font-outfit my-8">
-      <div className="">
+      <div>
         <p className="text-3xl font-semibold">Bin</p>
       </div>
       <div>
@@ -59,12 +61,29 @@ export default function Bin() {
                 </svg>
               </button>
               {selectOption && exisitngId === b.transacId && (
-                <div className="absolute bg-white right-0 my-6 px-4 py-2 flex flex-col rounded-xl border shadow-md items-start">
-                  <button onClick={() => handleRestore(b.transacId)}>Restore</button>
-                  <button onClick={handleOpenConfirmation}>
-                    Delete permanently
-                  </button>
-                </div>
+                <>
+                  <div
+                    onClick={() => setSelectOption(false)}
+                    className="inset-1 fixed "
+                  />
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className=" absolute bg-white right-0 my-6 px-4 py-3 flex flex-col rounded-xl border shadow-md items-start"
+                  >
+                    <button
+                      className="hover:text-slate-500 w-full text-left rounded-lg px-3"
+                      onClick={() => handleRestore(b.transacId)}
+                    >
+                      Restore
+                    </button>
+                    <button
+                      className="hover:text-slate-500 transition-colors w-full text-left rounded-lg px-3"
+                      onClick={handleOpenConfirmation}
+                    >
+                      Delete permanently
+                    </button>
+                  </div>
+                </>
               )}
             </div>
             <div className="flex space-x-1">
@@ -104,7 +123,10 @@ export default function Bin() {
               <label className="font-semibold">Description: </label>
               <span>{b.transacDescription}</span>
             </div>
-            <DeleteModal isOpen={isModalOpen}>
+            <DeleteModal
+              closeModal={handleCloseConfirmation}
+              isOpen={isModalOpen}
+            >
               <DeleteConfirmation
                 binId={b.transacId}
                 closeModal={handleCloseConfirmation}

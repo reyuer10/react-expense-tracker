@@ -47,33 +47,33 @@ export default function BudgetManagement() {
 
   return (
     <div className="shadow-md mx-3 py-3  px-4 rounded-[30px] w-[580px] h-[calc(100vh-290px)] ring-2 ring-slate-200 font-outfit space-y-10">
-      <div>
-        <p className="text-2xl font-semibold pt-5">Budget Management</p>
-      </div>
-      <div className="my-5">
-        {isbuttonBudgetClick ? (
-          <>
-            <div>
-              <AddCategory
-                setIsBudgetComplete={setIsBudgetComplete}
-                setIsButtonBudgetClick={setIsButtonBudgetClick}
-                handleBudgetCancel={handleBudgetCancel}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-           <div className="px-3">
-           <SetButton
-              handleButtonSet={handleButtonSet}
-              isBudgetComplete={isBudgetComplete}
-            />
-           </div>
-         
-          </>
-        )}
+      <div className="overflow-y-hidden h-[630px]">
+        <div>
+          <p className="text-2xl font-semibold pt-5">Budget Management</p>
+        </div>
+        <div className="my-5">
+          {isbuttonBudgetClick ? (
+            <>
+              <div>
+                <AddCategory
+                  setIsBudgetComplete={setIsBudgetComplete}
+                  setIsButtonBudgetClick={setIsButtonBudgetClick}
+                  handleBudgetCancel={handleBudgetCancel}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="px-3">
+                <SetButton
+                  handleButtonSet={handleButtonSet}
+                  isBudgetComplete={isBudgetComplete}
+                />
+              </div>
+            </>
+          )}
           <div className="overflow-y-auto h-[480px] px-3 my-5 rounded-2xl">
-           {budgetList.map((budget) => (
+            {budgetList.map((budget) => (
               <BudgetContainer
                 key={budget.budgetId}
                 budget={budget}
@@ -87,7 +87,8 @@ export default function BudgetManagement() {
                 handleCancel={handleCancel}
               />
             ))}
-           </div>
+          </div>
+        </div>
       </div>
     </div>
   );

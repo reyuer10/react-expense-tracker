@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { categoryIcons } from "../../svg_category/svgCategory";
 import { useSelector } from "react-redux";
 import { buttonOption } from "./ButtonOption";
 import BinExpensesModal from "../../modal/BinExpensesModal";
 import BinModal from "./binModal";
+import Details from "./Details";
+import ButtonTransacOption from "./ButtonTransacOption";
+import EditTransaction from "./EditTransaction";
 
 export default function ViewDetails() {
-  const [isOptionButtonClick, setIsOptionButtonClick] = useState(false);
   const { id } = useParams();
+  const transactionList = useSelector(
+    (state) => state.transaction.transactionList
+  );
 
+  const [isOptionButtonClick, setIsOptionButtonClick] = useState(null);
   const [binOpenModal, setBinOpenModal] = useState(false);
+  const [isTransacEdit, setIsTransacEdit] = useState(false);
+  const [getValue, setGetValue] = useState(null);
+
+  const handleCloseTEdit = () => {
+    setIsTransacEdit(false);
+    setIsOptionButtonClick(false);
+  };
 
   const handleOpenModal = () => {
     setIsOptionButtonClick((prevState) => !prevState);
@@ -31,11 +43,24 @@ export default function ViewDetails() {
     );
   }
 
+  const handleEditTransaction = (itemId) => {
+    const tExistingId = transactionList.find(
+      (transac) => transac.transacId === itemId
+    );
+    if (tExistingId) {
+      setGetValue(tExistingId);
+      setIsTransacEdit(true);
+    }
+  };
+
   const handleButtonClick = (buttonId) => {
-    if (buttonId === 2) {
+    if (buttonId === 1) {
+      handleEditTransaction(buttonId);
+    } else if (buttonId === 2) {
       handleOpenModal();
     }
-    console.log(selectedItem.transacId);
+
+    console.log(isTransacEdit);
   };
 
   const handleOptionButtonClick = () =>
@@ -47,97 +72,68 @@ export default function ViewDetails() {
         <div>
           <p className="text-3xl font-medium">Transaction Details</p>
         </div>
-        <div>
-          <button
-            onClick={handleOptionButtonClick}
-            className="absolute right-0 mx-10 text-[#303030] hover:text-slate-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="Outline"
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-            >
-              <circle cx="2" cy="12" r="2" />
-              <circle cx="12" cy="12" r="2" />
-              <circle cx="22" cy="12" r="2" />
-            </svg>
-          </button>
-          {isOptionButtonClick && (
-            <>
-              <div className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-2xl flex flex-col p-5 ring-1 ring-slate-200 w-[250px] z-10 bg-white items-baseline">
-                {buttonOption.map((button) => (
-                  <div
-                    key={button.id}
-                    className="hover:bg-slate-100 w-full rounded-lg p-1 px-4"
+        {!isTransacEdit && (
+          <>
+            <div>
+              <div>
+                <button
+                  onClick={handleOptionButtonClick}
+                  className="absolute right-0 mx-10 text-[#303030] hover:text-slate-50"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="Outline"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
                   >
-                    <button
-                      onClick={() => handleButtonClick(button.id)}
-                      className="flex items-center space-x-2"
-                    >
-                      {button.svg}
-                      <p>{button.name}</p>
-                    </button>
-                  </div>
-                ))}
+                    <circle cx="2" cy="12" r="2" />
+                    <circle cx="12" cy="12" r="2" />
+                    <circle cx="22" cy="12" r="2" />
+                  </svg>
+                </button>
               </div>
-            </>
-          )}
-        </div>
+              {isOptionButtonClick && (
+                <>
+                  <div
+                    onClick={() => setIsOptionButtonClick(false)}
+                    className="inset-1 fixed"
+                  />
+                  <div
+                    onClick={(e) => e.isPropagationStopped()}
+                    className="space-y-2 absolute right-0 mx-10 my-5 shadow-md rounded-2xl flex flex-col p-5 ring-1 ring-slate-200 w-[250px] z-10 bg-white items-baseline"
+                  >
+                    {buttonOption.map((button) => (
+                      <ButtonTransacOption
+                        handleButtonClick={handleButtonClick}
+                        button={button}
+                        key={button.id}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        )}
       </div>
       <div className="text-xl w-[700px]">
-        <div>
-          <div className="flex justify-between">
-            <span className="font-medium">Transaction type:</span>
-            <p
-              className={`${
-                selectedItem.transactionType === "Expenses"
-                  ? "bg-red-400"
-                  : "bg-green-400"
-              } text-white rounded-lg px-4`}
-            >
-              {selectedItem.transactionType}
-            </p>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">Category: </span>
-            <div className="flex space-x-2 ">
-              {categoryIcons[selectedItem.transacCategory]}
-              <p>{selectedItem.transacCategory}</p>
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">Date: </span>
-            <p>{selectedItem.transacDate}</p>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">Amount: </span>
-            <p
-              className={`${
-                selectedItem.transactionType === "Expenses"
-                  ? "text-red-400"
-                  : "text-green-400"
-              }`}
-            >
-              {selectedItem.transacAmount}$
-            </p>
-          </div>
-          <div className="py-10 space-y-7">
-            <div>
-              <span className="font-medium">Title:</span>
-              <p>{selectedItem.transacTitle}</p>
-            </div>
-            <div>
-              <span className="font-medium">Description:</span>
-              <div className="bg-slate-50 rounded-xl p-5 shadow-md">
-                <p>{selectedItem.transacDescription}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {isTransacEdit ? (
+          <>
+            <EditTransaction
+              onCancel={handleCloseTEdit}
+              isTransacEdit={isTransacEdit}
+              getValue={getValue}
+              selectedItem={selectedItem}
+            />
+          </>
+        ) : (
+          <>
+            <Details selectedItem={selectedItem} />
+          </>
+        )}
       </div>
-      <BinExpensesModal isOpen={binOpenModal}>
+      <BinExpensesModal closeModal={handleCloseModal} isOpen={binOpenModal}>
         <BinModal
           transacId={selectedItem.transacId}
           closeModal={handleCloseModal}

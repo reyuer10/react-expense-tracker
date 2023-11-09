@@ -15,7 +15,7 @@ export default function DeleteConfirmation({ closeModal, binId }) {
 
   };
   return (
-    <div className="flex flex-col font-outfit">
+    <div  className="flex flex-col font-outfit">
       <div className="text-right">
         <button onClick={closeModal}>
           <svg

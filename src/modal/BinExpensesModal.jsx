@@ -1,14 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function BinModal({ isOpen, children }) {
+export default function BinModal({ isOpen, children, closeModal }) {
   if (!isOpen) {
     return null;
   }
 
 
   return (
+    
     <div className="bg-[#FFFFFF81] inset-0 fixed z-0 flex justify-center items-center font-outfit text-[#303030]">
+    <div onClick={closeModal} className="inset-0 fixed" />
       <motion.div
         initial={{ y: "-4vh", opacity: 0 }}
         animate={{ y: "0", opacity: 1 }}
