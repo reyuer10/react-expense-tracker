@@ -1,41 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { notification_budget } from "../features/transactionSlice";
 
 export default function Notifcation() {
   const dispatch = useDispatch();
-  const notificationList = useSelector(
-    (state) => state.transaction.notificationList
-  );
   const budgetList = useSelector((state) => state.transaction.budgetList);
-  const [notifValue, setNotifValue] = useState(null);
   const [isButtonClick, setIsButtonClick] = useState(false);
 
-  useEffect(() => {
-    dispatch(
-      notification_budget({
-        nValue: notifValue,
-      })
-    );
-    budgetList.map((budget) => {
-      if (
-        (budget.budgetExpenses / budget.budgetAmount) *
-          budget.budgetPercentage === 80
-      ) {
-        setNotifValue(
-          `You have spent 80% of your budget for ${
-            budget.budgetCategory
-          }. You have $${
-            budget.budgetAmount - budget.budgetExpenses
-          } left in your budget.`
-        );
-      }
-    });
-  }, []);
-
-  console.log(notifValue);
   const handleButtonClick = () => setIsButtonClick(!isButtonClick);
-
 
   return (
     <div>
@@ -54,11 +25,9 @@ export default function Notifcation() {
       </button>
       {!isButtonClick && (
         <div>
-          {notificationList.map((notification) => (
-            <div key={notification.notificationId}>
-              <p>Hi</p>
-              {console.log(notification.notificationValue)}
-              <p>{notification.notificationValue}</p>
+          {budgetList.map((budget) => (
+            <div className="" key={budget.budgetId}>
+              <p>{budget.budgetExceedLimitMessage}</p>
             </div>
           ))}
         </div>

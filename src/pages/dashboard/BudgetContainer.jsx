@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { add_expenses_budgetM, notification_budget } from "../../features/transactionSlice";
 
 export default function BudgetContainer({
   newExpensesOne,
   setNewExpensesOne,
   isButtonEditClick,
+  setIsButtonEditClick,
   handleEdit,
-  handleSave,
   handleCancel,
   isBudgetI,
   budget,
 }) {
+  const dispatch = useDispatch();
+
+  // const percent =
+  // (budget.budgetExpenses / budget.budgetAmount) * budget.budgetPercentage;
+
+  // const message = `You have spent 80% of your budget for ${
+  //   budget.budgetCategory
+  // }. You have $${
+  //   budget.budgetAmount - budget.budgetExpenses
+  // } left in your budget.`;
+
+      
+  // if (percent > 80) {
+  //   console.log("True")
+  // }else{
+  //   console.log("False")
+  // }
+
+  // setIsButtonEditClick(false);
+
+
+  const handleSave = (itemId) => {
+    dispatch(
+      add_expenses_budgetM({
+        bId: itemId,
+        newEOneVal: newExpensesOne,
+      })
+    );
+
+  };
+
+
 
   return (
     <div className="ring-1 p-3 my-3 ring-slate-400 shadow-md rounded-2xl">

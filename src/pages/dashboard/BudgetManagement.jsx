@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AddCategory from "../button/AddCategory";
 import { useDispatch, useSelector } from "react-redux";
-import { add_expenses_budgetM } from "../../features/transactionSlice";
+import {
+  notification_budget,
+} from "../../features/transactionSlice";
 import SetButton from "../button/SetButton";
 import BudgetContainer from "./BudgetContainer";
 
@@ -21,6 +23,7 @@ export default function BudgetManagement() {
 
   const [isButtonEditClick, setIsButtonEditClick] = useState(false);
   const [isBudgetId, setIsBudgetId] = useState(null);
+  
   const handleEdit = (itemId) => {
     const budgetExistingId = budgetList.find(
       (budget) => budget.budgetId === itemId
@@ -31,16 +34,6 @@ export default function BudgetManagement() {
     }
 
     setIsButtonEditClick(true);
-  };
-
-  const handleSave = (itemId) => {
-    dispatch(
-      add_expenses_budgetM({
-        bId: itemId,
-        newEOneVal: newExpensesOne,
-      })
-    );
-    setIsButtonEditClick(false);
   };
 
   const handleCancel = () => setIsButtonEditClick(false);
@@ -74,6 +67,7 @@ export default function BudgetManagement() {
           )}
           <div className="overflow-y-auto h-[480px] px-3 my-5 rounded-2xl">
             {budgetList.map((budget) => (
+              
               <BudgetContainer
                 key={budget.budgetId}
                 budget={budget}
@@ -82,8 +76,8 @@ export default function BudgetManagement() {
                 setNewExpensesOne={setNewExpensesOne}
                 expensesLimit={expensesLimit}
                 isButtonEditClick={isButtonEditClick}
+                setIsButtonEditClick={setIsButtonEditClick}
                 handleEdit={handleEdit}
-                handleSave={handleSave}
                 handleCancel={handleCancel}
               />
             ))}

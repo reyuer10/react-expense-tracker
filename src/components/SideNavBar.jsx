@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { sideNav } from "./svg_navbar/navBarSvg";
+import { useSelector } from "react-redux";
 
 export default function SideNavBar() {
+  const transaction = useSelector((state) => state.transaction.transactionList);
   const [isNameHover, SetIsNameHover] = useState(null);
 
   const handleOpenHover = (id) => {
@@ -12,6 +14,10 @@ export default function SideNavBar() {
   const handleClosenHover = () => {
     SetIsNameHover(null);
   };
+
+  const viewedStatus = transaction.filter(
+    (transac) => transac.viewed_status === false
+  );
 
   return (
     <div className="flex flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl border-none shadow-md ring-2 ring-slate-200">
@@ -27,6 +33,19 @@ export default function SideNavBar() {
             className="p-3 shadow-md rounded-xl hover:bg-slate-100 duration-75"
           >
             {nav.svg}
+            {nav.id === 2 && (
+              <>
+                {viewedStatus.length === 0 ? null : (
+                  <>
+                    <div>
+                      <p className=" absolute text-white rounded-full font-outfit -top-2 -right-1 h-6 w-6 text-center bg-red-400">
+                        {viewedStatus.length}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
           {isNameHover === nav.id && (
             <>

@@ -10,6 +10,7 @@ const initalValue = {
       transacAmount: 150,
       transacDate: "October 24",
       transacDescription: "This is a sample description",
+      viewed_status: true,
     },
     {
       transacId: 2,
@@ -19,6 +20,7 @@ const initalValue = {
       transacAmount: 3000,
       transacDate: "October 26",
       transacDescription: "This is a sample description",
+      viewed_status: true,
     },
     {
       transacId: 3,
@@ -28,6 +30,7 @@ const initalValue = {
       transacAmount: 80,
       transacDate: "October 27",
       transacDescription: "This is a sample description",
+      viewed_status: true,
     },
   ],
   modalTransactions: false,
@@ -36,8 +39,16 @@ const initalValue = {
   totalExpenses: 0,
   draftList: [],
   bin: [],
-  budgetList: [],
-  notificationList: [],
+  budgetList: [
+    {
+      budgetId: 1,
+      budgetAmount: 2000,
+      budgetCategory: "Grocery Shopping",
+      budgetExpenses: 0,
+      budgetPercentage: 100,
+      budetLimitExceed: false,
+    },
+  ],
 };
 
 export const transactionSlice = createSlice({
@@ -59,6 +70,7 @@ export const transactionSlice = createSlice({
         transacAmount: parseInt(newAmount),
         transacDate: newDate,
         transacDescription: newDescription,
+        viewed_status: false,
       };
       return {
         ...state,
@@ -82,12 +94,27 @@ export const transactionSlice = createSlice({
         transacAmount: parseInt(eAmount),
         transacDate: eDate,
         transacDescription: eDescription,
+        viewed_status: false,
       };
       return {
         ...state,
         transactionList: [...state.transactionList, newExpense],
         balance: state.balance - newExpense.transacAmount,
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
+      };
+    },
+    viewed_transaction: (state, action) => {
+      const { vId } = action.payload;
+      return {
+        ...state,
+        transactionList: state.transactionList.map((transac) =>
+          transac.transacId === vId
+            ? {
+                ...transac,
+                viewed_status: true,
+              }
+            : transac
+        ),
       };
     },
     edit_transaction: (state, action) => {
@@ -282,6 +309,8 @@ export const transactionSlice = createSlice({
         budgetCategory: GetCategory,
         budgetExpenses: 0,
         budgetPercentage: 100,
+        budetLimitExceed: false,
+        budgetExceedLimitMessage: "",
       };
 
       return {
@@ -306,18 +335,18 @@ export const transactionSlice = createSlice({
       };
     },
     notification_budget: (state, action) => {
-      const { nValue } = action.payload;
-      const newNotification = {
-        notificationId:
-          state.notificationList.length === 0
-            ? 1
-            : state.notificationList[state.notificationList.length - 1]
-                .notificationId + 1,
-        notificationValue: nValue,
-      };
+      const { nId, notificationValue } = action.payload;
       return {
         ...state,
-        notificationList: [...state.notificationList, newNotification],
+        budgetList: state.budgetList.map((budget) =>
+          budget.budgetId === nId
+            ? {
+                ...budget,
+                budetLimitExceed: true,
+                budgetExceedLimitMessage: notificationValue,
+              }
+            : budget
+        ),
       };
     },
   },
@@ -328,6 +357,7 @@ export const {
   open_modal,
   close_modal,
   expense_transaction,
+  viewed_transaction,
   add_to_draft_expenses,
   add_to_draft_income,
   move_to_bin,

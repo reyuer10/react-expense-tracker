@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { categoryIcons } from "../svg_category/svgCategory";
+import { viewed_transaction } from "../features/transactionSlice";
 
 export default function Transactions() {
   const transaction = useSelector((state) => state.transaction.transactionList);
+  const dispatch = useDispatch();
   const [searchFilter, setSearchFilter] = useState("");
 
   const handleSearchInputChange = (e) => {
@@ -15,6 +17,12 @@ export default function Transactions() {
   const filterSearch = transaction.filter((transac) =>
     transac.transacCategory.toLowerCase().includes(searchFilter.toLowerCase())
   );
+
+  const handleViewed = (itemId) => {
+    dispatch(viewed_transaction({
+      vId: itemId
+    }))
+  }
 
   return (
     <motion.div
@@ -34,7 +42,7 @@ export default function Transactions() {
             placeholder="Search category..."
             value={searchFilter}
             onChange={handleSearchInputChange}
-            className="flex justify-center items-center w-full rounded-lg ring-1 ring-slate-300 shadow-md px-3 py-2"
+            className="flex justify-center items-center w-full rounded-lg border border-gray-200 shadow px-3 py-2"
           />
         </div>
         <div>
@@ -42,8 +50,9 @@ export default function Transactions() {
             <Link
               to={`/transaction-details/${transac.transacId}`}
               key={transac.transacId}
+              onClick={() => handleViewed(transac.transacId)}
             >
-              <div className="flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5 hover:bg-slate-50 transition-colors duration-100">
+              <div className={`${transac.viewed_status === false ? "bg-slate-100" : "hover:bg-slate-50"} flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5  transition-colors duration-100`}>
                 <div>
                   <div className="flex space-x-2">
                     {categoryIcons[transac.transacCategory]}

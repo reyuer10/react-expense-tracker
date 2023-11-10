@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   add_to_draft_expenses,
   close_modal,
@@ -19,6 +19,7 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
     formState: { errors },
     watch,
   } = useForm();
+  const balance = useSelector((state) => state.transaction.balance);
   const dispatch = useDispatch();
 
   // const [expenseTitle, setExpenseTitle] = useState("");
@@ -71,6 +72,10 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
 
   const isPositive = (value) => {
     return parseFloat(value) >= 0;
+  };
+
+  const insufficientBalance = (value) => {
+    return balance >= value;
   };
 
   const handleAddtoDraft = () => {
@@ -242,8 +247,12 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
               // onChange={(e) => setExpenseAmount(e.target.value)}
               {...register("expensesAmount", {
                 required: "Amount is required.",
-                validate: (value) =>
-                  isPositive(value) || "Non-negative values required",
+                validate: {
+                  positive: (value) =>
+                    isPositive(value) || "Non-negative values required",
+                  insufficient: (value) =>
+                    insufficientBalance(value) || "Balance limit exceeded",
+                },
               })}
             />
           </div>
