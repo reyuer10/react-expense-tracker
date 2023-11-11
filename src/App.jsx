@@ -10,11 +10,11 @@ import RootLayout from "./root/RootLayout";
 // pages
 import DashBoard from "./pages/dashboard/DashBoard";
 import Transactions from "./pages/Transactions";
-import Expenses from "./pages/Expenses";
 import ExpensesEntry from "./pages/entry/ExpensesEntry";
 import ViewDetails from "./pages/view-details/ViewDetails";
 import Bin from "./pages/Bin";
 import Income from "./pages/income/Income";
+import Expenses from "./pages/expenses/Expenses";
 
 export default function App() {
   return (

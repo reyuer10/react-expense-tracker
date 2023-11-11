@@ -46,9 +46,11 @@ const initalValue = {
       budgetCategory: "Grocery Shopping",
       budgetExpenses: 0,
       budgetPercentage: 100,
+      isbuttonSaveClick: false,
       budetLimitExceed: false,
     },
   ],
+  budgetDetailList: [],
 };
 
 export const transactionSlice = createSlice({
@@ -310,6 +312,7 @@ export const transactionSlice = createSlice({
         budgetExpenses: 0,
         budgetPercentage: 100,
         budetLimitExceed: false,
+        isbuttonSaveClick: false,
         budgetExceedLimitMessage: "",
       };
 
@@ -332,6 +335,33 @@ export const transactionSlice = createSlice({
               }
             : budget
         ),
+      };
+    },
+    remove_expenses_budget: (state, action) => {
+      const { bMId } = action.payload;
+      return {
+        ...state,
+        budgetList: state.budgetList.filter(
+          (budget) => budget.budgetId !== bMId
+        ),
+      };
+    },
+    save_details_budget: (state, action) => {
+      const { cMId } = action.payload;
+      const dExistingId = state.budgetList.find(
+        (budget) => budget.budgetId === cMId
+      );
+      const DetailId =
+        state.budgetDetailList.length === 0
+          ? 1
+          : state.budgetDetailList[state.budgetDetailList.length - 1].DetailId +
+            1;
+      return {
+        ...state,
+        budgetDetailList: [
+          ...state.budgetDetailList,
+          { ...dExistingId, budgetId: DetailId },
+        ],
       };
     },
     notification_budget: (state, action) => {
@@ -367,8 +397,10 @@ export const {
   draft_transaction,
   add_budget_item,
   add_expenses_budgetM,
+  remove_expenses_budget,
   exit_budget_management,
   notification_budget,
   edit_transaction,
+  save_details_budget,
 } = transactionSlice.actions;
 export default transactionSlice.reducer;
