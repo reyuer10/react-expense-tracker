@@ -30,7 +30,7 @@ export default function Transactions() {
       animate={{ y: "0", opacity: 1 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <div className="font-outfit h-[calc(100vh-200px)] w-[500px] p-3 rounded-3xl shadow-lg ring-1 ring-slate-200">
+      <div className="font-outfit my-8 h-[calc(100vh-200px)] p-3 rounded-3xl shadow-lg border border-slate-300">
         <div>
           <p className="text-2xl font-medium text-[#303030] p-4">
             Transactions
@@ -45,14 +45,15 @@ export default function Transactions() {
             className="flex justify-center items-center w-full rounded-lg border border-gray-200 shadow px-3 py-2"
           />
         </div>
-        <div>
+        {/*   */}
+        <div className="grid grid-cols-2 overflow-y-scroll m-5 max-lg:flex max-lg:flex-col">
           {filterSearch.map((transac) => (
             <Link
               to={`/transaction-details/${transac.transacId}`}
               key={transac.transacId}
               onClick={() => handleViewed(transac.transacId)}
             >
-              <div className={`${transac.viewed_status === false ? "bg-slate-100" : "hover:bg-slate-50"} flex items-center justify-between shadow-md rounded-xl p-3 my-3 mx-5  transition-colors duration-100`}>
+              <div className={`${transac.viewed_status === false ? "bg-slate-100" : "hover:bg-slate-50"} flex items-center justify-between w-[400px] border border-slate-300 shadow-md rounded-xl p-3 my-2 mx-2  transition-colors duration-100`}>
                 <div>
                   <div className="flex space-x-2">
                     {categoryIcons[transac.transacCategory]}

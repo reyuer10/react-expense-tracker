@@ -62,9 +62,9 @@ export default function DashBoard() {
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
-
+      {/* flex flex-grow flex-wrap gap-8 mx-5  */}
       <div className="flex">
-        <div className="flex flex-grow flex-wrap gap-8 mx-5 ">
+        <div className="grid grid-cols-2 mx-3 gap-x-8 ">
           {dashBoardComponent.map((component) => (
             <div key={component.id}>
               <div>{component.component}</div>

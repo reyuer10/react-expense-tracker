@@ -8,7 +8,7 @@ export default function RootLayout() {
       <div>
         <SideNavBar />
       </div>
-      <div className="mx-3 ">
+      <div className="flex-1 mx-3 flex justify-center items-center ">
         <Outlet />
       </div>
     </div>

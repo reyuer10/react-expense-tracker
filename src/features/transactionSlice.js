@@ -32,6 +32,66 @@ const initalValue = {
       transacDescription: "This is a sample description",
       viewed_status: true,
     },
+    {
+      transacId: 4,
+      transactionType: "Income",
+      transacCategory: "Monthly Salary",
+      transacTitle: ".",
+      transacAmount: 1200,
+      transacDate: "November 3",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
+    {
+      transacId: 5,
+      transactionType: "Income",
+      transacCategory: "Savings interest",
+      transacTitle: ".",
+      transacAmount: 500,
+      transacDate: "November 5",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
+    {
+      transacId: 6,
+      transactionType: "Expenses",
+      transacCategory: "Bills & Utilities",
+      transacTitle: "Paid electricity and water bills",
+      transacAmount: 80,
+      transacDate: "November 6",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
+    {
+      transacId: 7,
+      transactionType: "Expenses",
+      transacCategory: "Groceries",
+      transacTitle: ".",
+      transacAmount: 300,
+      transacDate: "November 7",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
+    {
+      transacId: 8,
+      transactionType: "Income",
+      transacCategory: "Salary/Wages",
+      transacTitle: ".",
+      transacAmount: 400,
+      transacDate: "November 11",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
+    {
+      transacId: 9,
+      transactionType: "Expenses",
+      transacCategory: "Bills & Utilities",
+      transacTitle: "Paid electricity and water bills",
+      transacAmount: 100,
+      transacDate: "November 12",
+      transacDescription: "This is a sample description",
+      viewed_status: true,
+    },
   ],
   modalTransactions: false,
   balance: 1000,
@@ -40,15 +100,6 @@ const initalValue = {
   draftList: [],
   bin: [],
   budgetList: [
-    {
-      budgetId: 4,
-      budgetAmount: 2000,
-      budgetCategory: "Grocery Shopping",
-      budgetExpenses: 0,
-      budgetPercentage: 100,
-      isbuttonSaveClick: false,
-      budetLimitExceed: false,
-    },
   ],
   budgetDetailList: [
     {
@@ -369,6 +420,7 @@ export const transactionSlice = createSlice({
               }
             : detail
       );
+      
       return {
         ...state,
         budgetList: state.budgetList.map((budget) =>

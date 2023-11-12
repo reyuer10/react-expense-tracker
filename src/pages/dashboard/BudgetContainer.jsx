@@ -21,6 +21,8 @@ export default function BudgetContainer({
 }) {
   const dispatch = useDispatch();
   const [isRemoveButtonClick, setIsRemoveButtonClick] = useState(false);
+  const [limitExceedError, setLimitExceedError] = useState(null);
+  const [error, setError] = useState(null);
   // const [isbuttonSaveClick, setIsButtonSaveClick] = useState(false);
 
   // const percent =
@@ -52,15 +54,31 @@ export default function BudgetContainer({
   const handleRemoveButton = () => {
     setIsRemoveButtonClick(true);
   };
+  const currentSpent = budget.budgetAmount - budget.budgetExpenses;
 
+console.log(currentSpent)
   const handleSave = (itemId) => {
+    if (newExpensesOne > budget.budgetAmount) {
+      setLimitExceedError("Amount has exceed the budget limit.");
+      setError(true)
+      return;
+    }
+    else if(newExpensesOne > currentSpent){
+      setLimitExceedError("Amount has exceed the budget limit.");
+      setError(true)
+      return;
+    }
+    else{
+      setError(null)
+    }
+
     dispatch(
       add_expenses_budgetM({
         bId: itemId,
         newEOneVal: newExpensesOne,
       })
     );
-    setIsButtonEditClick(false)
+    setIsButtonEditClick(false);
   };
 
   const handleRemoveBudget = () => {
@@ -76,11 +94,11 @@ export default function BudgetContainer({
       <div
         className={`${
           isRemoveButtonClick ? "bg-[#FFFFFF81]" : "bg-white"
-        } ring-1 p-3 my-3  shadow-md rounded-2xl ring-slate-400`}
+        } ring-1 p-3 my-3  shadow-md rounded-2xl ring-slate-300`}
       >
         {isRemoveButtonClick ? (
           <>
-            <div className="flex justify-center items-center h-[196px] ">
+            <div className="flex justify-center items-center h-[196px]">
               <div className="flex space-x-3">
                 <button
                   className="px-4 py-2 rounded-lg shadow-md border border-slate-200 bg-[#303030] text-white hover:bg-slate-700 transition-colors duration-100"
@@ -99,7 +117,7 @@ export default function BudgetContainer({
           </>
         ) : (
           <>
-            <div className="flex items-center justify-evenly relative ">
+            <div className="flex items-center justify-evenly relative">
               <div className="absolute right-1 top-0">
                 <RemoveDetails confirm={handleRemoveButton} />
               </div>
@@ -173,21 +191,27 @@ export default function BudgetContainer({
               </div>
             </div>
             <div>
+              {/* limitExceedError */}
               {isButtonEditClick && isBudgetI === budget.budgetId ? (
                 <>
-                  <div className="flex justify-end items-end space-x-3">
-                    <button
-                      onClick={() => handleSave(budget.budgetId)}
-                      className=" items-center  my-3  px-4 py-2 rounded-lg bg-[#303030] text-white shadow-md hover:bg-slate-700 transition-colors duration-100"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={handleCancel}
-                      className="flex items-center  my-3 px-4 py-2 rounded-lg ring-1 ring-slate-200 shadow-md hover:bg-slate-100 transition-colors duration-100"
-                    >
-                      Cancel
-                    </button>
+                  <div className="flex justify-between items-center">
+                    <div className="mx-5 text-red-400">
+                      {error && <p>{limitExceedError}</p>}
+                    </div>
+                    <div className="space-x-3 flex">
+                      <button
+                        onClick={() => handleSave(budget.budgetId)}
+                        className=" items-center  my-3  px-4 py-2 rounded-lg bg-[#303030] text-white shadow-md hover:bg-slate-700 transition-colors duration-100"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="flex items-center  my-3 px-4 py-2 rounded-lg ring-1 ring-slate-200 shadow-md hover:bg-slate-100 transition-colors duration-100"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </>
               ) : (

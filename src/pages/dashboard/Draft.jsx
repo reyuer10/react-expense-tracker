@@ -11,9 +11,9 @@ export default function Draft() {
 
   const handleOpenModalDraft = () => setOpenDraftModal(true);
   const handleCloseModalDraft = () => setOpenDraftModal(false);
-
+  // h-[calc(100vh-290px)]
   return (
-    <div className=" shadow-md text-[#303030] font-outfit px-7 rounded-[30px] w-[580px] h-[calc(100vh-290px)] ring-2 ring-slate-200">
+    <div className=" shadow-md mx-3 py-3  px-4 rounded-[30px] w-[580px] border border-slate-300 font-outfit space-y-10">
       <div>
         <p className="text-3xl font-semibold pt-5">Draft</p>
       </div>
