@@ -110,8 +110,8 @@ export const expCategory = [
   },
   {
     id: 7,
-    name: "Invesments",
-    value: "Invesments",
+    name: "Investments",
+    value: "Investments",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

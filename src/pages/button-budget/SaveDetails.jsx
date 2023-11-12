@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function SaveDetails({handleSaveDetails, budget}) {
-  const isbuttonSaveClick = useSelector((state) => state.transaction.isbuttonSaveClick)
-  const detailList = useSelector((state) => state.transaction.budgetDetailList);
-
-  console.log(budget)
+console.log(budget)
   return (
     <>
       <button
         onClick={() => handleSaveDetails(budget.budgetId)}
+        disabled={budget.isbuttonSaveClick}
         className={`${
-          !detailList.isbuttonSaveClick ? "border border-slate-200 shadow-md" : "text-gray-400"
+          !budget.isbuttonSaveClick ? "border border-slate-200 shadow-md" : "text-gray-400"
         } flex space-x-2 px-4 py-2 rounded-lg `}
       >
-        {!detailList.isbuttonSaveClick ? (
+        {!budget.isbuttonSaveClick ? (
           "Save details"
         ) : (
           <>

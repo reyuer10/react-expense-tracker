@@ -41,7 +41,7 @@ const initalValue = {
   bin: [],
   budgetList: [
     {
-      budgetId: 1,
+      budgetId: 4,
       budgetAmount: 2000,
       budgetCategory: "Grocery Shopping",
       budgetExpenses: 0,
@@ -50,7 +50,35 @@ const initalValue = {
       budetLimitExceed: false,
     },
   ],
-  budgetDetailList: [],
+  budgetDetailList: [
+    {
+      budetLimitExceed: false,
+      budgetAmount: 1300,
+      budgetCategory: "Bills & Utilities",
+      budgetExpenses: 400,
+      budgetId: 1,
+      budgetPercentage: 100,
+      isbuttonSaveClick: true,
+    },
+    {
+      budetLimitExceed: false,
+      budgetAmount: 800,
+      budgetCategory: "Food",
+      budgetExpenses: 300,
+      budgetId: 2,
+      budgetPercentage: 100,
+      isbuttonSaveClick: true,
+    },
+    {
+      budetLimitExceed: false,
+      budgetAmount: 1500,
+      budgetCategory: "Groceries",
+      budgetExpenses: 1300,
+      budgetId: 3,
+      budgetPercentage: 100,
+      isbuttonSaveClick: true,
+    },
+  ],
 };
 
 export const transactionSlice = createSlice({
@@ -261,6 +289,13 @@ export const transactionSlice = createSlice({
         ),
       };
     },
+    delete_draft: (state, action) => {
+      const { dId } = action.payload;
+      return {
+        ...state,
+        draftList: state.draftList.filter((draft) => draft.toDraftId !== dId),
+      };
+    },
     move_to_bin: (state, action) => {
       const { detailsExistingId } = action.payload;
       const removeTransaction = state.transactionList.find(
@@ -304,9 +339,9 @@ export const transactionSlice = createSlice({
       const { GetAmount, GetCategory } = action.payload;
       const budget = {
         budgetId:
-          state.budgetList.length === 0
+          state.budgetDetailList.length === 0
             ? 1
-            : state.budgetList[state.budgetList.length - 1].budgetId + 1,
+            : state.budgetDetailList[state.budgetDetailList.length - 1].budgetId + 1,
         budgetAmount: parseInt(GetAmount),
         budgetCategory: GetCategory,
         budgetExpenses: 0,
@@ -324,6 +359,16 @@ export const transactionSlice = createSlice({
 
     add_expenses_budgetM: (state, action) => {
       const { bId, newEOneVal } = action.payload;
+
+      const updateInfoFromBudgetDetailList = state.budgetDetailList.map(
+        (detail) =>
+          detail.budgetId === bId
+            ? {
+                ...detail,
+                budgetExpenses: detail.budgetExpenses + parseInt(newEOneVal),
+              }
+            : detail
+      );
       return {
         ...state,
         budgetList: state.budgetList.map((budget) =>
@@ -335,6 +380,7 @@ export const transactionSlice = createSlice({
               }
             : budget
         ),
+        budgetDetailList: updateInfoFromBudgetDetailList,
       };
     },
     remove_expenses_budget: (state, action) => {
@@ -354,14 +400,28 @@ export const transactionSlice = createSlice({
       const DetailId =
         state.budgetDetailList.length === 0
           ? 1
-          : state.budgetDetailList[state.budgetDetailList.length - 1].DetailId +
+          : state.budgetDetailList[state.budgetDetailList.length - 1].budgetId +
             1;
+
+
+        // For update save click
+      const updateBudgetDetalList = [
+        ...state.budgetDetailList,
+        { ...dExistingId, budgetId: DetailId, isbuttonSaveClick: true },
+      ];
+
+      const updateSaveButtonFromBudgetList = state.budgetList.map((budget) =>
+        budget.budgetId === cMId
+          ? {
+              ...budget,
+              isbuttonSaveClick: true,
+            }
+          : budget
+      );
       return {
         ...state,
-        budgetDetailList: [
-          ...state.budgetDetailList,
-          { ...dExistingId, budgetId: DetailId },
-        ],
+        budgetDetailList: updateBudgetDetalList,
+        budgetList: updateSaveButtonFromBudgetList,
       };
     },
     notification_budget: (state, action) => {
@@ -394,6 +454,7 @@ export const {
   delete_bin,
   restore_bin,
   edit_draft,
+  delete_draft,
   draft_transaction,
   add_budget_item,
   add_expenses_budgetM,
