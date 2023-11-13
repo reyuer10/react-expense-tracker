@@ -7,7 +7,7 @@ export default function BudgetButton({ handleFIllButton, navTop }) {
     <>
       <Link to="/">
         <button
-          className="flex shadow-md px-4 py-2 rounded-full font-medium space-x-2 hover:bg-slate-50 border border-slate-200"
+          className={`${navTop === "/" ? "bg-slate-100" : ""} flex shadow-md px-4 py-2 rounded-full font-medium space-x-2 hover:bg-slate-50 border border-slate-200`}
           onClick={() => handleFIllButton("/")}
         >
           {navTop === "/" ? (

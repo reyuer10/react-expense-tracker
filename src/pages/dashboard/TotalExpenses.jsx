@@ -7,17 +7,19 @@ export default function TOtalExpenses() {
 
   return (
     <Link to="/expenses">
-      <div className=" hover:scale-105 transition-all shadow-md p-5 rounded-3xl h-[300px] w-[550px] border border-gray-200">
+      <div className="hover:scale-105 space-y-10 transition-all shadow-md p-5 rounded-[36px] h-[300px]  border border-gray-200">
         <div>
-          <p className="text-2xl font-semibold">Expenses</p>
+          <p className="text-4xl font-semibold">Expenses</p>
         </div>
-        <div>
-          <p className="text-4xl font-semibold p-7">Total Expenses: </p>
-        </div>
-        <div>
-          <p className="text-[55px] text-red-400 text-center font-semibold">
-            {totalExpenses}$
-          </p>
+        <div className="border text-3xl border-slate-200 shadow-md rounded-[24px] bg-slate-100 p-6 mx-5">
+          <div>
+            <p className="font-semibold">Total Expenses: </p>
+          </div>
+          <div>
+            <p className="text-[48px] text-green-400 text-center font-semibold p-5">
+              {totalExpenses}$
+            </p>
+          </div>
         </div>
       </div>
     </Link>

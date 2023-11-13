@@ -56,20 +56,18 @@ export default function BudgetContainer({
   };
   const currentSpent = budget.budgetAmount - budget.budgetExpenses;
 
-console.log(currentSpent)
+  console.log(currentSpent);
   const handleSave = (itemId) => {
     if (newExpensesOne > budget.budgetAmount) {
       setLimitExceedError("Amount has exceed the budget limit.");
-      setError(true)
+      setError(true);
       return;
-    }
-    else if(newExpensesOne > currentSpent){
+    } else if (newExpensesOne > currentSpent) {
       setLimitExceedError("Amount has exceed the budget limit.");
-      setError(true)
+      setError(true);
       return;
-    }
-    else{
-      setError(null)
+    } else {
+      setError(null);
     }
 
     dispatch(
@@ -94,8 +92,11 @@ console.log(currentSpent)
       <div
         className={`${
           isRemoveButtonClick ? "bg-slate-100" : "bg-white"
-        } ring-1 p-3 my-3  shadow-md rounded-2xl ring-slate-300`}
+        } p-3 my-3 shadow-lg rounded-[32px] border border-slate-300 `}
       >
+        <div className="flex justify-end items-end p-1">
+          <RemoveDetails confirm={handleRemoveButton} />
+        </div>
         {isRemoveButtonClick ? (
           <>
             <div className="flex justify-center items-center h-[196px]">
@@ -118,14 +119,11 @@ console.log(currentSpent)
         ) : (
           <>
             <div className="flex items-center justify-evenly relative">
-              <div className="absolute right-1 top-0">
-                <RemoveDetails confirm={handleRemoveButton} />
-              </div>
               <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
-                <p className="text-xl">Amount spent:</p>
+                <p className="text-xl">Amount</p>
                 {isButtonEditClick && isBudgetI === budget.budgetId ? (
                   <>
-                    <div className="my-2 space-y-3 flex flex-col">
+                    <div className="my-2 space-y-1 mx-[10px]">
                       <input
                         value={newExpensesOne}
                         onChange={(e) => setNewExpensesOne(e.target.value)}
@@ -135,21 +133,45 @@ console.log(currentSpent)
                     </div>
                   </>
                 ) : (
-                  <div className="my-2 space-y-3">
+                  <div className="my-2 space-y-1 mx-10">
                     <p>{budget.budgetExpenses}$</p>
                   </div>
                 )}
               </div>
               <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
-                <p className="text-xl">Budget limit:</p>
+                <p className="text-xl">Budget limit</p>
                 <div className="my-2 space-y-3">
                   <p>{budget.budgetAmount}</p>
                 </div>
               </div>
-              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
-                <p className="text-xl">Category:</p>
-                <div className="my-2 space-y-3">
-                  <p>{budget.budgetCategory}</p>
+              <div
+                className={`${
+                  budget.budgetCategory === "Health & Wellness" ||
+                  budget.budgetCategory === "Grocery Shopping"
+                    ? "px-4 py-2"
+                    : "p-3"
+                } text-center my-2 bg-slate-100  rounded-2xl border border-slate-400`}
+              >
+                <p className="text-xl">Category</p>
+                <div
+                  className={`${
+                    budget.budgetCategory === "Health & Wellness" ||
+                    budget.budgetCategory === "Grocery Shopping"
+                      ? ""
+                      : "my-2"
+                  }  space-y-3`}
+                >
+                  <p
+                    className={`${
+                      budget.budgetCategory === "Health & Wellness" ||
+                      budget.budgetCategory === "Grocery Shopping"
+                        ? "w-[80px]"
+                        : ""
+                    }`}
+                  >
+                    {budget.budgetCategory}
+                  </p>
+                  {/* w-[80px] */}
                 </div>
               </div>
             </div>

@@ -1,13 +1,14 @@
 import React from "react";
 
-export default function ButtonAddExpenses({handleEdit, budget}) {
+export default function ButtonAddExpenses({ handleEdit, budget }) {
   return (
     <>
       <button
         onClick={() => handleEdit(budget.budgetId)}
-        className="flex items-center my-3  px-4 py-2 rounded-lg ring-1 ring-slate-200 shadow-md"
+        className="flex items-center my-3  px-4 py-2 rounded-full bg-slate-700 text-white shadow-md"
       >
         <svg
+        className="fill-current text-white"
           xmlns="http://www.w3.org/2000/svg"
           id="Outline"
           viewBox="0 0 24 24"

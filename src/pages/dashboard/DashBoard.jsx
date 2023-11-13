@@ -71,7 +71,7 @@ export default function DashBoard() {
     <div className="text-[#303030] font-outfit">
       <div className="flex items-center justify-between my-4 mx-5">
         <div>
-          <p className="text-2xl font-semibold">DashBoard</p>
+          <p className="text-4xl font-semibold">DashBoard</p>
         </div>
         <div className="flex space-x-3">
           <BudgetButton handleFIllButton={handleFIllButton} navTop={navTop} />
@@ -80,8 +80,9 @@ export default function DashBoard() {
         </div>
       </div>
       {/* flex flex-grow flex-wrap gap-8 mx-5  */}
+      {/* grid grid-flow-col auto-cols-[500px] mx-3 gap-x-8 */}
       <div className="flex">
-        <div className="grid grid-cols-2 mx-3 gap-x-8 ">
+        <div className="grid grid-cols-2 gap-5 max-2xl:bg-black">
           {dashBoardComponent.map((component) => (
             <div key={component.id}>
               <div>{component.component}</div>

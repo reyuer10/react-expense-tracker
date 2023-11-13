@@ -5,9 +5,10 @@ export default function SetButton({ handleButtonSet }) {
     <>
       <button
         onClick={handleButtonSet}
-        className={`flex shadow-sm rounded-full px-4 py-2 border border-slate-300 hover:bg-slate-100 transition-colors font-medium`}
+        className={`flex shadow-sm rounded-full px-4 py-2 bg-slate-700 text-white transition-colors font-medium`}
       >
         <svg
+        className="fill-current text-white"
           xmlns="http://www.w3.org/2000/svg"
           id="Outline"
           viewBox="0 0 24 24"

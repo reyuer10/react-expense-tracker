@@ -7,7 +7,7 @@ export default function DraftButton({ handleFIllButton, navTop }) {
     <>
       <Link to="/draft">
         <button
-          className="flex items-center shadow-md px-4 py-2 rounded-full font-medium text-md space-x-2 hover:bg-slate-50 border borde-slate-200"
+          className={`${navTop === "/draft" ? "bg-slate-100" : ""} flex items-center shadow-md px-4 py-2 rounded-full font-medium text-md space-x-2 hover:bg-slate-50 border borde-slate-200`}
           onClick={() => handleFIllButton("/draft")}
         >
           {navTop === "/draft" ? (

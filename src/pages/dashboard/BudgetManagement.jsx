@@ -33,14 +33,14 @@ export default function BudgetManagement() {
   };
 
   const handleCancel = () => setIsButtonEditClick(false);
-  //  h-[calc(100vh-290px)] 
+  //   
   return (
-    <div className="shadow-md mx-3 py-3  px-4 rounded-[30px] w-[580px] border border-slate-300 font-outfit space-y-10">
-      <div className="overflow-y-hidden h-[630px]">
+    <div className="shadow-md mx-5 p-8 rounded-[36px] w-[580px] border border-slate-300 font-outfit space-y-10">
+      <div className="overflow-y-hidden ">
         <div>
-          <p className="text-2xl font-semibold pt-5">Budget Management</p>
+          <p className="text-2xl font-semibold">Budget Management</p>
         </div>
-        <div className="my-5">
+        <div className="my-5 py-2 overflow-y-auto h-[510px]">
           {isbuttonBudgetClick ? (
             <>
               <div>
@@ -61,7 +61,7 @@ export default function BudgetManagement() {
               </div>
             </>
           )}
-          <div className="overflow-y-auto h-[480px] px-3 my-5 rounded-2xl">
+          <div className="px-3 rounded-2xl">
             {budgetList.map((budget) => (
               
               <BudgetContainer

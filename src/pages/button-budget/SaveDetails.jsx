@@ -10,7 +10,7 @@ console.log(budget)
         disabled={budget.isbuttonSaveClick}
         className={`${
           !budget.isbuttonSaveClick ? "border border-slate-200 shadow-md" : "text-gray-400"
-        } flex space-x-2 px-4 py-2 rounded-lg `}
+        } flex space-x-2 px-4 py-2 rounded-full `}
       >
         {!budget.isbuttonSaveClick ? (
           "Save details"
