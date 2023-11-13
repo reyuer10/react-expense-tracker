@@ -5,7 +5,7 @@ export default function TransactionButton({ handleOpenModal }) {
     <>
       <button
         onClick={handleOpenModal}
-        className="flex px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 "
+        className="flex px-4 py-2 rounded-full shadow-md hover:bg-slate-50 border border-slate-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

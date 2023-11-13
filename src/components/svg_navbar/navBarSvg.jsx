@@ -1,3 +1,8 @@
+import dashboard from "../../assets/fill-svg/apps.png";
+import walletPNG from "../../assets/fill-svg/walletPNG.png";
+import trashBin from "../../assets/fill-svg/trash.png";
+import handDollar from "../../assets/fill-svg/hand-holding-usd.png";
+
 export const sideNav = [
   {
     id: 1,
@@ -16,6 +21,7 @@ export const sideNav = [
         <path d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z" />
       </svg>
     ),
+    fill_svg: <img src={dashboard} style={{ height: "24px" }} alt="apps" />,
     link: "/",
     name: "Dashboard",
   },
@@ -23,6 +29,18 @@ export const sideNav = [
   {
     id: 2,
     svg: (
+      <svg
+        className="fill-current text-[#303030]"
+        xmlns="http://www.w3.org/2000/svg"
+        id="arrow-circle-down"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path d="M0,7A1,1,0,0,1,1,6H18V2.639a.792.792,0,0,1,1.35-.552l4.418,4.361a.773.773,0,0,1,0,1.1L19.35,11.913A.792.792,0,0,1,18,11.361V8H1A1,1,0,0,1,0,7Zm23,9H6V12.639a.792.792,0,0,0-1.35-.552L.232,16.448a.773.773,0,0,0,0,1.1L4.65,21.913A.792.792,0,0,0,6,21.361V18H23a1,1,0,0,0,0-2Z" />
+      </svg>
+    ),
+    fill_svg: (
       <svg
         className="fill-current text-[#303030]"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +70,7 @@ export const sideNav = [
         <path d="M21,6H5c-.859,0-1.672-.372-2.235-.999,.55-.614,1.349-1.001,2.235-1.001H23c.553,0,1-.448,1-1s-.447-1-1-1H5C2.239,2,0,4.239,0,7v10c0,2.761,2.239,5,5,5H21c1.657,0,3-1.343,3-3V9c0-1.657-1.343-3-3-3Zm1,13c0,.551-.448,1-1,1H5c-1.654,0-3-1.346-3-3V6.998c.854,.639,1.904,1.002,3,1.002H21c.552,0,1,.449,1,1v10Zm-2-5c0,.552-.448,1-1,1s-1-.448-1-1,.448-1,1-1,1,.448,1,1Z" />
       </svg>
     ),
+    fill_svg: <img src={walletPNG} style={{ height: "24px" }} alt="wallet" />,
     link: "/expenses",
     name: "Expenses",
   },
@@ -71,6 +90,9 @@ export const sideNav = [
         <path d="M9,10h.38c1.45,0,2.62-1.18,2.62-2.62,0-1.29-.92-2.38-2.19-2.59l-3.28-.55c-.3-.05-.52-.31-.52-.62,0-.34,.28-.62,.62-.62h2.64c.36,0,.69,.19,.87,.5,.27,.48,.88,.64,1.37,.36,.48-.28,.64-.89,.36-1.37-.53-.92-1.53-1.5-2.6-1.5h-.27c0-.55-.45-1-1-1s-1,.45-1,1h-.38c-1.45,0-2.62,1.18-2.62,2.62,0,1.29,.92,2.38,2.19,2.59l3.28,.55c.3,.05,.52,.31,.52,.62,0,.34-.28,.62-.62,.62h-2.64c-.36,0-.69-.19-.87-.5-.28-.48-.89-.64-1.37-.36-.48,.28-.64,.89-.36,1.37,.53,.92,1.53,1.5,2.6,1.5h.27c0,.55,.45,1,1,1s1-.45,1-1Z" />
       </svg>
     ),
+    fill_svg: (
+      <img src={handDollar} style={{ height: "24px" }} alt="hand-dollar" />
+    ),
     link: "/income",
     name: "Income",
   },
@@ -89,6 +111,9 @@ export const sideNav = [
           <rect x="13" y="10" width="2" height="8" />
         </g>
       </svg>
+    ),
+    fill_svg: (
+      <img src={trashBin} style={{ height: "24px" }} alt="trash" />
     ),
     link: "/bin",
     name: "Bin",

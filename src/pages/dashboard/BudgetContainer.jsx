@@ -93,7 +93,7 @@ console.log(currentSpent)
     <>
       <div
         className={`${
-          isRemoveButtonClick ? "bg-[#FFFFFF81]" : "bg-white"
+          isRemoveButtonClick ? "bg-slate-100" : "bg-white"
         } ring-1 p-3 my-3  shadow-md rounded-2xl ring-slate-300`}
       >
         {isRemoveButtonClick ? (
@@ -101,13 +101,13 @@ console.log(currentSpent)
             <div className="flex justify-center items-center h-[196px]">
               <div className="flex space-x-3">
                 <button
-                  className="px-4 py-2 rounded-lg shadow-md border border-slate-200 bg-[#303030] text-white hover:bg-slate-700 transition-colors duration-100"
+                  className="px-4 py-2 rounded-full shadow-md border border-slate-200 bg-[#303030] text-white hover:bg-slate-700 transition-colors duration-100"
                   onClick={handleRemoveBudget}
                 >
                   Delete
                 </button>
                 <button
-                  className="px-4 py-2 rounded-lg shadow-md border border-slate-200 hover:bg-slate-50 transition-colors duration-100"
+                  className="px-4 py-2 rounded-full shadow-md border border-slate-200 bg-white hover:bg-slate-50 transition-colors duration-100"
                   onClick={handleCancelRemove}
                 >
                   Cancel
@@ -121,7 +121,7 @@ console.log(currentSpent)
               <div className="absolute right-1 top-0">
                 <RemoveDetails confirm={handleRemoveButton} />
               </div>
-              <div className="text-center my-2">
+              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
                 <p className="text-xl">Amount spent:</p>
                 {isButtonEditClick && isBudgetI === budget.budgetId ? (
                   <>
@@ -140,13 +140,13 @@ console.log(currentSpent)
                   </div>
                 )}
               </div>
-              <div className="text-center">
+              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
                 <p className="text-xl">Budget limit:</p>
                 <div className="my-2 space-y-3">
                   <p>{budget.budgetAmount}</p>
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
                 <p className="text-xl">Category:</p>
                 <div className="my-2 space-y-3">
                   <p>{budget.budgetCategory}</p>
@@ -201,13 +201,13 @@ console.log(currentSpent)
                     <div className="space-x-3 flex">
                       <button
                         onClick={() => handleSave(budget.budgetId)}
-                        className=" items-center  my-3  px-4 py-2 rounded-lg bg-[#303030] text-white shadow-md hover:bg-slate-700 transition-colors duration-100"
+                        className=" items-center  my-3  px-4 py-2 rounded-full bg-[#303030] text-white shadow-md hover:bg-slate-700 transition-colors duration-100"
                       >
                         Save
                       </button>
                       <button
                         onClick={handleCancel}
-                        className="flex items-center  my-3 px-4 py-2 rounded-lg ring-1 ring-slate-200 shadow-md hover:bg-slate-100 transition-colors duration-100"
+                        className="flex items-center  my-3 px-4 py-2 rounded-full ring-1 ring-slate-200 shadow-md hover:bg-slate-100 transition-colors duration-100"
                       >
                         Cancel
                       </button>

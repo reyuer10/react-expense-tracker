@@ -37,29 +37,29 @@ export default function AddCategory({
   return (
     <form
       onSubmit={handleSubmit(handleBudgetComplete)}
-      className="text-center space-y-8 "
+      className="text-center space-y-8"
     >
       <div className="flex space-x-3 mx-5">
         <button
           type="submit"
-          className="flex shadow-sm rounded-lg px-4 py-2 ring-1 ring-slate-400 bg-[#303030] text-white font-semibold hover:bg-slate-700"
+          className="flex shadow-sm rounded-full px-4 py-2 ring-1 ring-slate-400  bg-slate-700 text-white font-semibold hover:bg-slate-700"
         >
           Add budget
         </button>
         <button
           type="button"
           onClick={handleBudgetCancel}
-          className="flex shadow-sm rounded-lg px-4 py-2 ring-1 ring-slate-400 font-semibold transition-all hover:bg-slate-100"
+          className="flex shadow-sm rounded-full px-4 py-2 ring-1 ring-slate-400 font-semibold transition-all hover:bg-slate-100"
         >
           Cancel
         </button>
       </div>
-      <div className="flex space-x-10 items-center justify-center ring-1 ring-slate-400 rounded-lg mx-3 py-10">
-        <div>
+      <div className="flex space-x-10 items-center justify-center bg-slate-400 border border-slate-700 rounded-3xl mx-3 py-10 shadow-md">
+        <div className="flex flex-col text-left space-y-2 bg-gray-700 text-white p-5 rounded-2xl shadow-md">
           <label htmlFor="AmountOne">Amount: </label>
           <input
             id="AmountOne"
-            className="ring-1 ring-slate-200 rounded-lg p-1 w-[120px]"
+            className="bg-slate-600 outline-none rounded-lg p-1 w-[120px] text-center"
             type="number"
             {...register("budgetOneAmount", {
               required: "Amount is required.",
@@ -71,11 +71,11 @@ export default function AddCategory({
             </p>
           )}
         </div>
-        <div>
+        <div className="flex flex-col text-left space-y-2 bg-gray-700 text-white p-4 rounded-2xl shadow-md">
           <label htmlFor="categoryOne">Category: </label>
           <select
             id="categoryOne"
-            className="px-4 py-2 rounded-lg ring-1 ring-slate-200"
+            className="px-4 py-2 rounded-lg bg-slate-600 "
             {...register("budgetOneCategory", {
               required: "Amount is required.",
             })}

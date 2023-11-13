@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Dashboard component
 import Balance from "./Balance";
@@ -50,6 +50,23 @@ export default function DashBoard() {
     { id: 4, component: <TotalExpenses /> },
   ];
 
+  const [navTop, setNavTop] = useState("");
+
+  const handleFIllButton = (itemId) => {
+    setNavTop(itemId);
+  };
+
+  useEffect(() => {
+    const na = localStorage.getItem("setItem");
+    if (na) {
+      setNavTop(na);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("setItem", navTop);
+  }, [navTop]);
+
   return (
     <div className="text-[#303030] font-outfit">
       <div className="flex items-center justify-between my-4 mx-5">
@@ -57,8 +74,8 @@ export default function DashBoard() {
           <p className="text-2xl font-semibold">DashBoard</p>
         </div>
         <div className="flex space-x-3">
-          <BudgetButton />
-          <DraftButton />
+          <BudgetButton handleFIllButton={handleFIllButton} navTop={navTop} />
+          <DraftButton handleFIllButton={handleFIllButton} navTop={navTop} />
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>

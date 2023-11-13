@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AddCategory from "../button/AddCategory";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  notification_budget,
-} from "../../features/transactionSlice";
+import { useSelector } from "react-redux";
 import SetButton from "../button/SetButton";
 import BudgetContainer from "./BudgetContainer";
 
 export default function BudgetManagement() {
-  const dispatch = useDispatch();
 
   const budgetList = useSelector((state) => state.transaction.budgetList);
   const expensesLimit = useSelector((state) => state.transaction.expensesLimit);
