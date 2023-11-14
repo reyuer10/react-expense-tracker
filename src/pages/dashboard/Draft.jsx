@@ -13,16 +13,16 @@ export default function Draft() {
   const handleCloseModalDraft = () => setOpenDraftModal(false);
   // h-[calc(100vh-290px)]
   return (
-    <div className=" shadow-md mx-3 py-3 px-4 rounded-[30px] w-[580px] border border-slate-300 font-outfit space-y-10">
+    <div className=" shadow-md mx-3 py-3 px-4 rounded-[36px] w-full border border-slate-300 font-outfit space-y-10">
       <div>
         <p className="text-3xl font-semibold pt-5">Draft</p>
       </div>
-      <div className=" h-[540px] overflow-y-auto">
+      <div className=" h-[540px] overflow-y-auto border border-slate-300 shadow-lg rounded-[32px] p-5">
         {draftList.map((draft) => (
           <div
             onClick={handleOpenModalDraft}
             key={draft.toDraftId}
-            className="my-5 p-3 hover:bg-slate-100 rounded-3xl cursor-pointer transition-colors duration-100"
+            className="m-5 px-5 hover:bg-slate-100 first:rounded-t-[24px] border-b-2 border-b-slate-300 cursor-pointer transition-colors duration-100"
           >
             <div className="flex justify-between">
               <p>
@@ -39,7 +39,7 @@ export default function Draft() {
                 <span className="font-semibold">Title:</span>{" "}
                 {draft.toDraftTitle}
               </p>
-              <div>
+              <div className="flex space-x-2">
                 <span className="font-semibold">Transaction Type:</span>
                 <p
                   className={`${
@@ -55,11 +55,6 @@ export default function Draft() {
             <div>
               <p>
                 <span className="font-semibold">Date:</span> {draft.toDraftDate}
-              </p>
-              <p>
-                <span className="font-semibold">
-                  Desription: {draft.toDraftDescription}
-                </span>
               </p>
             </div>
             <DraftModal isOpen={openDraftModal}>

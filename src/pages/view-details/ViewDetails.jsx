@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { useSelector } from "react-redux";
 import { buttonOption } from "./ButtonOption";
 import BinExpensesModal from "../../modal/BinExpensesModal";
 import BinModal from "./binModal";
 import Details from "./Details";
 import ButtonTransacOption from "./ButtonTransacOption";
 import EditTransaction from "./EditTransaction";
+import { useSelector } from "react-redux";
 
-export default function ViewDetails() {
-  const { id } = useParams();
-  const transactionList = useSelector(
-    (state) => state.transaction.transactionList
-  );
+export default function ViewDetails({transac}) {
+  // const { id } = useParams();
+  // const transactionList = useSelector(
+  //   (state) => state.transaction.transactionList
+  // );
+
+    // const transaction = useSelector((state) => state.transaction.transactionList);
+  // const selectedItem = transaction.find(
+  //   (transac) => transac.transacId === parseInt(id)
+  // );
+
+
 
   const [isOptionButtonClick, setIsOptionButtonClick] = useState(null);
   const [binOpenModal, setBinOpenModal] = useState(false);
@@ -30,12 +38,7 @@ export default function ViewDetails() {
   };
   const handleCloseModal = () => setBinOpenModal(false);
 
-  const transaction = useSelector((state) => state.transaction.transactionList);
-  const selectedItem = transaction.find(
-    (transac) => transac.transacId === parseInt(id)
-  );
-
-  if (!selectedItem) {
+  if (transac === null) {
     return (
       <div className="text-[#303030] my-10 text-xl font-outfit font-normal shadow-md p-8 rounded-xl w-[600px] h-[300px]">
         Item not found
@@ -43,14 +46,14 @@ export default function ViewDetails() {
     );
   }
 
-  const handleEditTransaction = (itemId) => {
-    const tExistingId = transactionList.find(
-      (transac) => transac.transacId === itemId
-    );
-    if (tExistingId) {
-      setGetValue(tExistingId);
+  const handleEditTransaction = () => {
+    // const tExistingId = transactionList.find(
+    //   (transac) => transac.transacId === itemId
+    // );
+    // if (tExistingId) {
+      setGetValue(transac.transacId);
       setIsTransacEdit(true);
-    }
+    // }
   };
 
   const handleButtonClick = (buttonId) => {
@@ -124,18 +127,18 @@ export default function ViewDetails() {
               onCancel={handleCloseTEdit}
               isTransacEdit={isTransacEdit}
               getValue={getValue}
-              selectedItem={selectedItem}
+              transac={transac}
             />
           </>
         ) : (
           <>
-            <Details selectedItem={selectedItem} />
+            <Details transac={transac} />
           </>
         )}
       </div>
       <BinExpensesModal closeModal={handleCloseModal} isOpen={binOpenModal}>
         <BinModal
-          transacId={selectedItem.transacId}
+          transacId={transac.transacId}
           closeModal={handleCloseModal}
         />
       </BinExpensesModal>

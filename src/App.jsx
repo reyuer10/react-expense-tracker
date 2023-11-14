@@ -15,6 +15,7 @@ import ViewDetails from "./pages/view-details/ViewDetails";
 import Bin from "./pages/Bin";
 import Income from "./pages/income/Income";
 import Expenses from "./pages/expenses/Expenses";
+import Draft from "./pages/dashboard/Draft";
 
 export default function App() {
   return (
@@ -28,7 +29,8 @@ export default function App() {
           <Route path="/income" element={<Income />} />
           <Route path="/expenses-entry" element={<ExpensesEntry />} />
           <Route path="/bin" element={<Bin />} />
-          <Route path="/transaction-details/:id" element={<ViewDetails />} />
+          <Route path="/draft" element={<Draft />} />
+          {/* <Route path="/transaction-details/:id" element={<ViewDetails />} /> */}
         </Route>
       </Routes>
     </>

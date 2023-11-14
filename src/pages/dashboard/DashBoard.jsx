@@ -19,12 +19,12 @@ import { close_modal, open_modal } from "../../features/transactionSlice";
 import ExpensesEntry from "../entry/ExpensesEntry";
 import IncomeEntry from "../entry/IncomeEntry";
 
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 
-import BudgetButton from "../button/BudgetButton";
-import DraftButton from "../button/DraftButton";
+// import BudgetButton from "../button/BudgetButton";
+// import DraftButton from "../button/DraftButton";
 
-import Draft from "./Draft";
+// import Draft from "./Draft";
 import BudgetManagement from "./BudgetManagement";
 
 export default function DashBoard() {
@@ -42,12 +42,14 @@ export default function DashBoard() {
   const handleCloseExpense = () => setIsUserChooseExpense(false);
   const handleOpenIncome = () => setIsUserChooseIncome(true);
   const handleCloseIncome = () => setIsUserChooseIncome(false);
+  // <Route path="/" element={<BudgetManagement />} />
 
   const dashBoardComponent = [
     { id: 1, component: <Balance /> },
     { id: 2, component: <TotalIncome /> },
-    { id: 3, component: <RecentTransaction /> },
-    { id: 4, component: <TotalExpenses /> },
+    { id: 3, component: <BudgetManagement /> },
+    { id: 4, component: <RecentTransaction /> },
+    { id: 5, component: <TotalExpenses /> },
   ];
 
   const [navTop, setNavTop] = useState("");
@@ -73,27 +75,26 @@ export default function DashBoard() {
         <div>
           <p className="text-4xl font-semibold">DashBoard</p>
         </div>
-        <div className="flex space-x-3">
-          <BudgetButton handleFIllButton={handleFIllButton} navTop={navTop} />
-          <DraftButton handleFIllButton={handleFIllButton} navTop={navTop} />
+        <div className="flex">
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
       {/* flex flex-grow flex-wrap gap-8 mx-5  */}
       {/* grid grid-flow-col auto-cols-[500px] mx-3 gap-x-8 */}
       <div className="flex">
-        <div className="grid grid-cols-2 gap-5 max-2xl:bg-black">
+        <div
+          className={`grid grid-cols-3 max-lg:grid-cols-2 max-[700px]:grid-cols-1  gap-x-7`}
+        >
           {dashBoardComponent.map((component) => (
-            <div key={component.id}>
+            <div
+              className={`${
+                component.id === 3 ? "row-span-2 max-lg:hidden" : ""
+              }`}
+              key={component.id}
+            >
               <div>{component.component}</div>
             </div>
           ))}
-        </div>
-        <div>
-          <Routes>
-            <Route path="/" element={<BudgetManagement />} />
-            <Route path="/draft" element={<Draft />} />
-          </Routes>
         </div>
       </div>
       {modalTransactions && (

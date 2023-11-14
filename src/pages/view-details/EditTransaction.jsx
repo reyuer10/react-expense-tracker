@@ -6,19 +6,19 @@ import { useDispatch } from "react-redux";
 import { edit_transaction } from "../../features/transactionSlice";
 
 export default function EditTransaction({
-  selectedItem,
+  transac,
   isTransacEdit,
   onCancel,
 }) {
   const dispatch = useDispatch();
   const [newTransacValue, setNewTransacValue] = useState({
-    eCategory: selectedItem.transacCategory,
-    eAmount: selectedItem.transacAmount,
-    eTitle: selectedItem.transacTitle,
-    eDescription: selectedItem.transacDescription,
-    eType: selectedItem.transactionType,
+    eCategory: transac.transacCategory,
+    eAmount: transac.transacAmount,
+    eTitle: transac.transacTitle,
+    eDescription: transac.transacDescription,
+    eType: transac.transactionType,
   });
-  const fDate = selectedItem.transacDate;
+  const fDate = transac.transacDate;
   const parseDate = Date.parse(fDate + " 2023");
   const [eDate, setEdate] = useState(parseDate);
 
@@ -26,7 +26,7 @@ export default function EditTransaction({
     const { name, value } = e.target;
     setNewTransacValue({ ...newTransacValue, [name]: value });
   };
-  console.log(selectedItem.transacCategory);
+  console.log(transac.transacCategory);
   const { eCategory, eAmount, eTitle, eDescription, eType } = newTransacValue;
 
   const handleSave = (selectedId) => {

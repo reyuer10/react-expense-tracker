@@ -6,7 +6,6 @@ export default function Modal({ isOpen, children }) {
     return null;
   }
 
-
   return (
     <div className="bg-[#FFFFFF81] inset-0 fixed z-0 flex justify-center items-center font-outfit text-[#303030]">
       <motion.div
@@ -16,7 +15,7 @@ export default function Modal({ isOpen, children }) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="container bg-white ring-1 ring-slate-200 rounded-lg"
+          className="container bg-white border border-slate-200 rounded-3xl"
         >
           <div>{children}</div>
         </div>

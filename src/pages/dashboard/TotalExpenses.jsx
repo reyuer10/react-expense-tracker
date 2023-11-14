@@ -7,7 +7,7 @@ export default function TOtalExpenses() {
 
   return (
     <Link to="/expenses">
-      <div className="hover:scale-105 space-y-10 transition-all shadow-md p-5 rounded-[36px] h-[300px]  border border-gray-200">
+      <div className="hover:scale-105 space-y-10 transition-all shadow-md p-5 rounded-[36px] h-[300px] border border-gray-200">
         <div>
           <p className="text-4xl font-semibold">Expenses</p>
         </div>

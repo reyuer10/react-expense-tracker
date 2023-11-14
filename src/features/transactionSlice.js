@@ -93,14 +93,14 @@ const initalValue = {
       viewed_status: true,
     },
   ],
+  transactionDetails: [],
   modalTransactions: false,
   balance: 1000,
   totalIncome: 0,
   totalExpenses: 0,
   draftList: [],
   bin: [],
-  budgetList: [
-  ],
+  budgetList: [],
   budgetDetailList: [
     {
       budetLimitExceed: false,
@@ -182,6 +182,16 @@ export const transactionSlice = createSlice({
         transactionList: [...state.transactionList, newExpense],
         balance: state.balance - newExpense.transacAmount,
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
+      };
+    },
+    transaction_detail: (state, action) => {
+      const { transactionId } = action.payload;
+      const findTransactionId = state.transactionList.find(
+        (transac) => transac.transacId === transactionId
+      );
+      return {
+        ...state,
+        transactionDetails: [findTransactionId],
       };
     },
     viewed_transaction: (state, action) => {
@@ -392,7 +402,8 @@ export const transactionSlice = createSlice({
         budgetId:
           state.budgetDetailList.length === 0
             ? 1
-            : state.budgetDetailList[state.budgetDetailList.length - 1].budgetId + 1,
+            : state.budgetDetailList[state.budgetDetailList.length - 1]
+                .budgetId + 1,
         budgetAmount: parseInt(GetAmount),
         budgetCategory: GetCategory,
         budgetExpenses: 0,
@@ -420,7 +431,7 @@ export const transactionSlice = createSlice({
               }
             : detail
       );
-      
+
       return {
         ...state,
         budgetList: state.budgetList.map((budget) =>
@@ -455,8 +466,7 @@ export const transactionSlice = createSlice({
           : state.budgetDetailList[state.budgetDetailList.length - 1].budgetId +
             1;
 
-
-        // For update save click
+      // For update save click
       const updateBudgetDetalList = [
         ...state.budgetDetailList,
         { ...dExistingId, budgetId: DetailId, isbuttonSaveClick: true },
@@ -499,6 +509,7 @@ export const {
   open_modal,
   close_modal,
   expense_transaction,
+  transaction_detail,
   viewed_transaction,
   add_to_draft_expenses,
   add_to_draft_income,
@@ -515,5 +526,6 @@ export const {
   notification_budget,
   edit_transaction,
   save_details_budget,
+  
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

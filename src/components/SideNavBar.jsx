@@ -51,7 +51,9 @@ export default function SideNavBar() {
             onMouseEnter={() => handleOpenHover(nav.id)}
             onMouseLeave={() => handleClosenHover(nav.id)}
             className={`${
-              navId === nav.link ? " bg-gradient-to-r from-slate-100 to-slate-200" : "hover:bg-slate-100"
+              navId === nav.link
+                ? " bg-gradient-to-r from-slate-100 to-slate-200"
+                : "hover:bg-slate-100"
             } p-3 shadow-md rounded-xl  duration-75 border border-slate-200`}
             onClick={() => handleFillButton(nav.link)}
           >

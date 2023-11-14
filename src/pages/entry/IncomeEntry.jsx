@@ -167,7 +167,7 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
         <p className="text-xl grid place-items-center w-full">Income</p>
       </div>
       <div className="space-x-3 flex flex-col">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-2">
           <label htmlFor="category">Category:</label>
           <select
             // value={category}
@@ -177,7 +177,7 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
               errors.incomeCategory
                 ? "border-red-400 border focus-within:outline-red-400"
                 : ""
-            } p-3 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+            } p-3 shadow-md ring-1 ring-slate-200 rounded-2xl w-full`}
             // onChange={handleOnchange}
             {...register("incomeCategory", {
               required: "Category is required",
@@ -199,7 +199,7 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
         </div>
       </div>
       <div className="space-x-3 flex flex-col">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-2">
           <label htmlFor="title">Title: </label>
           <input
             // value={title}
@@ -207,7 +207,7 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
               errors.incomeTitle
                 ? "border-red-400 border focus-within:outline-red-400"
                 : ""
-            } p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+            } p-2 shadow-md border border-slate-200 rounded-2xl w-full`}
             type="text"
             id="title"
             name="title"
@@ -226,17 +226,17 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
         </div>
       </div>
       <div className="flex items-center space-x-3">
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-2">
           <label htmlFor="date">Date:</label>
           <DatePicker
             id="date"
             selected={date}
             onChange={(date) => setDate(date)}
-            className="p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full"
+            className="p-2 shadow-md border border-slate-200 rounded-2xl w-full text-center"
           />
         </div>
         <div className="space-x-1 flex flex-col">
-          <div className="flex items-center">
+          <div className="flex items-center space-x-2">
             <label htmlFor="amount">Amount: </label>
             <input
               // value={amount}
@@ -245,7 +245,7 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
                 errors.incomeAmount
                   ? "border-red-400 border focus-within:outline-red-400"
                   : ""
-              } p-2 shadow-md ring-1 ring-slate-200 rounded-lg w-full`}
+              } p-2 shadow-md ring-1 ring-slate-200 rounded-2xl w-full text-center`}
               type="number"
               name="amount"
               id="amount"
@@ -275,14 +275,14 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
           cols="30"
           rows="3"
           name="description"
-          className="rounded-lg ring-1 ring-slate-200 shadow-md p-3 w-full"
+          className="rounded-2xl ring-1 ring-slate-200 shadow-md p-3 w-full"
           onChange={handleOnchange}
         ></textarea>
       </div>
       <div className="flex space-x-3">
         <button
           type="submit"
-          className="px-4 py-2 rounded-lg bg-[#303030] text-white font-medium w-full shadow-md hover:bg-slate-600 transition-colors"
+          className="px-4 py-2 rounded-full bg-[#303030] text-white font-medium w-full shadow-md hover:bg-slate-600 transition-colors"
         >
           Add transaction
         </button>

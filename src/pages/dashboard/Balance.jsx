@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function Balance() {
   const balance = useSelector((state) => state.transaction.balance);
   return (
-    <div className=" shadow-md p-5 space-y-16 h-[300px] w-[550px] border border-gray-200 rounded-[36px]">
+    <div className=" shadow-md p-5 space-y-16 h-[300px] border border-gray-200 rounded-[36px]">
       <div>
         <p className="text-4xl font-semibold">Balance:</p>
       </div>
