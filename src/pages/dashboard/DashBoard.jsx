@@ -83,7 +83,7 @@ export default function DashBoard() {
       {/* grid grid-flow-col auto-cols-[500px] mx-3 gap-x-8 */}
       <div className="flex">
         <div
-          className={`grid grid-cols-3 max-lg:grid-cols-2 max-[700px]:grid-cols-1  gap-x-7`}
+          className={`grid grid-cols-3 max-lg:grid-cols-2 max-[700px]:grid-cols-1 gap-x-5`}
         >
           {dashBoardComponent.map((component) => (
             <div

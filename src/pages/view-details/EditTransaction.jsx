@@ -6,19 +6,20 @@ import { useDispatch } from "react-redux";
 import { edit_transaction } from "../../features/transactionSlice";
 
 export default function EditTransaction({
-  transac,
+  transacDetail,
   isTransacEdit,
   onCancel,
+  setTransacDetail
 }) {
   const dispatch = useDispatch();
   const [newTransacValue, setNewTransacValue] = useState({
-    eCategory: transac.transacCategory,
-    eAmount: transac.transacAmount,
-    eTitle: transac.transacTitle,
-    eDescription: transac.transacDescription,
-    eType: transac.transactionType,
+    eCategory: transacDetail.transacCategory,
+    eAmount: transacDetail.transacAmount,
+    eTitle: transacDetail.transacTitle,
+    eDescription: transacDetail.transacDescription,
+    eType: transacDetail.transactionType,
   });
-  const fDate = transac.transacDate;
+  const fDate = transacDetail.transacDate;
   const parseDate = Date.parse(fDate + " 2023");
   const [eDate, setEdate] = useState(parseDate);
 
@@ -26,7 +27,7 @@ export default function EditTransaction({
     const { name, value } = e.target;
     setNewTransacValue({ ...newTransacValue, [name]: value });
   };
-  console.log(transac.transacCategory);
+  console.log(transacDetail.transacCategory);
   const { eCategory, eAmount, eTitle, eDescription, eType } = newTransacValue;
 
   const handleSave = (selectedId) => {
@@ -46,7 +47,7 @@ export default function EditTransaction({
         nType: eType,
       })
     );
-
+    setTransacDetail(null)
     onCancel();
   };
 
@@ -145,7 +146,7 @@ export default function EditTransaction({
           <>
             <div className="flex items-end justify-end space-x-3">
               <button
-                onClick={() => handleSave(selectedItem.transacId)}
+                onClick={() => handleSave(transacDetail.transacId)}
                 className="px-4 py-2 rounded-lg bg-[#303030] text-white hover:bg-slate-600 transition-colors duration-100 shadow-md"
               >
                 Save

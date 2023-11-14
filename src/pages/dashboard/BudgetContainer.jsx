@@ -119,7 +119,7 @@ export default function BudgetContainer({
         ) : (
           <>
             <div className="flex items-center justify-evenly relative">
-              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
+              <div className="text-center my-2 p-3 rounded-2xl border border-slate-300 shadow-md">
                 <p className="text-xl">Amount</p>
                 {isButtonEditClick && isBudgetI === budget.budgetId ? (
                   <>
@@ -138,7 +138,7 @@ export default function BudgetContainer({
                   </div>
                 )}
               </div>
-              <div className="text-center my-2 bg-slate-100 p-3 rounded-2xl border border-slate-400">
+              <div className="text-center my-2 p-3 rounded-2xl border border-slate-300 shadow-md">
                 <p className="text-xl">Budget limit</p>
                 <div className="my-2 space-y-3">
                   <p>{budget.budgetAmount}</p>
@@ -150,7 +150,7 @@ export default function BudgetContainer({
                   budget.budgetCategory === "Grocery Shopping"
                     ? "px-4 py-2"
                     : "p-3"
-                } text-center my-2 bg-slate-100  rounded-2xl border border-slate-400`}
+                } text-center my-2 border border-slate-300 shadow-md rounded-2xl`}
               >
                 <p className="text-xl">Category</p>
                 <div

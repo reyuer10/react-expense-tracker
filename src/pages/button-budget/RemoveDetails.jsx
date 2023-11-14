@@ -1,11 +1,12 @@
 import React from "react";
 
-export default function RemoveDetails({confirm}) {
-
-
+export default function RemoveDetails({ confirm }) {
   return (
     <>
-      <button onClick={confirm}>
+      <button
+        className="p-1 mx-2 "
+        onClick={confirm}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           id="Outline"

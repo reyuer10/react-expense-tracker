@@ -2,7 +2,7 @@ import React from "react";
 import { move_to_bin } from "../../features/transactionSlice";
 import { useDispatch } from "react-redux";
 
-export default function BinModal({ closeModal, transacId }) {
+export default function BinModal({ closeModal, transacId, setTransacDetail }) {
   const dispatch = useDispatch();
   const handleMovetoBin = () => {
     dispatch(
@@ -10,6 +10,8 @@ export default function BinModal({ closeModal, transacId }) {
         detailsExistingId: transacId,
       })
     );
+    setTransacDetail(null);
+    closeModal();
   };
   return (
     <>

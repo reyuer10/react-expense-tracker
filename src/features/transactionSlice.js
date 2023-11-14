@@ -93,7 +93,7 @@ const initalValue = {
       viewed_status: true,
     },
   ],
-  transactionDetails: [],
+  transactionDetails: null,
   modalTransactions: false,
   balance: 1000,
   totalIncome: 0,
@@ -191,7 +191,7 @@ export const transactionSlice = createSlice({
       );
       return {
         ...state,
-        transactionDetails: [findTransactionId],
+        transactionDetails: findTransactionId,
       };
     },
     viewed_transaction: (state, action) => {
@@ -526,6 +526,5 @@ export const {
   notification_budget,
   edit_transaction,
   save_details_budget,
-  
 } = transactionSlice.actions;
 export default transactionSlice.reducer;

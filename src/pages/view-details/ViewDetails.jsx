@@ -1,27 +1,12 @@
 import React, { useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { useSelector } from "react-redux";
 import { buttonOption } from "./ButtonOption";
 import BinExpensesModal from "../../modal/BinExpensesModal";
 import BinModal from "./binModal";
 import Details from "./Details";
 import ButtonTransacOption from "./ButtonTransacOption";
 import EditTransaction from "./EditTransaction";
-import { useSelector } from "react-redux";
 
-export default function ViewDetails({transac}) {
-  // const { id } = useParams();
-  // const transactionList = useSelector(
-  //   (state) => state.transaction.transactionList
-  // );
-
-    // const transaction = useSelector((state) => state.transaction.transactionList);
-  // const selectedItem = transaction.find(
-  //   (transac) => transac.transacId === parseInt(id)
-  // );
-
-
-
+export default function ViewDetails({ transacDetail, setTransacDetail }) {
   const [isOptionButtonClick, setIsOptionButtonClick] = useState(null);
   const [binOpenModal, setBinOpenModal] = useState(false);
   const [isTransacEdit, setIsTransacEdit] = useState(false);
@@ -38,22 +23,34 @@ export default function ViewDetails({transac}) {
   };
   const handleCloseModal = () => setBinOpenModal(false);
 
-  if (transac === null) {
+  if (transacDetail === null) {
     return (
-      <div className="text-[#303030] my-10 text-xl font-outfit font-normal shadow-md p-8 rounded-xl w-[600px] h-[300px]">
-        Item not found
+      <div className="text-[#303030] text-xl border border-slate-300 font-outfit font-normal shadow-md p-8 rounded-[36px]">
+        <div>
+          <p className="font-semibold text-2xl">View details here </p>
+        </div>
+        <div className="flex items-center text-slate-500 flex-col m-10">
+          <svg
+            className="fill-current m-10"
+            xmlns="http://www.w3.org/2000/svg"
+            id="Outline"
+            viewBox="0 0 24 24"
+            width="54"
+            height="54"
+          >
+            <path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z" />
+            <path d="M12,5a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0V6A1,1,0,0,0,12,5Z" />
+            <rect x="11" y="17" width="2" height="2" rx="1" />
+          </svg>
+          <p className="text-[32px]">Item not found</p>
+        </div>
       </div>
     );
   }
 
   const handleEditTransaction = () => {
-    // const tExistingId = transactionList.find(
-    //   (transac) => transac.transacId === itemId
-    // );
-    // if (tExistingId) {
-      setGetValue(transac.transacId);
-      setIsTransacEdit(true);
-    // }
+    setGetValue(transacDetail.transacId);
+    setIsTransacEdit(true);
   };
 
   const handleButtonClick = (buttonId) => {
@@ -127,18 +124,20 @@ export default function ViewDetails({transac}) {
               onCancel={handleCloseTEdit}
               isTransacEdit={isTransacEdit}
               getValue={getValue}
-              transac={transac}
+              transacDetail={transacDetail}
+              setTransacDetail={setTransacDetail}
             />
           </>
         ) : (
           <>
-            <Details transac={transac} />
+            <Details transacDetail={transacDetail} />
           </>
         )}
       </div>
       <BinExpensesModal closeModal={handleCloseModal} isOpen={binOpenModal}>
         <BinModal
-          transacId={transac.transacId}
+          setTransacDetail={setTransacDetail}
+          transacId={transacDetail.transacId}
           closeModal={handleCloseModal}
         />
       </BinExpensesModal>

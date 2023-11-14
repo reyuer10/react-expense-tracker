@@ -9,9 +9,9 @@ export default function RecentTransaction() {
   return (
     <div className=" h-[300px] shadow-md p-5 rounded-[36px] border border-slate-200 text-[#303030]">
       <div>
-        <p className="text-2xl py-3 text-[#303030]">Recent Transaction</p>
+        <p className="text-2xl font-semibold py-3 text-[#303030]">Recent Transaction</p>
       </div>
-      <div className="border border-slate-200 rounded-3xl p-3 shadow-md bg-slate-50">
+      <div className="border border-slate-200 rounded-3xl p-3 shadow-md">
         <div className="h-44 overflow-y-scroll p-3 ">
           {transaction.map((transac) => (
             <div
