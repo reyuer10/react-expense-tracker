@@ -9,7 +9,7 @@ export default function EditTransaction({
   transacDetail,
   isTransacEdit,
   onCancel,
-  setTransacDetail
+  backButton
 }) {
   const dispatch = useDispatch();
   const [newTransacValue, setNewTransacValue] = useState({
@@ -47,8 +47,8 @@ export default function EditTransaction({
         nType: eType,
       })
     );
-    setTransacDetail(null)
     onCancel();
+    backButton();
   };
 
   return (
@@ -147,13 +147,13 @@ export default function EditTransaction({
             <div className="flex items-end justify-end space-x-3">
               <button
                 onClick={() => handleSave(transacDetail.transacId)}
-                className="px-4 py-2 rounded-lg bg-[#303030] text-white hover:bg-slate-600 transition-colors duration-100 shadow-md"
+                className="px-4 py-2 rounded-full bg-[#303030] text-white hover:bg-slate-600 transition-colors duration-100 shadow-lg"
               >
                 Save
               </button>
               <button
                 onClick={onCancel}
-                className="px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors duration-100 ring-1 shadow-md ring-slate-400"
+                className="px-4 py-2 rounded-full hover:bg-slate-100 transition-colors duration-100 ring-1 shadow-lg ring-slate-400"
               >
                 Cancel
               </button>

@@ -102,7 +102,7 @@ export default function BudgetContainer({
             <div className="flex justify-center items-center h-[196px]">
               <div className="flex space-x-3">
                 <button
-                  className="px-4 py-2 rounded-full shadow-md border border-slate-200 bg-[#303030] text-white hover:bg-slate-700 transition-colors duration-100"
+                  className="px-4 py-2 rounded-full shadow-md border border-slate-200 bg-slate-700 hover:bg-slate-600 text-white transition-colors duration-150"
                   onClick={handleRemoveBudget}
                 >
                   Delete
@@ -213,7 +213,6 @@ export default function BudgetContainer({
               </div>
             </div>
             <div>
-              {/* limitExceedError */}
               {isButtonEditClick && isBudgetI === budget.budgetId ? (
                 <>
                   <div className="flex justify-between items-center">
@@ -223,7 +222,7 @@ export default function BudgetContainer({
                     <div className="space-x-3 flex">
                       <button
                         onClick={() => handleSave(budget.budgetId)}
-                        className=" items-center  my-3  px-4 py-2 rounded-full bg-[#303030] text-white shadow-md hover:bg-slate-700 transition-colors duration-100"
+                        className=" items-center  my-3  px-4 py-2 rounded-full bg-slate-700 hover:bg-slate-600 text-white shadow-md transition-colors duration-150"
                       >
                         Save
                       </button>

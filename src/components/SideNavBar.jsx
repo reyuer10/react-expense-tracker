@@ -40,7 +40,7 @@ export default function SideNavBar() {
   );
 
   return (
-    <div className="flex flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200">
+    <div className="flex md:flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200 max-md:fixed max-md:bottom-0 max-md:h-20 max-md:left-0 max-md:right-0 max-md:my-0 max-md:mx-0 max-md:rounded-none max-md:rounded-t-[32px] max-md:justify-center max-md:space-y-0 max-md:bg-white">
       {sideNav.map((nav) => (
         <Link
           to={`${nav.link}`}
@@ -54,7 +54,7 @@ export default function SideNavBar() {
               navId === nav.link
                 ? " bg-gradient-to-r from-slate-100 to-slate-200"
                 : "hover:bg-slate-100"
-            } p-3 shadow-md rounded-xl  duration-75 border border-slate-200`}
+            } ${nav.id === 5 || nav.id === 6 ? "max-md:hidden" : ""} p-3 shadow-md rounded-xl max-md:mx-3 duration-75 border border-slate-200`}
             onClick={() => handleFillButton(nav.link)}
           >
             {navId === nav.link ? <>{nav.fill_svg}</> : <> {nav.svg}</>}

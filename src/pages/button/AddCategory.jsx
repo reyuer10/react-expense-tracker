@@ -54,7 +54,7 @@ export default function AddCategory({
           Cancel
         </button>
       </div>
-      <div className="flex space-x-10 items-center justify-center bg-slate-200 border border-slate-300 rounded-3xl mx-3 py-10 shadow-md">
+      <div className="flex space-x-5 items-center justify-center bg-slate-200 border border-slate-300 rounded-3xl mx-3 py-10 shadow-md">
         <div className="flex flex-col text-left space-y-2 bg-gray-700 text-white p-5 rounded-2xl shadow-md">
           <label htmlFor="AmountOne">Amount: </label>
           <input

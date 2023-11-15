@@ -5,7 +5,7 @@ export default function ButtonAddExpenses({ handleEdit, budget }) {
     <>
       <button
         onClick={() => handleEdit(budget.budgetId)}
-        className="flex items-center my-3  px-4 py-2 rounded-full bg-slate-700 text-white shadow-md"
+        className="flex items-center my-3  px-4 py-2 rounded-full bg-slate-700 hover:bg-slate-600 duration-150 transition-colors text-white shadow-md"
       >
         <svg
         className="fill-current text-white"
