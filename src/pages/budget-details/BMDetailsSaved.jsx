@@ -4,16 +4,16 @@ import DetailsSaved from "./DetailsSaved";
 
 export default function BMDetailsSaved() {
   const detailList = useSelector((state) => state.transaction.budgetDetailList);
-  console.log(detailList)
+  console.log(detailList);
   return (
-    <div className="font-outfit border border-slate-200 shadow-md p-5 rounded-2xl space-y-2">
+    <div className="font-outfit border border-slate-200 shadow-md rounded-[36px] h-[700px] p-5">
       <div>
         <p className="text-2xl font-semibold">Budget Management</p>
       </div>
       <div>
-        <p className="text-xl">Saved Details</p>
+        <p className="text-xl p-3">Saved Details</p>
       </div>
-      <div className="space-y-3 w-[550px] h-[calc(100vh-365px)]">
+      <div className="space-y-3 overflow-y-auto  h-[550px] px-3">
         {detailList.map((detail) => (
           <DetailsSaved key={detail.budgetId} detail={detail} />
         ))}

@@ -110,6 +110,7 @@ const initalValue = {
       budgetId: 1,
       budgetPercentage: 100,
       isbuttonSaveClick: true,
+      isUserSeen: true,
     },
     {
       budetLimitExceed: false,
@@ -119,6 +120,7 @@ const initalValue = {
       budgetId: 2,
       budgetPercentage: 100,
       isbuttonSaveClick: true,
+      isUserSeen: true,
     },
     {
       budetLimitExceed: false,
@@ -128,8 +130,10 @@ const initalValue = {
       budgetId: 3,
       budgetPercentage: 100,
       isbuttonSaveClick: true,
+      isUserSeen: true,
     },
   ],
+  recentActivities: [],
 };
 
 export const transactionSlice = createSlice({
@@ -153,6 +157,7 @@ export const transactionSlice = createSlice({
         transacDescription: newDescription,
         viewed_status: false,
       };
+
       return {
         ...state,
         transactionList: [...state.transactionList, transactionItem],
@@ -161,8 +166,13 @@ export const transactionSlice = createSlice({
       };
     },
     expense_transaction: (state, action) => {
-      const { eCategory, eTitle, eAmount, eDescription, eDate } =
-        action.payload;
+      const {
+        eCategory,
+        eTitle,
+        eAmount,
+        eDescription,
+        eDate,
+      } = action.payload;
       const newExpense = {
         transacId:
           state.transactionList.length === 0
@@ -177,11 +187,24 @@ export const transactionSlice = createSlice({
         transacDescription: eDescription,
         viewed_status: false,
       };
+
+      const activities = {
+        recentId:
+          state.recentActivities.length === 0
+            ? 1
+            : state.recentActivities[state.recentActivities.length - 1]
+                .recentId + 1,
+        recentCategory: eCategory,
+        recentType: "Expenses",
+        recentIncomeAmount: parseInt(eAmount),
+        recentDate: eDate,
+      };
       return {
         ...state,
         transactionList: [...state.transactionList, newExpense],
         balance: state.balance - newExpense.transacAmount,
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
+        recentActivities: [...state.recentActivities, activities],
       };
     },
     transaction_detail: (state, action) => {
@@ -411,6 +434,7 @@ export const transactionSlice = createSlice({
         budetLimitExceed: false,
         isbuttonSaveClick: false,
         budgetExceedLimitMessage: "",
+        isUserSeen: false,
       };
 
       return {
@@ -444,6 +468,21 @@ export const transactionSlice = createSlice({
             : budget
         ),
         budgetDetailList: updateInfoFromBudgetDetailList,
+      };
+    },
+
+    budget_viewed_status: (state, action) => {
+      const { viewBudgetId } = action.payload;
+      return {
+        ...state,
+        budgetDetailList: state.budgetDetailList.map((budget) =>
+          budget.budgetId === viewBudgetId
+            ? {
+                ...budget,
+                isUserSeen: true,
+              }
+            : budget
+        ),
       };
     },
     remove_expenses_budget: (state, action) => {
@@ -521,6 +560,7 @@ export const {
   draft_transaction,
   add_budget_item,
   add_expenses_budgetM,
+  budget_viewed_status,
   remove_expenses_budget,
   exit_budget_management,
   notification_budget,

@@ -21,10 +21,10 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
 
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
-
   const [incomeValue, setIncomeValue] = useState({
     description: "",
   });
+
 
   const handleOnchange = (event) => {
     const { name, value } = event.target;
@@ -96,6 +96,8 @@ export default function IncomeEntry({ isClose, closeIncome, closeExpense }) {
     dispatch(close_modal());
     isClose();
     closeExpense();
+
+
   };
 
   const isPositive = (value) => {

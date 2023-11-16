@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 
 export default function SideNavBar() {
   const transaction = useSelector((state) => state.transaction.transactionList);
+  const budgetDetailList = useSelector(
+    (state) => state.transaction.budgetDetailList
+  );
   const [isNameHover, SetIsNameHover] = useState(null);
   const [navId, setNavId] = useState("");
 
@@ -30,14 +33,22 @@ export default function SideNavBar() {
     SetIsNameHover(id);
   };
 
+
   const handleClosenHover = () => {
     SetIsNameHover(null);
   };
+
 
   // For viewed status when added a transaction
   const viewedStatus = transaction.filter(
     (transac) => transac.viewed_status === false
   );
+
+  const budgetViewedStatus = budgetDetailList.filter(
+    (budget) => budget.isUserSeen === false
+  );
+
+  
 
   return (
     <div className="flex md:flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200 max-md:fixed max-md:bottom-0 max-md:h-20 max-md:left-0 max-md:right-0 max-md:my-0 max-md:mx-0 max-md:rounded-none max-md:rounded-t-[32px] max-md:justify-center max-md:space-y-0 max-md:bg-white">
@@ -54,7 +65,9 @@ export default function SideNavBar() {
               navId === nav.link
                 ? " bg-gradient-to-r from-slate-100 to-slate-200"
                 : "hover:bg-slate-100"
-            } ${nav.id === 5 || nav.id === 6 ? "max-md:hidden" : ""} p-3 shadow-md rounded-xl max-md:mx-3 duration-75 border border-slate-200`}
+            } ${
+              nav.id === 5 || nav.id === 6 ? "max-md:hidden" : ""
+            } p-3 shadow-md rounded-xl max-md:mx-3 duration-75 border border-slate-200`}
             onClick={() => handleFillButton(nav.link)}
           >
             {navId === nav.link ? <>{nav.fill_svg}</> : <> {nav.svg}</>}
@@ -65,6 +78,19 @@ export default function SideNavBar() {
                     <div>
                       <p className=" absolute text-white rounded-full font-outfit -top-2 -right-1 h-6 w-6 text-center bg-red-400">
                         {viewedStatus.length}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+            {nav.id === 3 && (
+              <>
+                {budgetViewedStatus.length === 0 ? null : (
+                  <>
+                    <div>
+                      <p className=" absolute text-white rounded-full font-outfit -top-2 -right-1 h-6 w-6 text-center bg-red-400">
+                        {budgetViewedStatus.length}
                       </p>
                     </div>
                   </>

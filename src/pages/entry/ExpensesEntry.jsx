@@ -27,6 +27,8 @@ export default function ExpensesEntry({ isClose, closeExpense, closeIncome }) {
   // const [expenseCategory, setExpenseCategory] = useState("");
 
   const [expenseDescription, setExpenseDescription] = useState("");
+
+
   const [expenseDate, setExpenseDate] = useState(new Date());
 
   const expensesCategory = getValues("expensesCategory");
