@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add_note } from "../../features/noteExpenses";
+import ButtonAddNote from "./note/ButtonAddNote";
+import ButtonAddCancel from "./note/ButtonAddCancel";
+import NoteList from "./note/NoteList";
 
 export default function NoteExpenses() {
   const noteList = useSelector((state) => state.note.noteList);
@@ -60,7 +63,7 @@ export default function NoteExpenses() {
             <div className="flex py-2 space-x-2">
               <label htmlFor="bodyId">Note: </label>
               <textarea
-                className="w-full border border-slate-200 outline-none shadow-md rounded-2xl p-3"
+                className="w-[429px] border border-slate-200 outline-none shadow-md rounded-2xl p-3"
                 name="body"
                 id="bodyId"
                 cols="30"
@@ -70,60 +73,25 @@ export default function NoteExpenses() {
               ></textarea>
             </div>
             <div className="flex justify-between items-center">
-              <div>
-                {valueError ? (
-                  <>
-                    <p className="text-red-400">{error}</p>
-                  </>
-                ) : null}
-              </div>
-              <div className="space-x-2">
-                <button
-                  className="px-4 py-2 rounded-full bg-slate-700 text-white shadow-md"
-                  onClick={handleAddNote}
-                >
-                  Add
-                </button>
-                <button
-                  className="px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 shadow-md border border-slate-200"
-                  onClick={handleCancelAdd}
-                >
-                  Cancel
-                </button>
-              </div>
+              <ButtonAddCancel
+                error={error}
+                valueError={valueError}
+                handleAddNote={handleAddNote}
+                handleCancelAdd={handleCancelAdd}
+              />
             </div>
           </>
         ) : (
           <>
-            <button
-              className="flex items-center px-4 py-2 rounded-full bg-slate-700 text-white"
-              onClick={handleOpenAdd}
-            >
-              <svg
-                className="fill-current text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                id="Outline"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-              >
-                <path d="M17,11H13V7a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1v4H7a1,1,0,0,0-1,1H6a1,1,0,0,0,1,1h4v4a1,1,0,0,0,1,1h0a1,1,0,0,0,1-1V13h4a1,1,0,0,0,1-1h0A1,1,0,0,0,17,11Z" />
-              </svg>
-              <span>Note</span>
-            </button>
+            <ButtonAddNote handleOpenAdd={handleOpenAdd} />
           </>
         )}
       </div>
       {isButtonAddClick ? null : (
         <>
-          <div className="grid grid-cols-4 gap-3  w-[500px] overflow-y-auto h-[210px] py-2 px-1 ">
+          <div className="grid grid-cols-4 gap-3 w-[500px] overflow-y-auto h-[210px] py-2 px-1 ">
             {noteList.map((note) => (
-              <div
-                className="border boder-slate-300 shadow-md rounded-2xl p-5 h-[90px]"
-                key={note.noteId}
-              >
-                <p className="font-semibold">{note.noteTitle}</p>
-              </div>
+              <NoteList note={note} key={note.noteId} />
             ))}
           </div>
         </>

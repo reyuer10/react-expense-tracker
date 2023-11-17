@@ -128,7 +128,7 @@ export default function Transactions() {
                                 : "text-green-400"
                             } font-semibold text-lg`}
                           >
-                            {transac.transacAmount}$
+                            {transac.transactionType === "Expenses" ? "-" : "+"}{transac.transacAmount}$
                           </p>
                         </div>
                       </div>

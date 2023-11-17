@@ -33,11 +33,9 @@ export default function SideNavBar() {
     SetIsNameHover(id);
   };
 
-
   const handleClosenHover = () => {
     SetIsNameHover(null);
   };
-
 
   // For viewed status when added a transaction
   const viewedStatus = transaction.filter(
@@ -47,8 +45,6 @@ export default function SideNavBar() {
   const budgetViewedStatus = budgetDetailList.filter(
     (budget) => budget.isUserSeen === false
   );
-
-  
 
   return (
     <div className="flex md:flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200 max-md:fixed max-md:bottom-0 max-md:h-20 max-md:left-0 max-md:right-0 max-md:my-0 max-md:mx-0 max-md:rounded-none max-md:rounded-t-[32px] max-md:justify-center max-md:space-y-0 max-md:bg-white">

@@ -32,7 +32,7 @@ export default function RecentTransaction() {
                       : "text-green-400"
                   } font-semibold`}
                 >
-                  {transac.transacAmount}$
+                 {transac.transactionType === "Expenses" ? "-" : "+"}{transac.transacAmount}$
                 </p>
               </div>
             </div>

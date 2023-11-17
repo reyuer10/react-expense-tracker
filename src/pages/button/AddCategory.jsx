@@ -37,7 +37,7 @@ export default function AddCategory({
   return (
     <form
       onSubmit={handleSubmit(handleBudgetComplete)}
-      className="text-center space-y-8"
+      className="text-center space-y-3"
     >
       <div className="flex space-x-3 mx-5">
         <button
@@ -54,12 +54,12 @@ export default function AddCategory({
           Cancel
         </button>
       </div>
-      <div className="flex space-x-5 items-center justify-center bg-slate-200 border border-slate-300 rounded-3xl mx-3 py-10 shadow-md">
-        <div className="flex flex-col text-left space-y-2 bg-gray-700 text-white p-5 rounded-2xl shadow-md">
+      <div className="flex space-x-5 items-center justify-center border border-slate-300 rounded-3xl py-10 shadow-md">
+        <div className="flex flex-col text-left space-y-2 p-5 rounded-2xl shadow-md border border-slate-300">
           <label htmlFor="AmountOne">Amount: </label>
           <input
             id="AmountOne"
-            className="bg-slate-600 outline-none rounded-lg p-1 w-[120px] text-center"
+            className="bg-slate-50 outline-none rounded-lg p-1 w-[120px] text-center border border-slate-200"
             type="number"
             {...register("budgetOneAmount", {
               required: "Amount is required.",
@@ -71,11 +71,11 @@ export default function AddCategory({
             </p>
           )}
         </div>
-        <div className="flex flex-col text-left space-y-2 bg-gray-700 text-white p-4 rounded-2xl shadow-md">
+        <div className="flex flex-col text-left space-y-2 p-4 rounded-2xl shadow-md border border-slate-300">
           <label htmlFor="categoryOne">Category: </label>
           <select
             id="categoryOne"
-            className="px-4 py-2 rounded-lg bg-slate-600 "
+            className="px-4 py-2 rounded-lg bg-slate-50 outline-none border border-slate-200"
             {...register("budgetOneCategory", {
               required: "Amount is required.",
             })}

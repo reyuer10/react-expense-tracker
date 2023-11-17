@@ -35,12 +35,12 @@ export default function BudgetManagement() {
   const handleCancel = () => setIsButtonEditClick(false);
 
   return (
-    <div className="shadow-md mx-5 p-8 rounded-[36px] w-[540px] border border-slate-300 font-outfit space-y-10">
+    <div className="shadow-md p-8 rounded-[36px] h-[620px] border border-slate-300 font-outfit space-y-10">
       <div className="overflow-y-hidden ">
         <div>
           <p className="text-2xl font-semibold">Budget Management</p>
         </div>
-        <div className="my-5 py-2 overflow-y-auto h-[510px]">
+        <div className="py-2 overflow-y-auto h-[480px]">
           {isbuttonBudgetClick ? (
             <>
               <div>

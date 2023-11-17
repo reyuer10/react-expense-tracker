@@ -70,8 +70,8 @@ export default function DashBoard() {
   }, [navTop]);
 
   return (
-    <div className="text-[#303030] font-outfit">
-      <div className="flex items-center justify-between my-4 mx-5 max-md:w-full">
+    <div className="text-[#303030] font-outfit ">
+      <div className="flex items-center justify-between my-4 mx-5 max-md:w-full ">
         <div>
           <p className="text-4xl font-semibold max-md:text-2xl">DashBoard</p>
         </div>
@@ -83,7 +83,7 @@ export default function DashBoard() {
       {/* grid grid-flow-col auto-cols-[500px] mx-3 gap-x-8 */}
       <div className="flex">
         <div
-          className={`grid grid-cols-3 max-lg:grid-cols-2 max-[768px]:grid-cols-2 gap-x-5 max-[768px]:text-sm`}
+          className={` grid grid-cols-3 max-lg:grid-cols-2 max-[768px]:grid-cols-2 gap-5 max-[768px]:text-sm`}
         >
           {dashBoardComponent.map((component) => (
             <div

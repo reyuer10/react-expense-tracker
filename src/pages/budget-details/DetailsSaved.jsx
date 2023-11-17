@@ -34,7 +34,7 @@ export default function DetailsSaved({ detail }) {
       <div
         className={`${
           detail.isUserSeen === false ? " animate-pulse bg-slate-100" : ""
-        } shadow-md border border-slate-100 rounded-3xl p-5 text-[#303030] duration-200 transition-colors`}
+        } shadow-md border border-slate-100 rounded-3xl p-4 text-[#303030] duration-200 transition-colors`}
       >
         {detail.isUserSeen === false ? (
           <>

@@ -11,9 +11,9 @@ import RootLayout from "./root/RootLayout";
 import DashBoard from "./pages/dashboard/DashBoard";
 import Transactions from "./pages/Transactions";
 import ExpensesEntry from "./pages/entry/ExpensesEntry";
-import ViewDetails from "./pages/view-details/ViewDetails";
+// import ViewDetails from "./pages/view-details/ViewDetails";
 import Bin from "./pages/Bin";
-import Income from "./pages/income/Income";
+// import Income from "./pages/income/Income";
 import Expenses from "./pages/expenses/Expenses";
 import Draft from "./pages/dashboard/Draft";
 import Settings from "./pages/settings/Settings";
@@ -28,7 +28,7 @@ export default function App() {
           <Route path="*" element={<DashBoard />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/expenses" element={<Expenses />} />
-          <Route path="/income" element={<Income />} />
+          {/* <Route path="/income" element={<Income />} /> */}
           <Route path="/expenses-entry" element={<ExpensesEntry />} />
           <Route path="/settings" element={<Settings />} >
             <Route index  element={<RecentActivities />} />
