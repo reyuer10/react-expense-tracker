@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ExpensesTransaction from "./ExpensesTransaction";
 import BMDetailsSaved from "../budget-details/BMDetailsSaved";
 import TopCategory from "./TopCategory";
+import NoteExpenses from "./NoteExpenses";
 
 export default function Expenses() {
   const totalExpenses = useSelector((state) => state.transaction.totalExpenses);
@@ -36,7 +37,7 @@ export default function Expenses() {
         </div>
         <div className="border border-slate-200 rounded-[36px] p-5 shadow-md h-[300px] w-[550px]">
           <div>
-            <p className="text-2xl font-semibold">Recent Transactions</p>
+            <p className="text-2xl font-semibold px-3">Recent Transactions</p>
           </div>
           <div className="h-[220px] overflow-y-scroll my-3 px-4 flex flex-col-reverse">
             {expensesList.map((transac) => (
@@ -45,7 +46,7 @@ export default function Expenses() {
           </div>
         </div>
         <div>
-          <p>Hi</p>
+          <NoteExpenses />
         </div>
       </div>
     </div>

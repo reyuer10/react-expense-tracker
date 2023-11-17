@@ -4,7 +4,7 @@ import { categoryIcons } from "../../svg_category/svgCategory";
 export default function ExpensesTransaction({ transac }) {
   return (
     <>
-      <div className="flex items-center justify-between shadow-md rounded-xl p-3 my-2 hover:bg-slate-50 transition-colors duration-100">
+      <div className="flex items-center justify-between shadow-md rounded-xl p-3 my-2 transition-colors duration-100">
         <div>
           <div className="flex space-x-2">
             {categoryIcons[transac.transacCategory]}

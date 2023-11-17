@@ -13,8 +13,7 @@ export default function RecentActivities() {
             <div className="flex space-x-3">
                 <p>{recent.recentId}. </p>
               <p>
-                Added an {recent.recentType} of ${recent.recentIncomeAmount} for{" "}
-                {recent.recentCategory} on {recent.recentDate}, 2023
+               {recent.recentExpenseValue}
               </p>
             </div>
           </div>

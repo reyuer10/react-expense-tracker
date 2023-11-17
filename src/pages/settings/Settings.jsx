@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Settings() {
+  const recentActivities = useSelector((state) => state.transaction.recentActivities)
   return (
     //
     <div className="border h-[700px] rounded-[36px] font-outfit text-slate-700 shadow-md">
@@ -9,7 +11,7 @@ export default function Settings() {
         <p className="p-5 text-4xl font-semibold">Settings</p>
       </div>
       <div className="flex m-10">
-        <div className="  p-5 w-[300px] ">
+        <div className="  p-5 w-[300px] max-xl:hidden">
           <Link className="flex space-x-2" to="/settings">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +26,7 @@ export default function Settings() {
             <span>Recent Activies</span>
           </Link>
         </div>
-        <div className="border h-[550px]  overflow-y-auto rounded-3xl p-5 mx-10 shadow-md ">
+        <div className={` ${recentActivities.length === 0 ? "" : ""} border h-[550px] w-[800px] overflow-y-auto rounded-3xl p-5 mx-10 shadow-md max-xl:w-full`}>
           <Outlet />
         </div>
       </div>

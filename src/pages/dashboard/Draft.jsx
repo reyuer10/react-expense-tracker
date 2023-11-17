@@ -13,11 +13,11 @@ export default function Draft() {
   const handleCloseModalDraft = () => setOpenDraftModal(false);
   // h-[calc(100vh-290px)]
   return (
-    <div className=" shadow-md mx-3 py-3 px-4 rounded-[36px] w-full border border-slate-300 font-outfit space-y-10">
+    <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-190px)] w-full">
       <div>
-        <p className="text-3xl font-semibold pt-5">Draft</p>
+        <p className="text-4xl font-semibold text-[#303030] p-4 max-md:text-center">Draft</p>
       </div>
-      <div className=" h-[540px] overflow-y-auto border border-slate-300 shadow-lg rounded-[32px] p-5">
+      <div className="h-[540px] overflow-y-auto border border-slate-300 shadow-lg rounded-[32px] m-5 p-5">
         {draftList.map((draft) => (
           <div
             onClick={handleOpenModalDraft}

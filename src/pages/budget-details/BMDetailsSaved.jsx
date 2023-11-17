@@ -8,7 +8,7 @@ export default function BMDetailsSaved() {
   return (
     <div className="font-outfit border border-slate-200 shadow-md rounded-[36px] h-[700px] p-5">
       <div>
-        <p className="text-2xl font-semibold">Budget Management</p>
+        <p className="text-2xl font-semibold px-3">Budget Management</p>
       </div>
       <div>
         <p className="text-xl p-3">Saved Details</p>

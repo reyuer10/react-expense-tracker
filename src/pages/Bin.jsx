@@ -33,15 +33,15 @@ export default function Bin() {
   };
 
   return (
-    <div className="text-[#303030] font-outfit my-8">
+    <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-190px)] w-full">
       <div>
-        <p className="text-3xl font-semibold">Bin</p>
+        <p className="text-4xl font-semibold text-[#303030] p-4 max-md:text-center">Bin</p>
       </div>
-      <div>
+      <div className={`${bin.length === 0 ? "hidden" : ""} grid grid-cols-3 max-2xl:grid-cols-2 max-xl:grid-cols-1 gap-5  overflow-y-auto rounded-3xl p-5`}>
         {bin.map((b) => (
           <div
             key={b.transacId}
-            className="border p-3 rounded-2xl shadow-md flex flex-col w-[700px] my-3"
+            className="border p-5 rounded-3xl  max-2xl:h-full shadow-md flex flex-col"
           >
             <div className="relative">
               <button
@@ -91,7 +91,7 @@ export default function Bin() {
               {categoryIcons[b.transacCategory]}
               <span>{b.transacCategory}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between max-2xl:flex-col">
               <div>
                 <label className="font-semibold">Title: </label>
                 <span>{b.transacTitle}</span>
@@ -101,7 +101,7 @@ export default function Bin() {
                 <span> {b.transacAmount}$</span>
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between max-2xl:flex-col">
               <div className="flex space-x-2">
                 <p className="font-semibold">Date: </p>
                 <span>{b.transacDate}</span>

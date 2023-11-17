@@ -158,21 +158,28 @@ export const transactionSlice = createSlice({
         viewed_status: false,
       };
 
+      const iActivities = {
+        recentId:
+          state.recentActivities.length === 0
+            ? 1
+            : state.recentActivities[state.recentActivities.length - 1]
+                .recentId + 1,
+        recentExpenseValue:`Added an income of ₱${parseInt(
+          newAmount
+        )} for ${newCategory} on ${newDate} 2023`,
+      };
+
       return {
         ...state,
         transactionList: [...state.transactionList, transactionItem],
         balance: transactionItem.transacAmount + state.balance,
         totalIncome: transactionItem.transacAmount + state.totalIncome,
+        recentActivities: [...state.recentActivities, iActivities],
       };
     },
     expense_transaction: (state, action) => {
-      const {
-        eCategory,
-        eTitle,
-        eAmount,
-        eDescription,
-        eDate,
-      } = action.payload;
+      const { eCategory, eTitle, eAmount, eDescription, eDate } =
+        action.payload;
       const newExpense = {
         transacId:
           state.transactionList.length === 0
@@ -188,23 +195,22 @@ export const transactionSlice = createSlice({
         viewed_status: false,
       };
 
-      const activities = {
+      const eActivities = {
         recentId:
           state.recentActivities.length === 0
             ? 1
             : state.recentActivities[state.recentActivities.length - 1]
                 .recentId + 1,
-        recentCategory: eCategory,
-        recentType: "Expenses",
-        recentIncomeAmount: parseInt(eAmount),
-        recentDate: eDate,
+        recentExpenseValue:`Added an expenses of ₱${parseInt(
+          eAmount
+        )} for ${eCategory} on ${eDate} 2023`,
       };
       return {
         ...state,
         transactionList: [...state.transactionList, newExpense],
         balance: state.balance - newExpense.transacAmount,
         totalExpenses: newExpense.transacAmount + state.totalExpenses,
-        recentActivities: [...state.recentActivities, activities],
+        recentActivities: [...state.recentActivities, eActivities],
       };
     },
     transaction_detail: (state, action) => {
