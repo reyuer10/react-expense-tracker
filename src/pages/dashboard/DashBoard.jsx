@@ -79,8 +79,6 @@ export default function DashBoard() {
           <TransactionButton handleOpenModal={handleOpenModal} />
         </div>
       </div>
-      {/* flex flex-grow flex-wrap gap-8 mx-5  */}
-      {/* grid grid-flow-col auto-cols-[500px] mx-3 gap-x-8 */}
       <div className="flex">
         <div
           className={` grid grid-cols-3 max-lg:grid-cols-2 max-[768px]:grid-cols-2 gap-5 max-[768px]:text-sm`}
@@ -89,7 +87,8 @@ export default function DashBoard() {
             <div
               className={`${
                 component.id === 3 ? "row-span-2 max-lg:hidden" : ""
-              }`}
+              } ${component.id === 4 ? "max-md:row-span-4" : ""} 
+              `}
               key={component.id}
             >
               <div>{component.component}</div>

@@ -60,7 +60,7 @@ export default function Transactions() {
       className="w-full"
     >
       <div>
-        <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-190px)]">
+        <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-250px)]">
           <div>
             <p className="text-4xl font-semibold text-[#303030] p-4 max-md:text-center">
               Transactions

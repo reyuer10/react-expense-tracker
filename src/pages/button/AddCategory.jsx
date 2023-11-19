@@ -39,7 +39,7 @@ export default function AddCategory({
       onSubmit={handleSubmit(handleBudgetComplete)}
       className="text-center space-y-3"
     >
-      <div className="flex space-x-3 mx-5">
+      <div className="flex space-x-3">
         <button
           type="submit"
           className="flex shadow-sm rounded-full px-4 py-2 ring-1 ring-slate-400  bg-slate-700 text-white font-semibold hover:bg-slate-700"
@@ -55,7 +55,7 @@ export default function AddCategory({
         </button>
       </div>
       <div className="flex space-x-5 items-center justify-center border border-slate-300 rounded-3xl py-10 shadow-md">
-        <div className="flex flex-col text-left space-y-2 p-5 rounded-2xl shadow-md border border-slate-300">
+        <div className="flex flex-col items-center justify-center space-y-2 p-5 rounded-2xl shadow-md border border-slate-300">
           <label htmlFor="AmountOne">Amount: </label>
           <input
             id="AmountOne"
@@ -66,16 +66,16 @@ export default function AddCategory({
             })}
           />
           {errors.budgetOneAmount && (
-            <p className="text-center text-red-400">
+            <p className=" text-red-400">
               {errors.budgetOneAmount.message}
             </p>
           )}
         </div>
-        <div className="flex flex-col text-left space-y-2 p-4 rounded-2xl shadow-md border border-slate-300">
+        <div className="flex flex-col justify-center space-y-2 p-4 rounded-2xl shadow-md border border-slate-300">
           <label htmlFor="categoryOne">Category: </label>
           <select
             id="categoryOne"
-            className="px-4 py-2 rounded-lg bg-slate-50 outline-none border border-slate-200"
+            className="px-4 py-2 rounded-lg text-center bg-slate-50 outline-none border border-slate-200"
             {...register("budgetOneCategory", {
               required: "Amount is required.",
             })}

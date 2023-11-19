@@ -36,7 +36,7 @@ export default function BudgetManagement() {
 
   return (
     <div className="shadow-md p-8 rounded-[36px] h-[620px] border border-slate-300 font-outfit space-y-10">
-      <div className="overflow-y-hidden ">
+      <div className="overflow-y-hidden">
         <div>
           <p className="text-2xl font-semibold">Budget Management</p>
         </div>
@@ -53,7 +53,7 @@ export default function BudgetManagement() {
             </>
           ) : (
             <>
-              <div className="px-3">
+              <div>
                 <SetButton
                   handleButtonSet={handleButtonSet}
                   isBudgetComplete={isBudgetComplete}

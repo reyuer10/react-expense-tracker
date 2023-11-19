@@ -6,7 +6,7 @@ export default function Settings() {
   const recentActivities = useSelector((state) => state.transaction.recentActivities)
   return (
     //
-    <div className="border h-[700px] rounded-[36px] font-outfit text-slate-700 shadow-md">
+    <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-250px)] w-full">
       <div>
         <p className="p-5 text-4xl font-semibold">Settings</p>
       </div>
@@ -26,7 +26,7 @@ export default function Settings() {
             <span>Recent Activies</span>
           </Link>
         </div>
-        <div className={` ${recentActivities.length === 0 ? "" : ""} border h-[550px] w-[800px] overflow-y-auto rounded-3xl p-5 mx-10 shadow-md max-xl:w-full`}>
+        <div className={` ${recentActivities.length === 0 ? "" : ""} border h-[400px] w-[800px] overflow-y-auto rounded-3xl p-5 mx-10 shadow-md max-xl:w-full`}>
           <Outlet />
         </div>
       </div>

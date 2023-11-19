@@ -47,7 +47,7 @@ export default function SideNavBar() {
   );
 
   return (
-    <div className="flex md:flex-col my-7 mx-3 h-[calc(100vh-190px)] space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200 max-md:fixed max-md:bottom-0 max-md:h-20 max-md:left-0 max-md:right-0 max-md:my-0 max-md:mx-0 max-md:rounded-none max-md:rounded-t-[32px] max-md:justify-center max-md:space-y-0 max-md:bg-white">
+    <div className="flex md:flex-col my-7 mx-3  space-y-8 items-center p-3 py-5 rounded-2xl shadow-md border border-slate-200 max-md:fixed max-md:bottom-0 max-md:h-20 max-md:left-0 max-md:right-0 max-md:my-0 max-md:mx-0 max-md:rounded-none max-md:rounded-t-[32px] max-md:justify-center max-md:space-y-0 max-md:bg-white">
       {sideNav.map((nav) => (
         <Link
           to={`${nav.link}`}
@@ -62,7 +62,7 @@ export default function SideNavBar() {
                 ? " bg-gradient-to-r from-slate-100 to-slate-200"
                 : "hover:bg-slate-100"
             } ${
-              nav.id === 5 || nav.id === 6 ? "max-md:hidden" : ""
+              nav.id === 4 || nav.id === 6 ? "max-md:hidden" : ""
             } p-3 shadow-md rounded-xl max-md:mx-3 duration-75 border border-slate-200`}
             onClick={() => handleFillButton(nav.link)}
           >
@@ -84,7 +84,9 @@ export default function SideNavBar() {
               <>
                 {budgetViewedStatus.length === 0 ? null : (
                   <>
-                    <div>
+                    <div
+                     
+                    >
                       <p className=" absolute text-white rounded-full font-outfit -top-2 -right-1 h-6 w-6 text-center bg-red-400">
                         {budgetViewedStatus.length}
                       </p>
@@ -96,7 +98,11 @@ export default function SideNavBar() {
           </button>
           {isNameHover === nav.id && (
             <>
-              <div className="absolute left-0 top-0 my-1 mx-16 shadow-md bg-white px-4 py-2 rounded-lg text-[#303030] font-medium">
+              <div
+                className={`${
+                  nav.id === 1 || nav.id === 2 || nav.id === 3 || nav.id === 5 ? "max-md:hidden" : ""
+                } absolute left-0 top-0 my-1 mx-16 shadow-md bg-white px-4 py-2 rounded-lg text-[#303030] font-medium`}
+              >
                 <p>{nav.name}</p>
               </div>
             </>

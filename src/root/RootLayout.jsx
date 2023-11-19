@@ -4,7 +4,7 @@ import SideNavBar from "../components/SideNavBar";
 
 export default function RootLayout() {
   return (
-    <div className="flex">
+    <div className="flex justify-center items-center ">
       <div>
         <SideNavBar />
       </div>

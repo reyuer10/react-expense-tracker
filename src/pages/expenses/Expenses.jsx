@@ -23,7 +23,7 @@ export default function Expenses() {
           <div>
             <p className="text-4xl font-semibold p-7">Total Expenses: </p>
           </div>
-          <div>
+          <div>   
             <p className="text-[55px] text-center font-semibold">
               {totalExpenses} ₱
             </p>
