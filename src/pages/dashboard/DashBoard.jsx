@@ -26,6 +26,7 @@ import IncomeEntry from "../entry/IncomeEntry";
 
 // import Draft from "./Draft";
 import BudgetManagement from "./BudgetManagement";
+import Header from "../../components/Header";
 
 export default function DashBoard() {
   const dispatch = useDispatch();
@@ -71,6 +72,9 @@ export default function DashBoard() {
 
   return (
     <div className="text-[#303030] font-outfit ">
+      <div>
+      <Header />
+      </div>
       <div className="flex items-center justify-between my-4 mx-5 max-md:w-full ">
         <div>
           <p className="text-4xl font-semibold max-md:text-2xl">DashBoard</p>

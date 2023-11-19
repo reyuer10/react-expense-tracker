@@ -22,7 +22,6 @@ import RecentActivities from "./pages/settings/RecentActivities";
 export default function App() {
   return (
     <>
-      <Header />
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="*" element={<DashBoard />} />
