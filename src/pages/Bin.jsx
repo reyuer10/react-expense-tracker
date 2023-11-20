@@ -33,9 +33,9 @@ export default function Bin() {
   };
 
   return (
-    <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-250px)] w-full">
+    <div className="font-outfit my-8 p-3 md:rounded-[36px] md:shadow-lg md:border border-slate-300 overflow-y-auto h-[calc(100vh-250px)] w-full">
       <div>
-        <p className="text-4xl font-semibold text-[#303030] p-4 max-md:text-center">
+        <p className="text-4xl max-md:text-2xl font-semibold text-[#303030] p-4 max-md:text-center">
           Bin
         </p>
       </div>
@@ -48,7 +48,7 @@ export default function Bin() {
       >
         {bin.length === 0 ? (
           <>
-            <p className="text-2xl">Empty Bins</p>
+            <p className="md:text-2xl">Empty Bins</p>
           </>
         ) : (
           <>
@@ -78,11 +78,11 @@ export default function Bin() {
                     <>
                       <div
                         onClick={() => setSelectOption(false)}
-                        className="inset-1 fixed "
+                        className="inset-1 fixed"
                       />
                       <div
                         onClick={(e) => e.stopPropagation()}
-                        className=" absolute bg-white right-0 my-6 px-4 py-3 flex flex-col rounded-xl border shadow-md items-start"
+                        className="absolute bg-white right-0 my-6 px-4 py-3 flex flex-col rounded-xl border shadow-md items-start"
                       >
                         <button
                           className="hover:text-slate-500 w-full text-left rounded-lg px-3"
@@ -144,6 +144,7 @@ export default function Bin() {
                   <DeleteConfirmation
                     binId={b.transacId}
                     closeModal={handleCloseConfirmation}
+                    setSelectOption={setSelectOption}
                   />
                 </DeleteModal>
               </div>

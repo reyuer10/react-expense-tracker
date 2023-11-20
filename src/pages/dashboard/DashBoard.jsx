@@ -73,11 +73,13 @@ export default function DashBoard() {
   return (
     <div className="text-[#303030] font-outfit ">
       <div>
-      <Header />
+        <Header />
       </div>
-      <div className="flex items-center justify-between my-4 mx-5 max-md:w-full ">
+      <div className="flex items-center justify-between my-4 mx-5 max-md:w-full max-md:mx-0 max-md:justify-around">
         <div>
-          <p className="text-4xl font-semibold max-md:text-2xl">DashBoard</p>
+          <p className="text-4xl font-semibold max-md:text-2xl max-md:text-left">
+            DashBoard
+          </p>
         </div>
         <div className="flex">
           <TransactionButton handleOpenModal={handleOpenModal} />
@@ -85,14 +87,16 @@ export default function DashBoard() {
       </div>
       <div className="flex">
         <div
-          className={` grid grid-cols-3 max-lg:grid-cols-2 max-[768px]:grid-cols-2 gap-5 max-[768px]:text-sm`}
+          className={`grid grid-cols-3 max-lg:grid-cols-2 max-[768px]:grid-cols-2 gap-5 max-[768px]:text-sm`}
         >
           {dashBoardComponent.map((component) => (
             <div
               className={`${
-                component.id === 3 ? "row-span-2 max-lg:hidden" : ""
-              } ${component.id === 4 ? "max-md:row-span-4" : ""} 
-              `}
+                component.id === 3 || component.id === 4
+                  ? "row-span-2 max-lg:hidden"
+                  : ""
+              }
+               ${component.id === 2 ? "max-lg:hidden" : ""}`}
               key={component.id}
             >
               <div>{component.component}</div>

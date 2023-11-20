@@ -60,7 +60,7 @@ export default function Transactions() {
       className="w-full"
     >
       <div>
-        <div className="font-outfit my-8 p-3 rounded-[36px] shadow-lg border border-slate-300 overflow-y-auto h-[calc(100vh-250px)]">
+        <div className="font-outfit my-8 p-3 md:rounded-[36px] md:shadow-lg md:border max-lg:overflow-y-auto border-slate-300 h-[calc(100vh-250px)]">
           <div>
             <p className="text-4xl font-semibold text-[#303030] p-4 max-md:text-center">
               Transactions
@@ -89,7 +89,7 @@ export default function Transactions() {
               </select>
             </div>
           </div>
-          <div className=" m-5">
+          <div className="m-5 ">
             {isUserPick ? (
               <>
                 <ViewDetails
@@ -100,7 +100,7 @@ export default function Transactions() {
               </>
             ) : (
               <>
-                <div className="flex flex-wrap flex-1 overflow-y-auto max-lg:flex max-lg:flex-col">
+                <div className="flex flex-wrap max-md:text-center overflow-y-auto  max-md:w-full max-md:items-center max-md:justify-center">
                   {filterSearch.map((transac) => (
                     <div
                       key={transac.transacId}
@@ -111,12 +111,22 @@ export default function Transactions() {
                           transac.viewed_status === false
                             ? "bg-slate-100"
                             : "hover:bg-slate-100"
-                        } flex items-center justify-between w-[400px] border border-slate-300 shadow-md shadow-gray-300 rounded-3xl p-4 my-2 mx-2  transition-colors duration-100 cursor-pointer`}
+                        } md:flex items-center justify-between max-md:w-[180px] md:w-[400px] border border-slate-300 shadow-md shadow-gray-300 rounded-3xl p-4 my-2 mx-2  transition-colors duration-100 cursor-pointer`}
                       >
                         <div>
-                          <div className="flex space-x-2">
+                          <div
+                            className={` flex space-x-2 max-md:justify-center `}
+                          >
                             {categoryIcons[transac.transacCategory]}
-                            <p className="text-xl">{transac.transacCategory}</p>
+                            <p
+                              className={`md:text-xl ${
+                                transac.transacCategory === "Grocery Shopping"
+                                  ? "text-[14px]"
+                                  : ""
+                              }`}
+                            >
+                              {transac.transacCategory}
+                            </p>
                           </div>
                           <p>{transac.transacDate}</p>
                         </div>
@@ -126,9 +136,10 @@ export default function Transactions() {
                               transac.transactionType === "Expenses"
                                 ? "text-red-400"
                                 : "text-green-400"
-                            } font-semibold text-lg`}
+                            } font-semibold md:text-lg`}
                           >
-                            {transac.transactionType === "Expenses" ? "-" : "+"}{transac.transacAmount}$
+                            {transac.transactionType === "Expenses" ? "-" : "+"}
+                            {transac.transacAmount}$
                           </p>
                         </div>
                       </div>

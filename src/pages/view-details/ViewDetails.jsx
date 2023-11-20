@@ -88,7 +88,7 @@ export default function ViewDetails({
                   />
                   <div
                     onClick={(e) => e.isPropagationStopped()}
-                    className="fixed bg-white border border-slate-300 shadow-lg p-4 rounded-3xl mx-14"
+                    className="fixed bg-white border border-slate-300 shadow-lg p-4 rounded-3xl mx-14 max-md:top-[180px]"
                   >
                     {buttonOption.map((button) => (
                       <ButtonTransacOption
@@ -104,10 +104,9 @@ export default function ViewDetails({
           </>
         )}
         <div>
-          <p className="text-3xl font-medium">Transaction Details</p>
+          <p className="text-3xl max-md:text-xl font-medium">Transaction Details</p>
         </div>
       </div>
-      {/* w-[700px] */}
       <div className="text-xl">
         {isTransacEdit ? (
           <>

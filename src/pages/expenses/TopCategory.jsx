@@ -41,7 +41,7 @@ export default function TopCategory() {
   return (
     <div className="shadow-md p-5 rounded-[36px] ring-2 ring-slate-200 h-[300px] text-slate-700">
       <div>
-        <p className="text-2xl font-semibold px-3">Top Category Expenses</p>
+        <p className="text-2xl max-md:text-xl font-semibold px-3">Top Category Expenses</p>
       </div>
       <div className="h-[220px] overflow-y-auto px-5 py-2">
         {categoryList.map((transac, index) => (

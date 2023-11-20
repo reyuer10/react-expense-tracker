@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { delete_bin } from "../features/transactionSlice";
 
-export default function DeleteConfirmation({ closeModal, binId }) {
+export default function DeleteConfirmation({ closeModal, binId, setSelectOption }) {
   const dispatch = useDispatch();
 
 
@@ -12,7 +12,8 @@ export default function DeleteConfirmation({ closeModal, binId }) {
         existingBinId: binId,
       })
     );
-
+    closeModal();
+    setSelectOption(false);
   };
   return (
     <div  className="flex flex-col font-outfit">

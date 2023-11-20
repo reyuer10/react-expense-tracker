@@ -5,9 +5,9 @@ export default function Details({ transacDetail }) {
   
   return (
     <>
-      <div>
+      <div className="max-md:text-lg">
         <div className="flex justify-between">
-          <span className="font-medium">Transaction type:</span>
+          <span className="font-medium max-md:text-lg">Transaction type:</span>
           <p
             className={`${
               transacDetail.transactionType === "Expenses"

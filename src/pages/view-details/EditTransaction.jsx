@@ -53,7 +53,7 @@ export default function EditTransaction({
 
   return (
     <>
-      <div className="space-y-3">
+      <div className="space-y-3 max-md:text-lg">
         <div className="flex justify-between">
           <span className="font-medium">Transaction type:</span>
           <select
