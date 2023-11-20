@@ -9,6 +9,6 @@
 ![pic3](https://github.com/reyuer10/react-expense-tracker/assets/78475164/e3fa596c-7a1e-4c8d-bb59-0c8cde1f3bd5)
 
 
-![pic4](https://github.com/reyuer10/react-expense-tracker/assets/78475164/3398a260-9d7a-4248-94f7-035450dc1ed1)
+![pic4](https://github.com/reyuer10/react-expense-tracker/assets/78475164/95df7ef7-4207-4ed3-83f0-107a0ca627b8)
 
 
