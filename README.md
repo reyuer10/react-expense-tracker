@@ -1,14 +1,17 @@
 # React + Vite
 
-![pic1](https://github.com/reyuer10/react-expense-tracker/assets/78475164/a4c663e4-2ed4-4713-84ae-4b508165c9cf)
+
+![pic1](https://github.com/reyuer10/react-expense-tracker/assets/78475164/33b37b98-eff2-439a-81a9-5eb4917724fd)
 
 
-![pic2](https://github.com/reyuer10/react-expense-tracker/assets/78475164/8761752a-f99f-4996-a213-5e3b4d597373)
+![pic1 1](https://github.com/reyuer10/react-expense-tracker/assets/78475164/a23bf6c2-4729-4f38-bb59-e72ff1cd8e16)
 
 
-![pic3](https://github.com/reyuer10/react-expense-tracker/assets/78475164/e3fa596c-7a1e-4c8d-bb59-0c8cde1f3bd5)
+![pic3](https://github.com/reyuer10/react-expense-tracker/assets/78475164/5287dab4-f9a7-4aba-9dec-e931e13d73e5)
 
 
-![pic4](https://github.com/reyuer10/react-expense-tracker/assets/78475164/95df7ef7-4207-4ed3-83f0-107a0ca627b8)
+![pic2](https://github.com/reyuer10/react-expense-tracker/assets/78475164/43a5a8ac-f72e-4081-a769-ac447e589f6b)
 
+
+![pic4](https://github.com/reyuer10/react-expense-tracker/assets/78475164/959b35fc-cbbb-4427-9bfa-4d5d51ecd327)
 
